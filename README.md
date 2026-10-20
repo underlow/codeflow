@@ -8,16 +8,16 @@ Both use shared instructions with small platform entrypoints.
 Install for your user account with one command, without cloning the repository:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/underlow/codeflow/main/install-remote.sh | sh
+curl -fsSL https://raw.githubusercontent.com/underlow/codeflow/master/install-remote.sh | sh
 ```
 
-The bootstrap script downloads the `main` archive to a temporary directory,
+The bootstrap script downloads the `master` archive to a temporary directory,
 runs the installer, and removes the archive afterwards. To add the optional
 `work-with-codex` skill or replace an existing installation, pass the same
 options to `sh`:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/underlow/codeflow/main/install-remote.sh | sh -s -- --with-collab --force
+curl -fsSL https://raw.githubusercontent.com/underlow/codeflow/master/install-remote.sh | sh -s -- --with-collab --force
 ```
 
 If you already have the repository locally, run:
