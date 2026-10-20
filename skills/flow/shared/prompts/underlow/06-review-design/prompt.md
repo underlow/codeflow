@@ -16,6 +16,9 @@ problematic, inspect the other behaviors that depend on it. An unresolved produc
 choice belongs back with the user through requirements. Do not demand line
 numbers, exhaustive file inventories, private signatures, task order, or test
 bodies. Routine local engineering choices can remain open.
+For a new or changed shared module boundary, check whether it hides meaningful
+complexity from callers or merely adds a pass-through layer. Raise this only when
+the boundary creates a concrete maintenance or integration cost.
 
 Follow the common review contract. Return concrete findings and limitations in
 the final response. Do not edit the design or code, commit, or launch agents.

@@ -20,6 +20,9 @@ Write {{step_output}} with these sections:
 Requirements own behavior; the design explains mechanisms satisfying them. Do not
 substitute a requirement paraphrase for design. Leave task decomposition, private
 helpers, exact private signatures, and routine implementation choices to later work.
+For a new or changed shared module boundary, consider what complexity it hides
+from callers and what callers must still know; avoid a pass-through layer that
+adds coordination without simplifying their work.
 Resolve contradictions between behavior and design in this session. Do not create
 separate concept, requirements, or design documents.
 

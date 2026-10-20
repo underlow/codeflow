@@ -22,6 +22,11 @@ distinguish assumptions, and do not invent quality targets.
 Settle mechanisms and contracts only when alternatives affect requirements,
 ownership, lifecycle, a shared boundary, or compatibility. Leave task decomposition
 and routine local implementation details open.
+When introducing or changing a shared module boundary, ask what complexity it hides
+from callers and what callers must still know. If its value is unclear, consider
+whether removing it would scatter that complexity across callers or simply remove
+a pass-through layer. Use this to choose a useful boundary, not to demand an
+abstraction for every component.
 
 Present the design in manageable pieces for an architect.
 Explain significant alternatives, consequences, risks, and your
