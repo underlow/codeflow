@@ -27,11 +27,14 @@ claude_flow=$target/.claude/skills/flow
 codex_flow=$target/.agents/skills/flow
 claude_project=$target/.claude/skills/project
 codex_project=$target/.agents/skills/project
+claude_architecture_review=$target/.claude/skills/architecture-review
+codex_architecture_review=$target/.agents/skills/architecture-review
 claude_collab=$target/.claude/skills/work-with-codex
 codex_sender=$target/.codex/collab/collab.sh
 codex_rule=$target/.codex/rules/collab.rules
 
-for path in "$claude_flow" "$codex_flow" "$claude_project" "$codex_project"; do
+for path in "$claude_flow" "$codex_flow" "$claude_project" "$codex_project" \
+  "$claude_architecture_review" "$codex_architecture_review"; do
   if { [ -e "$path" ] || [ -L "$path" ]; } && [ "$force" = false ]; then
     echo "Already exists: $path (use --force to replace)" >&2
     exit 1
@@ -62,6 +65,15 @@ for platform in claude codex; do
   mkdir -p "$destination"
   cp -R "$source_dir/skills/underlow/project/shared/." "$destination/"
   cp -R "$source_dir/skills/underlow/project/$platform/." "$destination/"
+  echo "Installed $destination"
+done
+
+for platform in claude codex; do
+  if [ "$platform" = claude ]; then destination=$claude_architecture_review; else destination=$codex_architecture_review; fi
+  [ "$force" = false ] || rm -rf -- "$destination"
+  mkdir -p "$destination"
+  cp -R "$source_dir/skills/architecture-review/shared/." "$destination/"
+  cp -R "$source_dir/skills/architecture-review/$platform/." "$destination/"
   echo "Installed $destination"
 done
 

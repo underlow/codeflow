@@ -4,6 +4,8 @@ Development guidance for Claude Code and Codex. `flow` handles one change from
 planning through review. `underlow/project` researches a larger idea, keeps an
 evolving map of stages, and hands a chosen stage to a separate ordinary `flow`.
 Both use shared instructions with small platform entrypoints.
+The standalone `architecture-review` command inspects a repository or named
+subsystem and writes a visual HTML report of evidence-backed improvement options.
 
 Install for your user account with one command, without cloning the repository:
 
@@ -26,7 +28,7 @@ If you already have the repository locally, run:
 ./install.sh
 ```
 
-This copies `flow` and `project` to `~/.claude/skills/` and
+This copies `flow`, `project`, and `architecture-review` to `~/.claude/skills/` and
 `~/.agents/skills/`.
 Invoke it as `/flow [plan-folder-or-description-file]` in Claude Code or
 `$flow [plan-folder-or-description-file]` in Codex. Codex discovers local skills
@@ -40,6 +42,10 @@ profile with you and runs independently. Returning to `project` reconciles the
 stage against its flow plan and Git history, or you can reconsider the overall
 map at any time.
 
+For an architecture audit outside `flow`, run `/architecture-review [path-or-subsystem]`
+in Claude Code or `$architecture-review [path-or-subsystem]` in Codex. The command
+creates an offline HTML report in a temporary directory and opens it when possible.
+
 The separate `work-with-codex` skill uses Ghostty on macOS and installs a Codex
 sender plus a rule allowing that sender to contact Claude. Install it explicitly:
 
@@ -52,7 +58,8 @@ already installed `flow` while adding `work-with-codex`. `--target DIR` installs
 another home directory, which is useful for trying the installer without
 changing your own setup. See [work-with-codex details](docs/work-with-codex.md).
 
-The source layout is `skills/flow/` and `skills/underlow/project/`, each with
+The source layout is `skills/flow/`, `skills/underlow/project/`, and
+`skills/architecture-review/`, each with
 shared instructions and platform entrypoints. When a platform needs hooks or
 other files, add them to its platform directory and the installer will copy
 them with its entrypoint.
