@@ -1,59 +1,68 @@
 # Independent review
 
-Review the complete change from the run's base commit through current HEAD and
-run-owned working changes. Read surrounding callers and consumers where needed.
-Separate unrelated user changes. Check the behavior against the agreed contract,
-including changed or deleted test expectations. Do not treat a passing test or a
-reviewer's confidence as proof of the user-visible result.
-
 Before the first code review, the coordinator proposes a concrete review plan to
-the user: what changed, which risks deserve an independent reviewer, which can
-be covered together, and why. Wait for the user's selection or agreement before
-launching reviewers. Consider behavior across supported entry paths, test
-quality, security, performance, and code quality. Behavior includes completeness,
-logic, reliability, and connections between components. These are review
-questions, not five mandatory agents or reports. For a narrow change, one
-whole-change reviewer may suffice. Use specialists when the
-risk or code boundary benefits from independent attention. Respect available
-agent concurrency; do not start redundant reviewers merely to fill slots.
+the user: what changed, which risks deserve a separate reviewer, and which can
+be covered together. Wait for the user's selection or agreement. Consider
+behavior across supported entry paths, test quality, security, performance, and
+code quality. Behavior includes completeness, logic, reliability, and component
+connections. These are review questions, not five mandatory agents or reports.
+Use specialists when the change gives them a real question to answer.
 
-Before recording findings, a reviewer identifies the changed user actions and
-code operations in its scope. Check each through entry points, inputs, state
-changes, failure and retry paths, downstream consumers, and observable results.
-When a defect uses a shared mechanism, inspect other reachable uses before
-reporting its extent. Finish the assigned scope even after an early defect. On
-re-review, include newly affected behavior and prior findings.
+## Give each reviewer a bounded assignment
 
-A finding needs a reachable trigger, location or missing behavior, likely
-consequence, and required outcome. Classify urgency from those facts, not from a
-hypothetical worst case or a reviewer's preferred design. High and medium
-findings normally require correction; low findings are nonblocking. Inspect
-whether a test catches a plausible harmful mistake using expected behavior
-established independently of the implementation. A test that performs the
-product's action itself or only confirms its fixture does not prove that action.
-For changed or deleted expectations, require an agreed behavior change or
-evidence that the old expectation was wrong. Remove or revise misleading tests
-when needed; more tests are not an end in themselves. Reviewers do not edit code
-or commit.
+Include the exact checkout, base and current commits, run-owned changes, agreed
+contract and acceptance examples, selected focus, relevant previous findings and
+corrections, user-accepted risks, and validation evidence. Say whether focused
+checks are safe in this checkout. Do not send the entire planning conversation.
+The reviewer must separate unrelated user changes and state any missing evidence.
+For a new session, do not claim a prior check passed without retained evidence.
 
-The coordinator groups duplicate findings and preserves source references. No
-separate consolidation agent or file is required. Give the fixer the original
-findings and contract. The fixer checks reachability, severity, protections, and
-all affected uses before changing code; it may reject a finding with evidence.
-It resolves confirmed defects and runs relevant checks. If a reviewer calls a
-problem high but the user considers even its demonstrated consequence
-acceptable, present the exact scenario, impact, and both assessments to the
-user. Record the user's disposition and its consequence. Do not keep sending the
-same accepted risk back through review unless new evidence changes it.
+The reviewer inspects the whole assigned scope, not just the last commit or the
+file that first drew attention. Trace relevant entry paths, inputs, state,
+failures, retries, downstream uses, and observable results. If a defect uses
+shared logic, check other reachable uses. Finding one issue is not a reason to
+stop. A reviewer may report a credible issue outside the assigned focus rather
+than hide it because another aspect might own it. The coordinator decides whether
+it needs another specialist.
 
-After a fix, select fresh independent review based on the corrected paths,
-previous findings, and newly affected interfaces. A targeted reviewer still
-checks the complete current behavior of its assigned scope, not just the last
-diff. Rerun a broader review when a correction changes shared behavior or
-invalidates earlier coverage. A test-only change may affect behavioral
-expectations; a local code change may affect component connections or
-performance. Explain the actual impact rather than using file type alone to
-skip or launch a reviewer.
-If a new broad round seems useful after corrections, discuss its expected value
-with the user. Repeated findings or substantive disagreement require a decision,
-not an automatic loop. Carry unresolved or user-accepted findings into delivery.
+A reviewer may run a focused test or reproduction when it would settle a material
+doubt and can be done safely in an isolated or disposable environment. Do not
+change product code, commit, use production data, or run destructive checks.
+Name the command or action, its observed result, and its limit. Inspect existing
+validation evidence, but do not repeat a broad suite merely to claim coverage.
+Missing evidence is not a passing check.
+
+## Report facts before priority
+
+Return findings in the final response, not a report file. For each finding give:
+location or missing behavior; reachable trigger; evidence or a check that would
+distinguish it; likely consequence; uncertainty; and the required behavior or
+question for the user. Recommend urgency only after explaining those facts.
+A high label is not a decision to fix. Do not inflate a finding from a theoretical
+worst case, a hypothetical workload, or a preferred design. A credible risk of
+data loss, security breach, or another irreversible consequence must be stated
+plainly even if the user may choose to accept it.
+
+If there are no findings, say so. Add only a brief account of what behavior or
+risk was checked and what could not be checked. Do not produce a per-operation
+coverage table, file inventory, reading log, design for the fixer, or history of
+resolved findings. Reuse a finding ID only when it helps compare a persistent
+problem with prior review. Reviewers do not edit project files or commit.
+
+The coordinator groups duplicates, checks scope and evidence, and passes the
+original findings to the fixer. The fixer verifies reachability, impact, and
+existing protections; it may reject a finding with evidence. The coordinator
+and user decide which verified findings require correction. If a reviewer calls
+a problem high but the user considers even its demonstrated consequence
+acceptable, present the exact scenario and both assessments. Record the user's
+disposition and its consequence. Do not reopen the same accepted risk without
+new evidence. An unresolved requirement conflict needs correction or explicit
+user acceptance regardless of the reviewer's priority label.
+
+After a fix, choose fresh independent review from corrected behavior, prior
+findings, and newly affected interfaces. A targeted reviewer checks the complete
+current behavior of its scope, not only the last diff. Broaden review when a
+correction changes shared behavior or invalidates earlier coverage. File type
+alone does not prove an aspect is unaffected. Discuss another broad round with
+the user when its value is uncertain; repeated findings or substantive
+disagreement need a decision, not an automatic loop.

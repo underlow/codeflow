@@ -53,11 +53,10 @@ or finding-by-finding repair history. Do not create separate decision, evidence,
 fixes files.
 
 On revision, verify every finding independently, including its trigger,
-reachability, consequence, and priority. Incorporate supported corrections into
-the complete requirements. High and medium findings require resolution. Low findings
-are nonblocking allowed variation for design or implementation: preserve them for the
-next responsible stage, but do not add requirements solely to resolve them unless the
-same change is required by a blocking finding. Before returning, identify every requirement, decision,
+reachability, and consequence. Incorporate corrections selected with the
+coordinator and user into the complete requirements. Preserve accepted or
+nonblocking variation for the next responsible stage. Do not add requirements
+solely because a reviewer assigned a priority label. Before returning, identify every requirement, decision,
 and acceptance case affected by each changed rule and re-evaluate the retained
 acceptance-case set against the consolidated requirements. Correct the general rule,
 not only the reported example: follow relevant inputs, exceptions, boundaries,
@@ -65,7 +64,7 @@ interactions, and subsequent behavior, updating affected decisions consistently.
 Resolve contradictions exposed by the correction instead of leaving them for the
 next review.
 Preserve unaffected confirmed choices. Record each finding's disposition in
-`{{step_output}}`. Give reasoning only for a rejection or changed priority. Resolve conflicts
+`{{step_output}}`. Explain rejections and consequential disagreements. Resolve conflicts
 explicitly; return `revise-concept` if purpose, scope, or major product choices
 must change.
 

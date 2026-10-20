@@ -21,7 +21,11 @@ They are source material for the assignment, not a second workflow engine.
 | Correct findings | `17-fix` for a substantial change; `30-fix-compact` for a small or medium change; `33-fix-bug` for a bug |
 | Documentation and delivery | `18-documentation` and `19-handoff` for their content criteria, when relevant |
 
-The numbered directories contain `prompt.md`. Whole-change review has one
+The numbered directories contain `prompt.md`. Give every reviewer the current
+[review contract](review.md) together with the relevant detailed prompt, its
+bounded assignment, and any selected focus guide. The reviewer prompts now use
+the current final-response contract; do not wrap them in old report-file rules.
+Whole-change review has one
 `behavior.md` aspect covering completeness, correctness, reliability, and
 component connections; do not split it into separate reviewers by those names.
 Use only the prompts relevant to
@@ -46,7 +50,11 @@ standards, checks, and test-quality criteria. When assembling an agent brief,
   old prompt names it.
 - For a prompt that authors a contract, plan, maintained documentation, or code,
   use the current file boundary and commit rules. Reviewers return findings and
-  coverage in their final response without editing project files.
+  a brief scope-and-limits note in their final response without editing project
+  files.
+- Old instructions that make a reviewer's priority label an automatic routing
+  or correction decision are superseded. The coordinator checks the evidence,
+  resolves disagreements with the user, and gives the fixer selected findings.
 
 The `16-combine-review`, `31-combine-compact-review`, and `21-retro` prompts remain
 as historical source material but are not phases or assignments. The coordinator

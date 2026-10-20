@@ -20,9 +20,8 @@ new agent, including after a plan revision. Do not give an independent reviewer
 the whole planning conversation or let a reviewer alter code. The coordinator
 validates agent claims against the actual repository and decides what to do next.
 Assemble each assignment from the applicable detailed prompt's substantive
-criteria and the current phase contract; never pass its obsolete output clauses
-as live instructions. If native agents are unavailable, stop before implementation
-or independent review and explain the missing capability.
+criteria and the current phase contract; never pass obsolete output clauses
+as live instructions.
 If native agents are unavailable, stop before implementation or independent
 review and explain the missing capability; do not quietly substitute the
 coordinator for a fresh agent.

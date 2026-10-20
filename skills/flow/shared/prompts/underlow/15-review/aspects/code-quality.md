@@ -1,11 +1,15 @@
-Does the change make the code harder to understand or change than the required
-behavior demands?
+Does the change make the code harder to understand, verify, or extend than its
+required behavior demands?
 
-Find tangled responsibilities, duplicated logic, misleading abstractions, dead
-code, or difficult control flow when they create a concrete maintenance problem.
-Do not call code unnecessary or dead based on its shape alone; check how it is
-used.
+Look for tangled responsibilities, duplicated rules, hidden coupling, unclear
+state ownership, misleading abstractions, dead code, and difficult control flow.
+Show the concrete maintenance consequence: for example, a supported behavior
+change must be made in several places that can diverge, or a reader cannot tell
+which component owns a state transition. Inspect actual callers before claiming
+code is unnecessary or dead.
 
-Do not ask for broad refactoring or removal of validation, failure handling,
-compatibility, or security controls. Added product behavior belongs to the
-behavior review.
+Do not turn style preferences into defects or request a broad refactor unrelated
+to this change. Validation, failure handling, compatibility, and security
+controls are not needless complexity merely because they add code. Report a
+credible behavioral defect you encounter even if another reviewer focuses on
+behavior.

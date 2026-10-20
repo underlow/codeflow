@@ -101,11 +101,10 @@ in {{step_output}} only where they affect a decision;
 do not present inferred behavior as observed.
 
 On revision, assess every incoming finding or planning feedback item independently,
-including its trigger, reachability, consequence, and priority.
-High and medium findings require resolution. Low findings are nonblocking
-implementation freedom: preserve them for the responsible downstream stage, but do
-not change the design solely to resolve them unless the same change is required by a
-blocking finding.
+including its trigger, reachability, and consequence. Address verified findings
+selected with the coordinator and user. Preserve accepted or nonblocking
+implementation freedom for the responsible downstream stage. Do not change the
+design solely because a reviewer assigned a priority label.
 Discuss changed consequential choices with the architect unless recorded approval
 preferences delegate them. Local repairs within agreed contracts need no renewed
 architectural decision. Correct supported defects, then identify every requirement,

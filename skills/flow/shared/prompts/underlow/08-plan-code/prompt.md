@@ -65,11 +65,12 @@ open product or design question inside the plan. If essential information is
 missing or unusable, preserve the draft and return `blocked`.
 
 When revising after review, check each finding against the requirements, design,
-and repository. Fix high and medium findings. Keep low findings as nonblocking
-notes for the implementer; do not change the plan only to resolve a low finding.
+and repository. Address verified findings selected for correction. Preserve
+accepted or nonblocking findings for the implementer without changing the plan
+only because a reviewer assigned a priority label.
 Update every affected task and every agreement between tasks, not only the place
 named by the reviewer. Record what happened to each finding in `{{step_output}}`.
-Explain only rejected findings and changed priorities.
+Explain rejected findings and consequential impact disagreements.
 
 When revising after an implementation failure, inspect the work that already
 exists. Keep valid completed work. Update tasks that are obsolete or still

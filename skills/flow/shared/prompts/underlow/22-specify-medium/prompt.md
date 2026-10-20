@@ -24,8 +24,9 @@ Resolve contradictions between behavior and design in this session. Do not creat
 separate concept, requirements, or design documents.
 
 When review or implementation returns work, verify each finding against the current
-contract and code. Correct supported high and medium issues throughout the document;
-preserve unaffected decisions. Briefly explain rejected or reprioritized findings.
+contract and code. Address verified findings selected for correction throughout
+the document; preserve unaffected decisions. Explain rejected findings and any
+consequential disagreement for the coordinator and user to resolve.
 Return ready only after current agreement and resolution or explicit delegation of
 every consequential question. Return blocked if essential evidence or a required
 decision is unavailable, or cancelled if the user cancels the work.

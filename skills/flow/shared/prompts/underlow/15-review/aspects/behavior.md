@@ -17,5 +17,5 @@ involves shared logic or input, inspect its other reachable uses.
 
 Report missing, incorrect, or unintended behavior with a concrete trigger and
 consequence. Do not demand a safeguard without a reachable failure or report an
-unrelated change only because it is outside the plan. Unnecessary complexity
-belongs to code-quality review.
+unrelated change only because it is outside the plan. Report a credible defect
+you encounter even if another focus guide would normally cover it.
