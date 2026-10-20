@@ -21,7 +21,10 @@ They are source material for the assignment, not a second workflow engine.
 | Correct findings | `17-fix` for a substantial change; `30-fix-compact` for a small or medium change; `33-fix-bug` for a bug |
 | Documentation and delivery | `18-documentation` and `19-handoff` for their content criteria, when relevant |
 
-The numbered directories contain `prompt.md`. Use only the prompts relevant to
+The numbered directories contain `prompt.md`. Whole-change review has one
+`behavior.md` aspect covering completeness, correctness, reliability, and
+component connections; do not split it into separate reviewers by those names.
+Use only the prompts relevant to
 the assigned work. For an independent reviewer, pass the detailed review
 criteria and the agreed contract, not the planning conversation. A selected
 aspect file supplements `15-review/prompt.md`; it is not a mandatory reviewer.

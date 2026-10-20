@@ -9,10 +9,10 @@ run-owned working changes. Distinguish unrelated user changes using scope and Gi
 evidence; state any uncertainty. Never limit review to the latest commit or fix.
 Read surrounding callers and consumers needed to understand reachable behavior.
 
-Check all seven aspects in one report:
-- Implementation: required behavior is complete and reachable through real entry points.
-- Correctness and reliability: inputs, state transitions, errors, retries, and later actions.
-- Integration: wiring, configuration, contracts, and all supported entry paths.
+Check these five areas in one report, explaining when an area is irrelevant to
+the change:
+- Behavior: required results are complete and reachable through every supported
+  entry path; logic, state, errors, retries, and component connections work.
 - Test quality: tests catch named harmful mistakes and expected results come from
   the contract. For bugs, inspect whether the regression check catches the original
   failure and whether the actual reproduction was rerun after the fix.

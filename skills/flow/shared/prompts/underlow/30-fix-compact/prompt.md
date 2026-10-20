@@ -1,5 +1,5 @@
-Verify and correct the supplied whole-feature findings noninteractively. Medium
-provides a consolidated seven-aspect report; small provides one review report.
+Verify and correct the supplied whole-feature findings noninteractively. The
+coordinator may supply findings from one or several selected reviewers.
 
 For medium, the combined specification owns requirements and binding design, its
 independent review provides acceptance cases, and the plan owns task dependencies.
@@ -32,4 +32,5 @@ correctable high and medium findings are resolved or rejected with evidence.
 Write {{step_output}} with each finding ID and disposition, actual validation
 results, and limitations. Explain rejections and changed priorities. Commit the
 corrections. Do not edit the plan, specification, or original reviews, or launch
-agents. The next stage re-reviews the complete current change.
+agents. The coordinator selects independent re-review for the affected behavior
+and interfaces.

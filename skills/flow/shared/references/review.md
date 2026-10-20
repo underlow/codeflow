@@ -9,10 +9,11 @@ reviewer's confidence as proof of the user-visible result.
 Before the first code review, the coordinator proposes a concrete review plan to
 the user: what changed, which risks deserve an independent reviewer, which can
 be covered together, and why. Wait for the user's selection or agreement before
-launching reviewers. Consider implementation completeness, correctness and
-reliability, integration, test quality, security, performance, and code quality.
-These are questions to assess, not seven mandatory agents or seven reports. For a
-narrow change one whole-change reviewer may suffice. Use specialists when the
+launching reviewers. Consider behavior across supported entry paths, test
+quality, security, performance, and code quality. Behavior includes completeness,
+logic, reliability, and connections between components. These are review
+questions, not five mandatory agents or reports. For a narrow change, one
+whole-change reviewer may suffice. Use specialists when the
 risk or code boundary benefits from independent attention. Respect available
 agent concurrency; do not start redundant reviewers merely to fill slots.
 
@@ -50,8 +51,9 @@ previous findings, and newly affected interfaces. A targeted reviewer still
 checks the complete current behavior of its assigned scope, not just the last
 diff. Rerun a broader review when a correction changes shared behavior or
 invalidates earlier coverage. A test-only change may affect behavioral
-expectations; a local code change may affect integration or performance. Explain
-the actual impact rather than using file type alone to skip or launch a reviewer.
+expectations; a local code change may affect component connections or
+performance. Explain the actual impact rather than using file type alone to
+skip or launch a reviewer.
 If a new broad round seems useful after corrections, discuss its expected value
 with the user. Repeated findings or substantive disagreement require a decision,
 not an automatic loop. Carry unresolved or user-accepted findings into delivery.

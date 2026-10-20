@@ -8,4 +8,4 @@ used.
 
 Do not ask for broad refactoring or removal of validation, failure handling,
 compatibility, or security controls. Added product behavior belongs to the
-implementation review.
+behavior review.
