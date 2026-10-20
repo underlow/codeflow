@@ -62,3 +62,7 @@ The profiles are `full`, `medium`, `small`, and `bugfix`. See the
 [prompt library](skills/flow/shared/references/prompt-map.md) preserves the
 original analysis, planning, implementation, and review criteria. The skill
 does not require the former CodeFlow application.
+
+After agreeing on a plan, `flow` proposes a model and reasoning effort for its
+developer agents and waits for your choice. It proposes reviewer models and
+effort alongside the review plan, once the actual change is known.

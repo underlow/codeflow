@@ -51,6 +51,19 @@ branch from Git, not duplicated state. Write state atomically after the work it
 records exists; do not mark an unfinished discussion as complete. The state
 file is local coordination data, not a second source of product decisions.
 For a project stage, carry `project` and `stage` through later state updates.
+After the user confirms development agent settings, retain the selected
+platform, model, and reasoning effort in a `development_agent` object in
+`state.json`, with `platform`, `model`, and `effort` fields. Use the actual
+platform and values. Record task-specific exceptions in an optional `tasks`
+object keyed by the plan's task ID only when the user chose them. This is a
+small resume pointer, not a history of every agent call. If no choice was made
+before pausing at the plan boundary, leave it absent and ask before
+implementation on resume. When resuming on another platform or after a model
+becomes unavailable, reconfirm an applicable choice with the user. If the user
+stops after confirming a review plan but before its reviewers start, retain the
+pending reviewer choices with their scope and current commit; discard them when
+the scope changes or the review starts. Do not add model assignments to the
+behavioral contract or plan.
 Use `analysis`, `planning`, `implementation`, `review`, or `delivery` as the
 active phase. For example, after stopping at the committed plan boundary:
 
@@ -88,6 +101,8 @@ Git and conversation. Ask only for information that cannot be inferred.
 
 A new coordinator session resumes at the recorded phase. After a committed plan
 and a user's choice to stop, implementation is the next phase; the new session
-still starts a fresh developer agent. If work after a clean review changed the
-reviewed commit, reassess the affected scope before delivery. Do not push,
-merge, delete branches or worktrees, or move plan directories as routine cleanup.
+checks the confirmed development model and effort, or obtains that choice if it
+is missing, before starting a fresh developer agent. If work after a clean
+review changed the reviewed commit, reassess the affected scope before delivery.
+Do not push, merge, delete branches or worktrees, or move plan directories as
+routine cleanup.

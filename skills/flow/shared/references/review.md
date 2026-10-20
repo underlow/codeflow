@@ -2,8 +2,12 @@
 
 Before the first code review, the coordinator proposes a concrete review plan to
 the user: what changed, which risks deserve a separate reviewer, and which can
-be covered together. Wait for the user's selection or agreement. Consider
-behavior across supported entry paths, test quality, security, performance, and
+be covered together. Include a concrete available model and reasoning effort
+for each proposed reviewer, with a short reason where the choice matters. Wait
+for the user's selection or agreement on both the reviewers and their model
+settings before launching them. The development choice is not automatically
+the review choice. Consider behavior across supported entry paths, test quality,
+security, performance, and
 code quality. Behavior includes completeness, logic, reliability, and component
 connections. These are review questions, not five mandatory agents or reports.
 Use specialists when the change gives them a real question to answer.
@@ -66,3 +70,9 @@ correction changes shared behavior or invalidates earlier coverage. File type
 alone does not prove an aspect is unaffected. Discuss another broad round with
 the user when its value is uncertain; repeated findings or substantive
 disagreement need a decision, not an automatic loop.
+
+Reuse a confirmed reviewer's model and effort for the same focus when they still
+fit; include any new reviewer or changed setting in the next proposal to the
+user. Apply selections through native agent settings. If a selected combination
+is unavailable, return to the user with an alternative instead of silently
+falling back.
