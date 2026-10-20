@@ -1,0 +1,83 @@
+# Workspace, state, and resume
+
+## Resolve a request
+
+Find the current Git repository and its registered worktrees with
+`git worktree list --porcelain`. A path argument may name a plan directory in
+any registered worktree or an existing description file. An unmatched argument
+needs clarification. Without an argument, inspect `docs/plans/` in the current
+checkout and every registered worktree for unfinished flow plans. Show the
+feature, profile, phase, branch, and absolute worktree path; let the user choose
+when more than one exists. Do not treat older CodeFlow engine plans as native
+flow plans or rewrite them. Recognize a native plan by its `state.json` and
+required profile, phase, and base-commit fields. A completed or cancelled plan
+is terminal.
+
+For a new request, understand the feature before choosing a profile. Propose the
+profile appropriate to the scope and let the user choose another. Use a
+`flow/<slug>` branch in the current checkout by default, adding a suffix if
+occupied. If existing user changes would overlap, offer a separate worktree or
+let the user resolve them. Never stash, discard, or commit their work as setup.
+Honor an explicit workspace choice. In a worktree, pass its absolute path to all
+tools and agents; creating one does not change the coordinator session's cwd.
+
+Keep each plan under `docs/plans/<date>-<slug>/` in its worktree. A plan's durable
+content is its agreed contract, plan and optional tasks, a minimal state file,
+and a current findings file only when needed. Do not create per-step result
+files, passing-review reports, combined reports, attempt logs, saved prompts,
+statistics, or execution directories. Use conversation and Git history for
+routine progress. A fresh session must rerun a check if its result cannot be
+verified from retained evidence; never report an unobserved check as passed.
+Commit deliverable documents and code in
+focused commits; preserve unrelated changes. Reviewers do not commit.
+
+## Minimal state
+
+After a durable phase or task completes, update `<plan>/state.json` with the
+selected `profile`, current `phase`, and exact `base_commit` captured before
+flow changes. Add `task` only for an active task and `status` only for paused,
+blocked, complete, or cancelled work. Record a reviewed commit when needed to
+know whether later code has invalidated a clean review. Derive worktree and
+branch from Git, not duplicated state. Write state atomically after the work it
+records exists; do not mark an unfinished discussion as complete. The state
+file is local coordination data, not a second source of product decisions.
+Use `analysis`, `planning`, `implementation`, `review`, or `delivery` as the
+active phase. For example, after stopping at the committed plan boundary:
+
+```json
+{
+  "profile": "medium",
+  "phase": "implementation",
+  "base_commit": "<original Git SHA>",
+  "status": "paused"
+}
+```
+
+Clear `paused` when continuing. The plan and Git history, not an accumulated
+attempt counter, show what work remains.
+
+Put current unresolved findings, evidence, and any user-accepted dispositions
+in `<plan>/findings.md` only when there is something to preserve across a
+session. Keep references to original agent messages when available. Update or
+remove resolved findings when their status changes; do not grow a sequence of
+round-numbered files. Keep agreement and acceptance examples in the contract,
+not in state or findings.
+
+## Resume from the main repository
+
+An invocation in the main checkout must discover unfinished plans inside its
+registered worktrees as well as its own. A selected plan's path supplies the
+checkout for every subsequent tool and agent. Verify that worktree still exists,
+its branch and Git history match the saved base, and the plan files are present.
+Read state, contract, plan, findings if any, current diff, and relevant commits.
+Determine what actually finished before continuing; a stale state file is not a
+reason to repeat valid work or call a draft complete. If an agent may still be
+running, account for it before starting another. If the worktree was removed or
+never reached its first durable plan file, explain what can be recovered from
+Git and conversation. Ask only for information that cannot be inferred.
+
+A new coordinator session resumes at the recorded phase. After a committed plan
+and a user's choice to stop, implementation is the next phase; the new session
+still starts a fresh developer agent. If work after a clean review changed the
+reviewed commit, reassess the affected scope before delivery. Do not push,
+merge, delete branches or worktrees, or move plan directories as routine cleanup.
