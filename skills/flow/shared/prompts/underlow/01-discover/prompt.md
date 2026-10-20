@@ -1,7 +1,6 @@
-Discuss drafts in chat. Write {{step_output}} and task changes only at step
-completion, after any required agreement. Waiting for an answer requires neither
-files nor a blocked outcome. If the step ends blocked, cancelled, or returning
-upstream, write its reason instead of an unfinished deliverable.
+Discuss drafts in chat. Write the agreed deliverable only after any required
+agreement. If work is blocked or cancelled, explain why in the response rather
+than saving an unfinished document.
 
 ## Product discovery step
 
@@ -24,7 +23,7 @@ findings through their product effect. Explore representative journeys, includin
 relevant failures, interruptions, recovery, and interactions with existing behavior,
 to uncover missing product choices.
 
-When you and product owner agreed on concept write `{{step_output}}` in the working documents directory with:
+When you and the product owner agree on the concept, write `concept.md` in the plan folder with:
 
 1. Problem, affected users, and intended outcome.
 2. Scope, major decisions, supplied constraints, exclusions, and reasons for tradeoffs.
@@ -34,7 +33,7 @@ When you and product owner agreed on concept write `{{step_output}}` in the work
 Keep the concept short, product-focused, and understandable without code knowledge.
 Leave exact key rules, matching details, counts, and behavioral boundaries to
 requirements unless they determine scope or a major product choice. Keep supplied
-answers, constraints, brief rationale, and relevant evidence in {{step_output}} without
+answers, constraints, brief rationale, and relevant evidence in `concept.md` without
 expanding them into a specification. Code links are allowed where useful;
 understanding the concept must not require reading code. Do not create separate
 decision, evidence, or revision documents.
@@ -48,11 +47,11 @@ Do not implement the feature or modify application code.
 
 When revising, read the existing concept and the supplied reason for returning.
 Check the evidence, preserve unaffected decisions, and discuss necessary product
-changes with the owner. Record how each requested revision was addressed or why
-it was rejected. High and medium findings require resolution. Low findings are
-nonblocking: preserve them for requirements or the final owner, but do not change the
-concept solely to resolve them unless the same change is required by a blocking
-finding.
+changes with the owner. Explain how each requested revision was addressed or why
+it was rejected. Judge findings by their demonstrated effect on purpose, scope,
+and major product choices, not by a reviewer's priority label. Carry unresolved
+behavioral details into requirements; bring a consequential disagreement to the
+owner rather than silently accepting or rejecting it.
 
 Walk the owner through the resulting concept in manageable pieces and incorporate
 corrections. Finish as `ready` only after they confirm it and no open issue could

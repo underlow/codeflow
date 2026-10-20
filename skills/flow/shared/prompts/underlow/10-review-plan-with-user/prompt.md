@@ -1,13 +1,12 @@
-Discuss drafts in chat. Write {{step_output}} and task changes only at step
-completion, after any required agreement. Waiting for an answer requires neither
-files nor a blocked outcome. If the step ends blocked, cancelled, or returning
-upstream, write its reason instead of an unfinished deliverable.
+Discuss drafts in chat. Write the agreed deliverable only after any required
+agreement. If work is blocked or cancelled, explain why in the response rather
+than saving an unfinished document.
 
 Review the existing implementation plan with the product owner, who may also act
 as architect. Help them understand what will be delivered, in what order, and the
 consequential risks and tradeoffs; revise the plan using their feedback.
 
-Review the implementation plan and every task document. Requirements govern behavior, quality,
+Review the implementation plan and any task documents. Requirements govern behavior, quality,
 purpose, and scope; the design governs binding design decisions. Investigate
 technical questions in the repository yourself and reuse recorded answers.
 
@@ -21,9 +20,9 @@ user to verify technical facts or choose routine implementation details.
 
 Check feedback against the agreed requirements, design, and repository evidence.
 Explain unsupported findings and discuss disagreements. Apply supported planning
-corrections, updating affected tasks, dependencies, coverage, and verification
-together. Write {{step_output}} as the revised overview with ordered task links, shared contracts,
-requirement coverage, and whole-change checks. Keep numbered tasks bounded and
+corrections, updating affected work, dependencies, coverage, and verification
+together. Write `plan.md` as the revised overview with ordered work, task links when present, shared contracts,
+requirement coverage, and whole-change checks. When task files exist, keep them bounded and
 actionable: outcome, explicit inputs and prerequisites,
 required outcomes and integration work, boundaries, and observable completion
 checks. Tasks are outcome contracts, not implementation recipes. Leave helpers,
@@ -32,7 +31,7 @@ agreed design; do not prescribe local signatures or call sequences.
 Assign an executor and completion point for manual verification.
 Do not add separate risks, evidence, decisions, or agreement sections; necessary
 safeguards become actual work and brief rationale stays beside the relevant choice.
-Map relevant acceptance-case IDs to task or whole-change
+Map relevant acceptance-case IDs to work or whole-change
 checks. Reference upstream rules instead of copying them; leave private helpers
 and routine algorithms to implementation. Do not write code or pseudocode.
 
@@ -41,12 +40,13 @@ return revise-requirements; for a changed binding design decision, return
 revise-approach. Preserve the proposal and explain the evidence, affected work,
 and decision needed without changing upstream documents.
 
-Before finishing, check task order, shared contracts, coverage, and end-to-end
+Before finishing, check work order, shared contracts, coverage, and end-to-end
 verification. Summarize changes and remaining concerns in plain language and
 confirm with the user that this review is complete. Return ready only then and
 when the plan is coherent and actionable. If essential evidence or a needed
 decision cannot be obtained, report the reason and return blocked.
 
-Record feedback dispositions and the user's confirmation in `{{step_output}}`.
-Write only {{step_output}}, task files, and required step result files. Do not implement
+Explain feedback dispositions in the response. Record the current agreement in
+`plan.md` without a finding history.
+Write only `plan.md` and any needed task files. Do not implement
 changes or launch reviewers.

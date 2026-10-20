@@ -1,13 +1,12 @@
-Discuss drafts in chat. Write {{step_output}} and task changes only at step
-completion, after any required agreement. Waiting for an answer requires neither
-files nor a blocked outcome. If the step ends blocked, cancelled, or returning
-upstream, write its reason instead of an unfinished deliverable.
+Discuss drafts in chat. Write the agreed deliverable only after any required
+agreement. If work is blocked or cancelled, explain why in the response rather
+than saving an unfinished document.
 
 Agree the concept, requirements, and system design together for a medium feature.
 This is one interactive stage and one authoritative document, not three sequential
 approval cycles. Keep detail proportional to the feature.
 
-Write {{step_output}} with these sections:
+Write specification.md with these sections:
 1. Purpose and scope: original request, intended outcome, included and excluded work.
 2. Requirements: stable R IDs, observable behavior, important failures and later
    actions, compatibility, and behavior to preserve. Resolve material variation.
@@ -39,7 +38,7 @@ behavior or technical decisions. Ask the user only for missing intent, constrain
 or consequential choices that repository evidence cannot answer. Reuse answers
 already given. Explain choices with concrete behavior and a recommendation.
 Present the consolidated proposal in the conversation and wait for explicit
-confirmation of the current version before writing {{step_output}}. Silence or
+confirmation of the current version before writing specification.md. Silence or
 confirmation of an earlier draft is not approval.
 On revision, discuss changed consequential decisions; local repairs within an
 agreed contract need no renewed decision. Record confirmation and explicit

@@ -11,29 +11,31 @@ needed for the plan.
 Read enough of the repository to find the affected code, existing patterns,
 dependencies, and useful validation commands. Do not inspect unrelated areas.
 
-Split the work into tasks that each produce a specific result. Order the tasks so
-that earlier tasks provide everything later tasks need. Make sure every
-requirement is handled by a task. When several tasks must use the same data or
-behavior, explain what they must agree on. Include the work needed to join the
-completed tasks into the working feature.
+Split the work into bounded units when that helps a fresh developer. Order the
+work so earlier results provide what later work needs. Make sure every
+requirement is covered. When several units must use the same data or behavior,
+explain what they must agree on. Include the work needed to join the results
+into the working feature.
 
-Describe what each task must achieve, not every step the implementer should take.
+Describe what each unit must achieve, not every step the implementer should take.
 Do not prescribe private helpers, algorithms, file organization, exact private
 signatures, pseudocode, or detailed test bodies unless the design already decided
 them. File paths may show the implementer where to start; they are not a complete
 list of files that may change.
 
-Use these sections in `{{step_output}}`:
+Use these sections in `plan.md`:
 1. A plain-language summary of what the work will deliver.
-2. Links to the tasks in execution order, with their dependencies.
-3. Anything that several tasks must agree on.
-4. A map from requirements to tasks and checks for the complete feature.
+2. Ordered work and dependencies, with links when separate task files help.
+3. Anything that several units must agree on.
+4. A map from requirements to work and checks for the complete feature.
 
 Put a short reason beside a planning choice when the reason matters. Do not create
-separate risk, evidence, decision, or agreement documents. Keep relevant answers
-to review findings in `{{step_output}}`. Put task files under `tasks/`.
+separate risk, evidence, decision, or agreement documents. Incorporate selected
+review corrections into the current plan without a finding history. Put optional
+task files under `tasks/`.
 
-Write one numbered file per task, in execution order. Each task contains:
+When separate task files help, write one numbered file per task, in execution
+order. Each task contains:
 1. Result: what must be true when the task is finished, with the relevant
    requirement IDs.
 2. Inputs and dependencies: the documents, current behavior, or earlier task
@@ -49,13 +51,13 @@ Refer to requirements and acceptance cases instead of copying them. A task must
 make sense without conversation history. Expected results must come from the
 requirements, not from one possible implementation. Give each task only the
 checks needed to show that it produced its result. Put checks that cover several
-tasks in `{{step_output}}` instead of repeating them in every task.
+tasks in `plan.md` instead of repeating them in every task.
 
 Before returning, check that:
-- every required result is assigned to a task;
-- each task has the inputs it needs before it starts;
-- tasks that must agree describe the same data or behavior;
-- the tasks join into the complete feature;
+- every required result is assigned to work;
+- each work unit has the inputs it needs before it starts;
+- units that must agree describe the same data or behavior;
+- the units join into the complete feature;
 - every named check can run and can catch the mistake it names.
 
 If requirements or acceptance cases contradict each other, return
@@ -68,16 +70,16 @@ When revising after review, check each finding against the requirements, design,
 and repository. Address verified findings selected for correction. Preserve
 accepted or nonblocking findings for the implementer without changing the plan
 only because a reviewer assigned a priority label.
-Update every affected task and every agreement between tasks, not only the place
-named by the reviewer. Record what happened to each finding in `{{step_output}}`.
-Explain rejected findings and consequential impact disagreements.
+Update every affected work unit and every agreement between units, not only the place
+named by the reviewer. Explain finding dispositions in the response, including
+rejections and consequential impact disagreements.
 
 When revising after an implementation failure, inspect the work that already
-exists. Keep valid completed work. Update tasks that are obsolete or still
+exists. Keep valid completed work. Update work that is obsolete or still
 needed so the implementer does not repeat finished work.
 
-Return `ready` only when the plan and tasks can be followed as written and no
+Return `ready` only when the plan and any tasks can be followed as written and no
 required product or design decision is missing.
 
-Write only `{{step_output}}`, task files, and the required step result files. Do not
+Write only `plan.md` and any needed task files. Do not
 implement code, edit earlier documents, run reviewers, or create other artifacts.

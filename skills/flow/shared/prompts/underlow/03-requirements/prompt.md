@@ -1,11 +1,10 @@
-Discuss drafts in chat. Write {{step_output}} and task changes only at step
-completion, after any required agreement. Waiting for an answer requires neither
-files nor a blocked outcome. If the step ends blocked, cancelled, or returning
-upstream, write its reason instead of an unfinished deliverable.
+Discuss drafts in chat. Write the agreed deliverable only after any required
+agreement. If work is blocked or cancelled, explain why in the response rather
+than saving an unfinished document.
 
 Work with the product owner to turn the agreed concept into complete,
 confirmed requirements that settle consequential product behavior. Keep the
-conversation and `{{step_output}}` understandable without code knowledge.
+conversation and `requirements.md` understandable without code knowledge.
 
 Reuse recorded answers and any relevant revision reason. Inspect relevant repository code,
 tests, and documentation to establish current behavior and constraints;
@@ -19,7 +18,7 @@ supported recommendation. Ask focused questions, normally one at a time. Leave
 implementation mechanisms to design; preserve explicit architectural constraints
 supplied by the owner.
 
-Use these sections in `{{step_output}}`:
+Use these sections in `requirements.md`:
 1. Purpose and scope: intended change, included behavior, and explicit exclusions.
 2. Requirements grouped by user activity, with stable IDs, applicable conditions,
    short titles, observable results and transitions, and consequential exceptions. Preserve
@@ -42,7 +41,7 @@ Use these sections in `{{step_output}}`:
    changes. Confirmation of an earlier version does not confirm changed behavior.
 
 Trace requirements to the concept or recorded confirmed decisions. Keep all
-binding behavior in `{{step_output}}`. Keep relevant decisions, brief rationale,
+binding behavior in `requirements.md`. Keep relevant decisions, brief rationale,
 approval preferences, and confirmation in that document. State current behavior as
 observable product behavior, not as code structure. Do not include source paths,
 line numbers, function or type names, code fragments, internal control flow, or
@@ -63,8 +62,9 @@ not only the reported example: follow relevant inputs, exceptions, boundaries,
 interactions, and subsequent behavior, updating affected decisions consistently.
 Resolve contradictions exposed by the correction instead of leaving them for the
 next review.
-Preserve unaffected confirmed choices. Record each finding's disposition in
-`{{step_output}}`. Explain rejections and consequential disagreements. Resolve conflicts
+Preserve unaffected confirmed choices. Explain finding dispositions in the
+response; incorporate accepted corrections into `requirements.md` without a
+finding history. Explain rejections and consequential disagreements. Resolve conflicts
 explicitly; return `revise-concept` if purpose, scope, or major product choices
 must change.
 
@@ -77,7 +77,7 @@ Could someone implement materially different behavior while following these
 requirements? Settle consequential differences with rules or allowed variation.
 Walk the owner through the consolidated behavior in manageable pieces, focusing
 on new or changed decisions. Record confirmation of this version in
-`{{step_output}}`. Return `ready` only after confirmation and when no
+`requirements.md`. Return `ready` only after confirmation and when no
 consequential behavioral or quality choice remains unresolved. If essential
 evidence or a needed decision cannot be obtained, report the reason and return
 `blocked`.

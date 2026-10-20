@@ -1,7 +1,6 @@
-Discuss drafts in chat. Write {{step_output}} and task changes only at step
-completion, after any required agreement. Waiting for an answer requires neither
-files nor a blocked outcome. If the step ends blocked, cancelled, or returning
-upstream, write its reason instead of an unfinished deliverable.
+Discuss drafts in chat. Write the agreed deliverable only after any required
+agreement. If work is blocked or cancelled, explain why in the response rather
+than saving an unfinished document.
 
 Investigate the reported bug and clarify the intended behavior with the user.
 Inspect affected code, tests, logs, and configuration. Attempt a focused reproduction
@@ -10,7 +9,7 @@ the actual path to its cause. Separate observed evidence from hypotheses. If the
 original environment is unavailable, record what was tested locally and what
 remains unverified; never claim a reproduction that did not run.
 
-Write one investigation in {{step_output}}:
+Write one investigation in investigation.md:
 1. Original report and source, expected versus actual behavior, affected scope.
 2. Reproduction: prerequisites, inputs or actions, observed results, and limitations.
 3. Cause: supporting code or runtime evidence, affected nearby paths, and remaining
@@ -33,7 +32,7 @@ behavior or technical decisions. Ask the user only for missing intent, constrain
 or consequential choices that repository evidence cannot answer. Reuse answers
 already given. Explain choices with concrete behavior and a recommendation.
 Present the consolidated proposal in the conversation and wait for explicit
-confirmation of the current version before writing {{step_output}}. Silence or
+confirmation of the current version before writing investigation.md. Silence or
 confirmation of an earlier draft is not approval.
 On revision, discuss changed consequential decisions; local repairs within an
 agreed contract need no renewed decision. Record confirmation and explicit

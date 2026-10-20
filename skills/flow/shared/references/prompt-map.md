@@ -33,30 +33,10 @@ the assigned work. For an independent reviewer, pass the detailed review
 criteria and the agreed contract, not the planning conversation. A selected
 aspect file supplements `15-review/prompt.md`; it is not a mandatory reviewer.
 
-The library predates the phase-based skill. Preserve its substantive guidance:
-questions to investigate, acceptance examples, scope boundaries, evidence
-standards, checks, and test-quality criteria. When assembling an agent brief,
-**replace** its old transport instructions with the current contract:
-
-- `{{step_output}}`, `result.md`, fixed numbered files, and any required report
-  path mean the agent's final response unless the current phase explicitly calls
-  for an agreed contract or plan file. Do not create report-only files.
-- An old named outcome is a description of the situation, not a YAML route.
-  The coordinator decides the next phase from evidence and user decisions.
-- Old references to `progress.json` mean `state.json`; use its `base_commit`.
-- Old seven-reviewer, all-again re-review, mandatory task-file, consolidation,
-  retrospective, and fixed-round instructions are superseded by the phase,
-  review, and execution references. Do not schedule or save work only because an
-  old prompt names it.
-- For a prompt that authors a contract, plan, maintained documentation, or code,
-  use the current file boundary and commit rules. Reviewers return findings and
-  a brief scope-and-limits note in their final response without editing project
-  files.
-- Old instructions that make a reviewer's priority label an automatic routing
-  or correction decision are superseded. The coordinator checks the evidence,
-  resolves disagreements with the user, and gives the fixer selected findings.
-
-The `16-combine-review`, `31-combine-compact-review`, and `21-retro` prompts remain
-as historical source material but are not phases or assignments. The coordinator
-combines findings; no separate agent or report is needed. Do not pass an old
-prompt verbatim to an agent when its transport clauses conflict with these rules.
+The detailed prompts provide substantive questions, acceptance examples, scope
+boundaries, and checks. The phase, review, and execution references govern agent
+assignments, files, commits, and next steps. An outcome named in a detailed
+prompt describes the situation; the coordinator decides what to do from evidence
+and user decisions. Do not create report-only files or pass a detailed prompt
+verbatim when its assignment instructions conflict with those references.
+The coordinator combines review findings; no separate agent or report is needed.

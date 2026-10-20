@@ -11,7 +11,7 @@ Update only documentation affected by the change. Follow its existing
 organization, terminology, and audience. Preserve unrelated content; no change
 is valid when existing documentation remains accurate.
 
-Edit only maintained documentation and the required reports. Do not edit
+Edit only maintained documentation. Do not edit
 AGENTS.md, CLAUDE.md, planning inputs, or generated files. Report documentation
 updates that require changes to code or generators. Commit completed
 documentation changes with a concise message.
@@ -25,15 +25,15 @@ evidence and explain the consequence in product terms. Do not resolve it by
 changing the agreement, fixing code, or treating it as accepted. Document only
 what can be stated accurately; do not ask the user or reopen development.
 
-Use this concise format in {{step_output}} in the plan folder:
+Report the result concisely in the final response:
 1. Documentation changes: documents and sections changed, or why no update is needed.
 2. Accuracy checks: checks actually performed, their results, and relevant source
    or report references. Distinguish inspection from executed checks.
 3. Conflict preventing accurate documentation, only when present: the deviation
    or missing prerequisite, consequence, and decision or source change needed.
    A recorded conflict is not accepted or resolved merely by documenting it.
-Do not add an implementation narrative, routine risks section, or extra authored
-reports. Maintained documentation changes remain the primary output of this step.
+Do not add an implementation narrative, routine risks section, or authored report.
+Maintained documentation changes remain the primary output.
 
 If essential evidence is missing or unusable, record the specific blocker in
-the step result.
+the final response.
