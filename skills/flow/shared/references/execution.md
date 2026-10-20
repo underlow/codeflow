@@ -21,6 +21,15 @@ let the user resolve them. Never stash, discard, or commit their work as setup.
 Honor an explicit workspace choice. In a worktree, pass its absolute path to all
 tools and agents; creating one does not change the coordinator session's cwd.
 
+A description file from `underlow/project` may contain `Project:` and `Stage:`
+fields. Treat its selected result and constraints as the input to an ordinary
+flow: discuss the profile with the user here, and keep this flow's contract,
+plan, review, and completion independent. Verify that the project document and
+stage ID match the handoff. In this flow's `state.json`, retain the optional
+`project` repository-relative path and `stage` ID so the project skill can find
+the work later. Do not infer a profile from the project roadmap, modify its
+other stages, or automatically start the next stage when this flow completes.
+
 Keep each plan under `docs/plans/<date>-<slug>/` in its worktree. A plan's durable
 content is its agreed contract, plan and optional tasks, a minimal state file,
 and a current findings file only when needed. Do not create per-step result
@@ -41,6 +50,7 @@ know whether later code has invalidated a clean review. Derive worktree and
 branch from Git, not duplicated state. Write state atomically after the work it
 records exists; do not mark an unfinished discussion as complete. The state
 file is local coordination data, not a second source of product decisions.
+For a project stage, carry `project` and `stage` through later state updates.
 Use `analysis`, `planning`, `implementation`, `review`, or `delivery` as the
 active phase. For example, after stopping at the committed plan boundary:
 

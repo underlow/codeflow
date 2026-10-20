@@ -1,8 +1,9 @@
 # CodeFlow skills
 
-Development guidance for Claude Code and Codex. The `flow` skill shares phase,
-review, and resume rules, with small platform entrypoints for invocation and
-native subagent tools.
+Development guidance for Claude Code and Codex. `flow` handles one change from
+planning through review. `underlow/project` researches a larger idea, keeps an
+evolving map of stages, and hands a chosen stage to a separate ordinary `flow`.
+Both use shared instructions with small platform entrypoints.
 
 Install for your user account with one command, without cloning the repository:
 
@@ -25,10 +26,19 @@ If you already have the repository locally, run:
 ./install.sh
 ```
 
-This copies `flow` to `~/.claude/skills/flow` and `~/.agents/skills/flow`.
+This copies `flow` and `project` to `~/.claude/skills/` and
+`~/.agents/skills/`.
 Invoke it as `/flow [plan-folder-or-description-file]` in Claude Code or
 `$flow [plan-folder-or-description-file]` in Codex. Codex discovers local skills
 from `.agents/skills`; `.codex` holds its configuration and rules.
+
+To start or resume a larger project, use `/project [project-file]` in Claude
+Code or `$project [project-file]` in Codex. The project skill saves research and
+an editable stage map in `docs/projects/`. You choose a stage; it prepares a
+short handoff file for a new `flow` session. The flow session chooses its own
+profile with you and runs independently. Returning to `project` reconciles the
+stage against its flow plan and Git history, or you can reconsider the overall
+map at any time.
 
 The separate `work-with-codex` skill uses Ghostty on macOS and installs a Codex
 sender plus a rule allowing that sender to contact Claude. Install it explicitly:
@@ -42,10 +52,10 @@ already installed `flow` while adding `work-with-codex`. `--target DIR` installs
 another home directory, which is useful for trying the installer without
 changing your own setup. See [work-with-codex details](docs/work-with-codex.md).
 
-The source layout is `skills/flow/shared/` for common instructions,
-and `skills/flow/{claude,codex}/SKILL.md` for the platform entrypoints. When a
-platform needs hooks or other files, add them to its platform directory and
-the installer will copy them with its entrypoint.
+The source layout is `skills/flow/` and `skills/underlow/project/`, each with
+shared instructions and platform entrypoints. When a platform needs hooks or
+other files, add them to its platform directory and the installer will copy
+them with its entrypoint.
 
 The profiles are `full`, `medium`, `small`, and `bugfix`. See the
 [phase guide](skills/flow/shared/references/phases.md). The detailed
