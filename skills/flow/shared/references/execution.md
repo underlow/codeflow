@@ -131,9 +131,23 @@ and summarize actual verification, material limits, and any implication for
 dependent stages. Do not keep the only account in the final chat message or
 create a separate outcome report. Write completion state only after the outcome
 and required work exist, and commit the outcome and state with explicit paths.
-For a project stage, the coordinator of flow records execution and results;
-project refreshes its document on return. Flow need not edit the project's
-status overview.
+For a flow explicitly linked to a project and stage, completing the flow also
+requires updating that stage in the project document in the flow's checkout.
+Record its status, concise outcome, and a link to this flow plan; preserve prior
+flow links and unrelated stages. Compare the stage's current goal with the
+flow's contract and outcome before marking it complete. Record an agreed
+no-change conclusion as such; do not mark unresolved or changed scope complete.
+Commit the stage update with the flow's outcome and completion state before
+reporting delivery. This update needs no separate `/project` invocation and
+does not depend on merge or push. If the project document or stage cannot be
+resolved, preserve the flow result and report the overview update as blocked
+rather than claiming it was synchronized.
+
+Use the flow's checkout; do not modify another worktree or merge just to publish
+the overview. Project reconciles other branches on return and handles project
+archival and consequential changes to future stages. Do not start the next stage
+automatically. For a standalone flow, skip this update entirely: do not search
+for or create a project merely to record completion.
 
 Put current unresolved findings, evidence, and any user-accepted dispositions
 in `<plan>/findings.md` only when there is something to preserve across a

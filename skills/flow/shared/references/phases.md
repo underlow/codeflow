@@ -81,7 +81,9 @@ Confirm the delivered behavior against the contract and actual validation.
 Update maintained documentation only when behavior or usage changed. Explain
 unavailable checks and accepted limitations. Retain the concise outcome in an
 existing flow document and commit it with completion state as described in
-[execution.md](execution.md). Report the result to the user. No separate
+[execution.md](execution.md). If this flow is explicitly linked to a project
+stage, update that stage's overview in the same checkout and completion commit;
+standalone flows require no project. Report the result to the user. No separate
 documentation report, consolidation report, handoff report, or retrospective is
 required. Do not claim delivery when
 a crucial requirement remains unresolved.

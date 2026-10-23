@@ -74,8 +74,12 @@ routine project work.
 ## Return to a project
 
 Flow's coordinator records execution state and a durable outcome in its own
-plan; project maintains the overview when opened again. Until then the overview
-may be stale. Read the project document and inspect linked flow plans. Also look
+plan. When the flow is explicitly linked to a project stage, it also updates
+that stage's status, concise outcome, and flow link in the project document in
+its checkout as part of completion, without waiting for a separate project
+invocation. Project reconciles the overview on return, including flows from
+other branches and older flows that did not update it. Read the project document
+and inspect linked flow plans. Also look
 in `docs/plans/` in the selected checkout and registered worktrees for native plans
 whose `state.json` has the matching `project` path and `stage` ID, including initial
 registrations without a selected profile. Match both the active and archived
@@ -121,8 +125,9 @@ project at `docs/projects/<slug>/project.md`, move the whole project directory
 to `docs/projects/completed/<slug>/`, preserving any contents. Do not archive
 a project with unresolved, paused, blocked, cancelled, or reopened work merely
 because no flow is running. Archive as part of the completion update without an
-additional permission step. Flow records its own outcome; project performs this
-reconciliation and move on return, including after the final stage.
+additional permission step. Flow updates its own stage at completion; project
+performs the project-wide reconciliation and move on return, including after
+the final stage.
 
 Preserve the document, stage IDs, outcomes, and flow history. Repair relative
 links in the moved document and references to it in the selected checkout,
