@@ -5,7 +5,7 @@
 Find the current Git repository and its registered worktrees with
 `git worktree list --porcelain`. A path argument may name a plan directory in
 any registered worktree, an existing description file, or a project document
-followed by a stage ID, such as `docs/projects/app/project.md S12`. An unmatched
+followed by a stage ID, such as `docs/projects/app.md S12`. An unmatched
 argument needs clarification. Without an argument, inspect `docs/plans/` in the
 current checkout and every registered worktree for unfinished flow plans. Show the
 feature, profile, phase, branch, and absolute worktree path; let the user choose
@@ -36,6 +36,12 @@ work, goal, and relevant project context as input to an ordinary flow. If the ID
 is missing, let the user select a stage. Check matching flows in the checkout
 and registered worktrees, including completed and cancelled ones. Compare the
 current stage goal with their contracts or recorded results, not just their IDs.
+Recognize both active and archived project paths (`docs/projects/<slug>.md`
+and `docs/projects/completed/<slug>.md`), including the legacy directory form
+ending in `<slug>/project.md`, when matching saved flows. If a saved project
+path is missing, check its active or archived counterpart before treating it
+as lost. Viewing archived results does not reopen a project; explicit reopening
+must first return through project to restore its active location and status.
 Resume unfinished work instead of making a duplicate. If the stage is already
 complete, show its outcome and ask whether the user wants to inspect it or
 explicitly reopen work; do not start another flow merely because none is unfinished.

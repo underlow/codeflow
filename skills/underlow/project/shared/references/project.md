@@ -16,9 +16,13 @@ Do not choose flow profiles or write implementation plans here.
 
 Find the current Git repository and registered worktrees with
 `git worktree list --porcelain`. A path argument selects an existing
-`docs/projects/<slug>/project.md`; an optional stage ID selects a stage. Without
-an argument, find project documents in the current checkout and registered
-worktrees; let the user choose if several could match. Record the selected
+`docs/projects/<slug>.md` or an archived project under `docs/projects/completed/`;
+an optional stage ID selects a stage. Also accept existing projects at
+`docs/projects/<slug>/project.md`. Without an argument, find active project
+documents in the current checkout and registered worktrees; let the user choose
+if several could match. Exclude `completed/` from the active list, but inspect
+it when the user asks for a finished project or no active project matches.
+Record the selected
 checkout and use it for subsequent work; a worktree does not change the session's
 cwd. Do not silently adopt unrelated plans or missing worktrees.
 
@@ -36,7 +40,8 @@ implement or consume it, without deciding the API here. Frontend work that does
 not require that API may come earlier. Clarify an ambiguous stage only enough to
 understand its dependency.
 
-Keep one `docs/projects/<slug>/project.md` containing:
+Keep one `docs/projects/<slug>.md` directly in `docs/projects/`, without a
+per-project directory, containing:
 
 - the project goal;
 - shared context and constraints needed to understand the plan;
@@ -73,7 +78,9 @@ plan; project maintains the overview when opened again. Until then the overview
 may be stale. Read the project document and inspect linked flow plans. Also look
 in `docs/plans/` in the selected checkout and registered worktrees for native plans
 whose `state.json` has the matching `project` path and `stage` ID, including initial
-registrations without a selected profile. Existing links may omit a just-started
+registrations without a selected profile. Match both the active and archived
+paths of the same project so moving it does not hide earlier flows, including
+those in other worktrees. Existing links may omit a just-started
 or reopened flow, so do not search only when links are missing.
 Use plan state, recorded conclusions, and relevant Git history to establish what
 finished; do not audit application code or rerun checks just to open the project.
@@ -105,11 +112,37 @@ stages are available, offer the user a choice. Explain missing dependencies and
 what remains possible. Do not automatically start work on opening the project or
 automatically chain stages after one finishes. A new session is optional.
 
+## Complete or reopen a project
+
+When refreshing the overview establishes that every stage is complete or has
+been explicitly superseded, mark the project complete and move
+`docs/projects/<slug>.md` to `docs/projects/completed/<slug>.md`. For an existing
+project at `docs/projects/<slug>/project.md`, move the whole project directory
+to `docs/projects/completed/<slug>/`, preserving any contents. Do not archive
+a project with unresolved, paused, blocked, cancelled, or reopened work merely
+because no flow is running. Archive as part of the completion update without an
+additional permission step. Flow records its own outcome; project performs this
+reconciliation and move on return, including after the final stage.
+
+Preserve the document, stage IDs, outcomes, and flow history. Repair relative
+links in the moved document and references to it in the selected checkout,
+including matching flow state `project` paths. Do not change execution statuses
+or rewrite other worktrees; recognize their old project paths during discovery.
+Never overwrite an existing archive destination. Commit the move, overview,
+and reference updates together, preserving unrelated changes, and report the
+new path. Viewing an archived project leaves it archived.
+
+If the user explicitly reopens a stage or adds new work to an archived project,
+move it back to its original active location, update its status and references
+by the same rules, and commit these changes before starting or resuming flow.
+Do not overwrite another active project or silently reopen completed work.
+
 ## Start or resume a stage
 
 Use the project document and selected stage ID directly as flow's input. For a
-new stage, offer `$flow docs/projects/<slug>/project.md S1` in Codex or
-`/flow docs/projects/<slug>/project.md S1` in Claude Code. For an existing flow,
+new stage, offer `$flow docs/projects/<slug>.md S1` in Codex or
+`/flow docs/projects/<slug>.md S1` in Claude Code, using the actual document
+path for an existing project. For an existing flow,
 resume its plan instead of starting a duplicate. Check terminal flows too: when
 the selected stage is already complete, show the result and distinguish viewing
 it from explicitly reopening work. Do not silently restart completed or cancelled

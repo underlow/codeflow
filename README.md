@@ -36,15 +36,20 @@ from `.agents/skills`; `.codex` holds its configuration and rules.
 
 To start or resume a larger project, use `/project [project-file]` in Claude
 Code or `$project [project-file]` in Codex. The project skill saves the goal and
-stages in `docs/projects/`; reported bugs and technical assumptions remain
+stages in `docs/projects/<slug>.md`, without a separate project directory;
+reported bugs and technical assumptions remain
 unverified. Investigation and implementation belong inside each stage's flow.
 After committing the agreed project plan, it offers to start a stage in the
 current conversation or gives a command for a new session, for example
-`$flow docs/projects/app/project.md S1` (use `/flow` in Claude Code). No separate
+`$flow docs/projects/app.md S1` (use `/flow` in Claude Code). No separate
 handoff file is needed. Returning to `project` offers to continue an unfinished
 flow or start the next eligible stage here. Each flow chooses its own profile
 with you and records its outcome, including an agreed conclusion that no change
-is warranted. You can reconsider the overall project plan at any time.
+is warranted. When project confirms all stages are complete, it moves the
+project document into `docs/projects/completed/` and updates its links.
+Explicitly reopening work moves it back. Existing projects stored in directories
+remain supported and are archived with their whole directory.
+You can reconsider the overall project plan at any time.
 
 For an architecture audit outside `flow`, run `/architecture-review [path-or-subsystem]`
 in Claude Code or `$architecture-review [path-or-subsystem]` in Codex. The command
