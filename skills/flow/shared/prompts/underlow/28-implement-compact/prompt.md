@@ -1,7 +1,10 @@
-Implement the assigned unit of work in a fresh agent. It may be a task file or
-the entire compact plan. Read the confirmed contract, accepted examples, plan,
-project instructions, and affected code. Continue valid work on retries and
-preserve unrelated user changes. Do not invent consequential product behavior.
+Implement only the assigned task in a fresh agent. It may be a numbered section
+of plan.md or a task file. The entire plan is an assignment only when it
+contains one bounded task. A plan with several tasks requires separate fresh
+agents; sharing one file does not combine those tasks. Read the confirmed
+contract, accepted examples, plan, project instructions, and affected code.
+Continue valid work on retries and preserve unrelated user changes. Do not
+invent consequential product behavior.
 
 For medium, the combined specification owns requirements and binding design;
 for small, the requirements own behavior and the plan includes the technical

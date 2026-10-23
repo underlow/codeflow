@@ -27,13 +27,26 @@ Independent review may expose missing cases, but put accepted cases in the
 contract, not only in a review report. Revise the contract after a consequential
 user decision; do not leave contradictory versions as simultaneous authority.
 
+For a project stage, independently check its reported problem and assumptions.
+Analysis may show that a bug is not confirmed or a proposed change is unwarranted.
+Present the evidence and agree the disposition with the user. If no change is
+warranted, record the conclusion and its evidence and limits in the analysis
+document and complete the flow without inventing implementation or code review.
+Do not call it a fix or treat unavailable reproduction as proof of no defect.
+If the result invalidates later stages, explain the implication for the project
+plan without silently changing their scope.
+
 ## Planning
 
 Inspect affected code and dependencies. Write `plan.md` with the result to
 deliver, approach where needed, ordered work, integration points, and verification
-that would catch plausible harmful mistakes. Create `tasks/` only when separately
-bounded work really helps a new developer; a small change or bugfix may need only
-the plan or investigation. Tasks must make sense without the planning chat.
+that would catch plausible harmful mistakes. Create `tasks/` only when separate
+files help a new developer; tasks may instead be numbered sections of `plan.md`.
+Choose task boundaries by independently verifiable results and dependencies,
+not by the number of files. One plan file does not imply one implementation
+assignment. Use a single task only when the change is one bounded result; a small
+change or bugfix may need only the plan or investigation. Tasks must make sense
+without the planning chat.
 Prefer observable outcomes over prescribed private helpers or test bodies. Review
 plans independently when uncertainty, size, or integration risk warrants it.
 Resolve important findings and commit the final plan and contract. Then present
@@ -41,7 +54,10 @@ the mandatory coordinator-session choice in [coordinator.md](coordinator.md).
 
 ## Development
 
-Start each implementation assignment in a fresh native agent with the committed
+Assign each planned task separately to a fresh native agent, including tasks
+stored in the same `plan.md`. Give the agent its exact task section; do not bundle
+several planned tasks into one assignment merely because they share a file.
+Start each implementation assignment with the committed
 contract and plan, the exact task and checkout, and relevant repository rules.
 The agent inspects the current code, preserves unrelated changes, implements the
 agreed behavior, runs meaningful checks, and commits only its own completed work.
@@ -63,7 +79,9 @@ interactions. A fix is not accepted merely because its author reports success.
 
 Confirm the delivered behavior against the contract and actual validation.
 Update maintained documentation only when behavior or usage changed. Explain
-unavailable checks and accepted limitations. Record the completion state and
-report the result to the user. No separate documentation report, consolidation
-report, handoff report, or retrospective is required. Do not claim delivery when
+unavailable checks and accepted limitations. Retain the concise outcome in an
+existing flow document and commit it with completion state as described in
+[execution.md](execution.md). Report the result to the user. No separate
+documentation report, consolidation report, handoff report, or retrospective is
+required. Do not claim delivery when
 a crucial requirement remains unresolved.

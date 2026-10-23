@@ -1,8 +1,8 @@
 # CodeFlow skills
 
 Development guidance for Claude Code and Codex. `flow` handles one change from
-planning through review. `underlow/project` researches a larger idea, keeps an
-evolving map of stages, and hands a chosen stage to a separate ordinary `flow`.
+planning through review. `project` helps form a high-level project goal and stage
+plan, then starts or resumes a chosen stage through ordinary `flow`.
 Both use shared instructions with small platform entrypoints.
 The standalone `architecture-review` command inspects a repository or named
 subsystem and writes a visual HTML report of evidence-backed improvement options.
@@ -35,12 +35,16 @@ Invoke it as `/flow [plan-folder-or-description-file]` in Claude Code or
 from `.agents/skills`; `.codex` holds its configuration and rules.
 
 To start or resume a larger project, use `/project [project-file]` in Claude
-Code or `$project [project-file]` in Codex. The project skill saves research and
-an editable stage map in `docs/projects/`. You choose a stage; it prepares a
-short handoff file for a new `flow` session. The flow session chooses its own
-profile with you and runs independently. Returning to `project` reconciles the
-stage against its flow plan and Git history, or you can reconsider the overall
-map at any time.
+Code or `$project [project-file]` in Codex. The project skill saves the goal and
+stages in `docs/projects/`; reported bugs and technical assumptions remain
+unverified. Investigation and implementation belong inside each stage's flow.
+After committing the agreed project plan, it offers to start a stage in the
+current conversation or gives a command for a new session, for example
+`$flow docs/projects/app/project.md S1` (use `/flow` in Claude Code). No separate
+handoff file is needed. Returning to `project` offers to continue an unfinished
+flow or start the next eligible stage here. Each flow chooses its own profile
+with you and records its outcome, including an agreed conclusion that no change
+is warranted. You can reconsider the overall project plan at any time.
 
 For an architecture audit outside `flow`, run `/architecture-review [path-or-subsystem]`
 in Claude Code or `$architecture-review [path-or-subsystem]` in Codex. The command

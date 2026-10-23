@@ -1,116 +1,145 @@
-# Project research and roadmap
+# Project goal and stage plan
 
-`underlow/project` helps the user investigate an idea, keep an evolving map of
-stages, choose work, and reconsider the map. A stage is a desired result, not a
-`flow` profile or an implementation plan. The user starts a separate ordinary
-`flow` session for a selected stage and chooses its profile there. Do not start
-that session as a project subagent, schedule later stages, or intervene in a
-running flow's implementation and review.
+`project` helps the user organize intended work into a high-level project goal
+and stages, maintain that plan, and choose the next stage. Clarify the request
+only enough to describe the goal, stage boundaries, and logical order. All
+investigation belongs inside the selected stage's ordinary `flow`.
+
+Do not reproduce bugs, inspect application code, research feasibility or causes,
+choose technical solutions, define API details, or delegate such work while
+forming the project plan. Existing conversation may supply context; preserve
+its provenance and distinguish reported facts, hypotheses, and user decisions.
+The user's desired behavior can be specific without prescribing implementation.
+Do not choose flow profiles or write implementation plans here.
 
 ## Find or establish the project
 
 Find the current Git repository and registered worktrees with
-`git worktree list --porcelain`. A path argument may select an existing
-`docs/projects/<slug>/project.md` or one of its stage handoffs. Without an
-argument, find project documents in the current checkout and registered
-worktrees; let the user choose if several could match. Do not silently adopt an
-unrelated plan or a removed worktree. Record the selected checkout and use it
-for subsequent project writes; a worktree does not change the session's cwd.
+`git worktree list --porcelain`. A path argument selects an existing
+`docs/projects/<slug>/project.md`; an optional stage ID selects a stage. Without
+an argument, find project documents in the current checkout and registered
+worktrees; let the user choose if several could match. Record the selected
+checkout and use it for subsequent work; a worktree does not change the session's
+cwd. Do not silently adopt unrelated plans or missing worktrees.
 
-For a new project, discuss the idea and investigate consequential uncertainties
-with the user. Use bounded research agents when they can answer distinct
-questions; check their evidence and report uncertainty. The user owns purpose,
-scope, consequential tradeoffs, and whether to proceed. The research may show
-that development should change direction or stop. Do not manufacture a stage
-list merely to make progress.
+For a new project, help express its goal and split the intended work into
+separately selectable stages. A stage is a meaningful piece of work, not a
+minimum size or a technical task. Do not invent stages to reach a count or make
+independent requests artificially dependent. Suggest logical ordering from the
+stated scope; leave uncertain dependencies tentative rather than investigating
+them. The user owns the goal, boundaries, and consequential ordering decisions.
 
-Keep durable research in one `docs/projects/<slug>/project.md` in the chosen
-checkout, including when research spans sessions. Clearly mark tentative
-conclusions and proposed stages until the user agrees. The document should
-contain:
+For five reported bugs, make five stages without checking that they are bugs.
+Each flow may confirm and fix its report, or conclude that no change is warranted.
+For a large application, include a stage to agree the API before stages that
+implement or consume it, without deciding the API here. Frontend work that does
+not require that API may come earlier. Clarify an ambiguous stage only enough to
+understand its dependency.
 
-- the intended outcome and boundaries;
-- research conclusions and evidence needed to understand later choices;
-- confirmed decisions, material assumptions, and open questions;
-- an ordered map of stages with stable IDs, each stage's desired result,
-  completion condition, and dependencies.
+Keep one `docs/projects/<slug>/project.md` containing:
 
-Only the near-term work needs much detail. A distant stage may remain a named
-hypothesis. Do not assign `small`, `medium`, `full`, or `bugfix` profiles, write
-future implementation plans, copy research transcripts, or maintain a second
-decision log. Commit durable research and agreed changes in focused commits;
-do not present tentative work as confirmed. Preserve unrelated changes; do not
-push, merge, or remove worktrees as routine work.
+- the project goal;
+- shared context and constraints needed to understand the plan;
+- stages with stable IDs, each describing the reported problem or requested
+  work and its goal, plus material boundaries and dependencies when relevant;
+- stage status, a concise outcome when known, and links to associated flow plans.
 
-## Reconcile before suggesting work
+Detailed acceptance criteria, reproduction, requirements, design, implementation
+plans, and task breakdowns belong to flow. Do not duplicate those documents in
+the project or create stage handoff files or a separate decision log.
 
-On each return to the project, read its document and inspect registered
-worktrees for native flow plans in `docs/plans/` whose `state.json` contains
-both this project's repository-relative path and a matching stage ID. Read the
-linked plan state and relevant Git evidence; the state may lag actual work.
-Distinguish a flow that is active, paused, blocked, or complete from a result
-that is present in the checkout where the next stage would run. A completed
-flow on another branch is not automatically an available dependency. If a
-worktree or plan is missing, report what can and cannot be established rather
-than guessing that the stage is done. Do not repeat already valid work because
-a pointer is stale.
-If a stage has a handoff but no linked plan yet, report only that the handoff
-was prepared. If several plans claim the same stage, inspect their branches and
-histories rather than choosing one by date; bring an unresolved identity or
-result conflict to the user.
+Near the top of every project document, explicitly warn its future flow reader:
 
-Give the user a concise view of current stage results, unavailable dependencies,
-and open decisions. Update the project document with durable conclusions and
-links to completed flow plans or commits only when the evidence supports them.
-Do not duplicate a flow's contract, tests, findings, or review report in the
-project. The current flow plan and Git are the source for its execution status;
-the project document is the source for the project's purpose and stage map.
+> This is a high-level plan based on the user's request. Reported bugs,
+> assumptions about causes, technical necessity, and dependencies have not been
+> verified; stage order is provisional. Agreement on this document approves the
+> intended direction, not its technical claims. Each stage's flow independently
+> checks its premises, refines its scope, and determines whether to implement,
+> fix, propose no change, or recommend revising the project plan.
 
-## Hand a chosen stage to flow
+Retain this distinction even when some context has evidence: identify the source
+and limits of that evidence. The user's agreed goals remain goals, not claims
+that require technical proof.
 
-The user chooses what to work on, including a later stage or a return to
-research. Check the chosen stage's current meaning and dependencies. Explain
-the consequence of any missing dependency; do not silently reorder the map or
-claim unavailable code is present. A stage can be selected despite an unmet
-dependency only after the user understands what work is possible now.
+Once the user agrees on the plan, commit the project document in a focused
+commit and offer to start a selected stage now or provide the command for a new
+session. Preserve unrelated changes. Do not push, merge, or remove worktrees as
+routine project work.
 
-For a stage that needs a new flow, write a short handoff at
-`docs/projects/<slug>/stages/<stage-id>.md` in the project's checkout. Include
-these two unambiguous fields near the top:
+## Return to a project
 
-```text
-Project: docs/projects/<slug>/project.md
-Stage: <stage-id>
-```
+Flow's coordinator records execution state and a durable outcome in its own
+plan; project maintains the overview when opened again. Until then the overview
+may be stale. Read the project document and inspect linked flow plans. Also look
+in `docs/plans/` in the selected checkout and registered worktrees for native plans
+whose `state.json` has the matching `project` path and `stage` ID, including initial
+registrations without a selected profile. Existing links may omit a just-started
+or reopened flow, so do not search only when links are missing.
+Use plan state, recorded conclusions, and relevant Git history to establish what
+finished; do not audit application code or rerun checks just to open the project.
+A stale pointer alone is not a reason to repeat valid work. If a plan or worktree
+is missing, report the uncertainty. Resolve competing plans for one stage rather
+than choosing one by date.
 
-Then state the selected result and completion condition, relevant confirmed
-decisions and constraints, dependencies and their actual status, and links to
-needed prior results. This is an input description, not requirements, design,
-task breakdown, or a preselected flow profile. Commit the handoff. If one
-already exists, inspect its linked flow and do not overwrite an active flow's
-agreed input; discuss changed scope and return to that flow's planning when
-needed.
+Update the stage overview from these results. A stage can be complete because a
+reported defect was not confirmed or an agreed investigation concluded no change
+was warranted; record that disposition rather than calling it fixed. Do not mark
+unresolved or merely abandoned work complete. A completed flow on another branch
+is not automatically an available dependency in the checkout for the next stage.
+Completion also does not imply that a dependent stage's premise remains valid:
+for example, concluding that an API is unnecessary does not make its planned
+implementation ready to start. Flag affected stages for reconsideration. If a
+required outcome is unavailable or unclear, explain this before proposing the
+dependent work; its flow verifies technical availability before relying on it.
 
-Give the user the exact handoff path and the selected checkout. Ask them to
-start a separate normal session there with `$flow <handoff-path>` in Codex or
-`/flow <handoff-path>` in Claude Code. Flow selects its profile with the user,
-owns its plan and review, and records the project and stage in its own state.
-The project skill stops at this handoff. It does not wait for or automatically
-launch the next stage.
+Compare the current stage goal with the linked flow's contract and outcome.
+An old completion applies only to the work it actually covered. If a goal has
+changed, do not copy the old completion onto the new scope. Commit actual
+overview updates, including statuses, concise outcomes, and flow links, in a
+focused commit before offering the next work. Do not create an empty commit
+when nothing changed or commit unrelated user edits in the project document.
 
-## Reconsider the map at any time
+Offer to continue an unfinished stage's existing flow in this session. If there
+is one next eligible stage, propose starting it here; if several independent
+stages are available, offer the user a choice. Explain missing dependencies and
+what remains possible. Do not automatically start work on opening the project or
+automatically chain stages after one finishes. A new session is optional.
 
-On request, compare new evidence, completed results, and the active stage's
-contract with the project's goal and assumptions. Propose concrete changes to
-future stage results, order, splits, dependencies, or even the goal. Explain
-what earlier work remains valid. Obtain the user's decision on consequential
-changes, then edit and commit the current project document. Keep stable IDs for
-unchanged stages; mark an abandoned stage as superseded when a previous handoff
-or flow needs to remain understandable. Git retains earlier maps; do not keep
-round-numbered roadmap copies.
+## Start or resume a stage
 
-Changing the project map never silently changes an active flow's agreed
-contract. Identify the conflict and direct the user to that flow to revise or
-finish it deliberately. On the next project invocation, reconcile the outcome
-again from its plan and Git. Do not treat a project-level replan as evidence
-that the code or integration already changed.
+Use the project document and selected stage ID directly as flow's input. For a
+new stage, offer `$flow docs/projects/<slug>/project.md S1` in Codex or
+`/flow docs/projects/<slug>/project.md S1` in Claude Code. For an existing flow,
+resume its plan instead of starting a duplicate. Check terminal flows too: when
+the selected stage is already complete, show the result and distinguish viewing
+it from explicitly reopening work. Do not silently restart completed or cancelled
+work. Give the exact checkout and command when the user chooses a new session.
+
+When the user chooses to continue here, load and follow the installed `flow`
+skill's instructions in this conversation with that input. This is an ordinary
+flow with its own profile selection, investigation, contract, plan, execution,
+and review. Do not launch it as a project subagent, require a separate session,
+or perform its investigation under project rules first. Pass through the
+project's warning about unverified premises. Before dependent work starts,
+flow checks that required prior results are actually available in its checkout.
+
+## Reconsider the plan
+
+When a flow result invalidates a premise or the user changes direction, explain
+which future stages or dependencies are affected and propose the necessary plan
+changes without doing their investigation. Obtain the user's decision on
+consequential changes, then edit and commit the project document. Preserve stable
+IDs for unchanged stages and mark superseded stages so their existing flows
+remain understandable. Use Git for earlier plan versions.
+
+For a materially different goal, create a new stage ID and preserve the old
+stage's outcome and flow link. If the user explicitly reopens the same goal,
+mark it reopened, retain its prior result, and link the new flow separately;
+the prior completion must not make the reopened work appear finished. The same
+rule applies when an active stage's goal changes: do not silently reuse its old
+contract for the new scope.
+
+Changing the project plan never silently changes an active flow's agreed
+contract. Bring a changed goal to that flow explicitly for replanning. Project
+status summarizes the work; the flow's contract, recorded conclusion, and Git
+remain the source for its execution and results.

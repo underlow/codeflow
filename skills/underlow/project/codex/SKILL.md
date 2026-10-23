@@ -1,14 +1,13 @@
 ---
 name: project
-description: Research a large project, maintain its evolving stage roadmap, and hand a chosen stage to a separate flow session. Does not choose flow profiles or run development stages.
+description: Form and maintain a high-level project goal and stage plan, then start or resume a chosen stage through flow in the current session or a new one. Investigation and implementation belong inside each stage.
 ---
 
-Use this skill as `underlow/project`. With no argument, find existing projects in
-the current repository or start a new one. A path argument selects a project
-document or a stage handoff.
+Use this skill as `$project`. With no argument, find existing projects in the
+current repository or start a new one. A path argument selects a project
+document; an optional stage ID selects a stage.
 
-Use Codex's native subagent tools for bounded research when independent work
-would materially help. The user chooses the next stage; hand it to a separate
-ordinary `$flow` session rather than running flow inside this skill.
+Help organize the user's intended work without investigating it. Offer to
+continue with ordinary `$flow` in this conversation; a new session is optional.
 
 Read [the project workflow](references/project.md) before acting.

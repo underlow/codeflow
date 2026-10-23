@@ -20,6 +20,9 @@ reasoning effort. A developer is always a new agent, including after a plan
 revision. Do not give an independent reviewer
 the whole planning conversation or let a reviewer alter code. The coordinator
 validates agent claims against the actual repository and decides what to do next.
+Assign one planned task per fresh developer, naming its section in `plan.md` or
+its task file. A shared plan file is not permission to combine several tasks.
+Check each returned task result before assigning work that depends on it.
 Assemble each assignment from the applicable detailed prompt's substantive
 criteria and the current phase contract; never pass obsolete output clauses
 as live instructions.

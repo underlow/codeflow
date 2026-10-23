@@ -11,10 +11,12 @@ until the necessary agreement is obtained.
 
 Write one plan that states the result, approach, work order, integration, and
 verification. Create task files only if separate bounded units help a fresh
-developer. Each unit of work needs its inputs, behavior to preserve, expected
-result, and checks that would catch a plausible harmful mistake. A one-unit plan
-must be executable without the planning chat. Leave private helpers, exact
-signatures, and test bodies to the developer.
+developer. Tasks may be numbered sections of plan.md; each is a separate
+assignment for a fresh developer. Choose boundaries by verifiable results and
+dependencies, not file layout. Each unit of work needs its inputs, behavior to
+preserve, expected result, and checks that would catch a plausible harmful
+mistake. A one-unit plan must be executable without the planning chat. Leave
+private helpers, exact signatures, and test bodies to the developer.
 
 Place required whole-feature checks and documentation work after the relevant
 implementation. Do not claim planned checks ran. On revision, verify review

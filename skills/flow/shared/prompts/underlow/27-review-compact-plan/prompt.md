@@ -2,6 +2,10 @@ Review the current plan before implementation. For medium, use the confirmed
 combined specification; for small, use confirmed requirements and the technical
 approach in the plan. Acceptance examples belong in the authoritative contract.
 Do not demand absent upstream stages or task files when one compact plan is enough.
+Check task boundaries independently of file layout: separate verifiable results
+and dependencies need explicit tasks, which may share plan.md. Flag a single
+assignment that bundles such tasks; keep a one-task plan when it is one bounded
+result. Each planned task will be assigned to a separate fresh developer.
 
 Check that required results, dependencies, shared contracts, real repository
 entry points, important failures and continuations, integration, documentation
