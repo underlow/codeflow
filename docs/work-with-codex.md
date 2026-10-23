@@ -97,7 +97,9 @@ Found while testing:
 - A tab opened through AppleScript gets Ghostty's environment, not the
   shell's, so `launch.sh` carries over `PATH`.
 - Ghostty does not report a terminal's tty. `start` finds Claude's tab by
-  writing a unique title to Claude's tty and looking it up.
+  writing a unique title to Claude's tty and looking it up, then restores the
+  original terminal title. The new tab gets `(1) <parent tab title>`, using the
+  first available positive number among tab titles in the same window.
 
 ## Open
 

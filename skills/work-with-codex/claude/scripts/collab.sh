@@ -94,13 +94,10 @@ cmd_start() {
 
   # Ghostty reports no tty per terminal, so mark this tab by title and look it up.
   local tty=/dev/$(ps -o tty= -p ${sock:t:r} | tr -d ' ')
-  local mark=collab-$id me= i=
-  print -n -- "\e]2;$mark\a" > $tty
-  for i in {1..20}; do
-    me=$(ghostty find-title $mark)
-    [[ -n $me ]] && break
-    sleep 0.1
-  done
+  local origin me parent_title
+  origin=$(ghostty identify "$tty" "collab-$id")
+  me=${origin%%$'\n'*}
+  parent_title=${origin#*$'\n'}
   [[ -n $me ]] || die "cannot find this Claude Code tab in Ghostty"
   print -r -- $me > $sdir/claude-terminal
 
@@ -114,7 +111,7 @@ EOF
   chmod +x $sdir/launch.sh
 
   local cx
-  cx=$(ghostty tab $me $sdir/launch.sh $dir)
+  cx=$(ghostty tab $me $sdir/launch.sh $dir "$parent_title")
   print -r -- $cx > $sdir/codex-terminal
   print -- "SESSION $id"
 }
