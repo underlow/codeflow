@@ -76,8 +76,9 @@ read replies, but they do not automatically wake a finished Codex turn. Saved
 connections let a later session resume the conversation. If session creation
 is unavailable, the skill asks you to open the designer session yourself.
 
-The separate `work-with-codex` and `delegate-to-codex` skills use Ghostty on macOS and install a Codex
-sender plus a rule allowing that sender to contact Claude. Install it explicitly:
+The separate `work-with-codex` and `delegate-to-codex` skills launch Codex in
+Ghostty, cmux, or agterm and use native terminal commands for messages.
+Install them explicitly:
 
 ```sh
 ./install.sh --with-collab --force

@@ -14,14 +14,6 @@ on run argv
             end repeat
             error "cannot find the originating terminal in Ghostty for TTY " & ttyPath
         end if
-        if op is "find-title" then
-            repeat with w in windows
-                repeat with t in terminals of w
-                    if name of t is (item 2 of argv) then return id of t
-                end repeat
-            end repeat
-            return ""
-        end if
         -- Resolve by id on every call: tabs move between windows and change index.
         set target to missing value
         set targetWindow to missing value
@@ -33,7 +25,6 @@ on run argv
                 end if
             end repeat
         end repeat
-        if op is "exists" then return target is not missing value
         if target is missing value then error "terminal " & (item 2 of argv) & " not found"
         if op is "tab" then
             set parentTitle to item 5 of argv
@@ -51,12 +42,9 @@ on run argv
             set newTab to new tab in targetWindow with configuration cfg
             perform action ("set_tab_title:" & childTitle) on focused terminal of newTab
             return id of focused terminal of newTab
-        else if op is "input" then
+        else if op is "send" then
             input text (item 3 of argv) to target
-        else if op is "key" then
-            send key (item 3 of argv) to target
-        else if op is "focus" then
-            focus target
+            send key "enter" to target
         else if op is "close" then
             close target
         end if

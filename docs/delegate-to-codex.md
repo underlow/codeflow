@@ -1,51 +1,16 @@
 # delegate-to-codex
 
-A Claude Code skill that delegates implementation or review to Codex in a new
-Ghostty tab. Claude owns the brief, inspects the result, and sends corrections;
-Codex does the assigned work. Requires the same Ghostty/macOS environment and
-Claude inbox socket as [work-with-codex](work-with-codex.md).
+Delegate implementation or review to Codex; inspect the result and send
+corrections until accepted. Installed with `./install.sh --with-collab --force`.
 
-```sh
-./install.sh --with-collab --force
-```
+Invoke `/delegate-to-codex [task]`. Claude asks which model to use unless the user
+already named it. `develop` permits workspace edits; `review` is read-only.
+Changing review to implementation requires user authorization and a new launch.
 
-This installs both Claude skills and the shared Codex sender and approval rule.
-The installer copies the existing `work-with-codex/claude/scripts/` transport
-into each installed skill. The delegation skill supplies its own worker prompt.
-Edit the transport once in `work-with-codex`; reinstall to update both skills.
+The launcher returns Codex's real terminal ID and native send/close commands.
+Claude verifies changes or review evidence, sends corrections when needed, and
+closes the worker after accepting the result unless asked to keep it open.
+Blockers leave the task open.
 
-Invoke `/delegate-to-codex [task]`, or ask Claude to hand development or review
-to Codex. Name the model in the request, or Claude must ask which model to use
-and wait for the answer. The transport also rejects delegation without an
-explicit `--model`. Effort follows configuration unless explicitly specified.
-
-Model names are resolved inside `start`, without a separate discovery command.
-Short names are configured in `~/.codex/collab/model-aliases.json`; the installer
-creates this file once and preserves it on updates, including `--force`.
-The launcher accepts an alias or exact catalog ID and also recognizes an
-unambiguous display name, ignoring case. It validates the selected model and
-explicit effort using the same Codex executable it will launch. If it cannot
-select a model, it returns the catalog choices before creating session state or
-opening a tab. Claude should present those choices rather than guess another
-spelling. Python 3 is required when an explicit model is provided.
-
-The launcher accepts `start --task develop|review --model <model>`:
-
-- `develop` uses `--sandbox workspace-write --ask-for-approval on-request`.
-- `review` uses `--sandbox read-only --ask-for-approval on-request`.
-
-The existing `work-with-codex` launch remains a read-only peer discussion and
-retains its configured model default. The `delegate-to-codex` installation
-defaults to the development task if the task flag is omitted, and still requires
-an explicit model. Specify the mode in both the launch and brief. Changing a
-review into development requires authorization and a new development session.
-
-Both skills use the same `send`, `status`, and `close` commands, session storage,
-and asynchronous replies prefixed `[codex <id>]`. Claude must inspect actual
-changes or findings before accepting a completion report. Codex sends only a
-completed result or a blocking question; routine progress stays in its own tab.
-Claude keeps the session open for corrections and unresolved blockers, then
-closes it after accepting the result unless the user explicitly asks to keep it.
-
-Installing the sender approval rule permits sending replies to Claude; it does
-not grant unrestricted file changes, network access, or deployment permissions.
+Both skills share the [terminal launcher](work-with-codex.md). Their instructions
+and worker prompts differ; edit the shared scripts only in `work-with-codex`.

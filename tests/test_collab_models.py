@@ -82,29 +82,29 @@ class ModelResolutionTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('bundled catalog', result.stderr)
 
-    def test_start_failure_precedes_socket_and_ghostty(self):
+    def test_start_failure_precedes_terminal_setup(self):
         environment = dict(os.environ, PATH=str(self.root) + os.pathsep + os.environ['PATH'])
-        environment.pop('CLAUDE_CODE_MESSAGING_SOCKET', None)
+        environment['HOME'] = str(self.root)
         result = subprocess.run([
-            '/bin/zsh', str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
+            sys.executable, str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
             '--model', 'unknown', '--effort', 'high', str(self.root),
         ], input='brief', text=True, capture_output=True, env=environment, timeout=5)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('Available catalog models', result.stderr)
         self.assertNotIn('inbox socket', result.stderr)
-        self.assertNotIn('SESSION ', result.stdout)
+        self.assertNotIn('ID ', result.stdout)
 
-    def test_start_passes_resolved_model_and_effort_to_socket_check(self):
+    def test_start_validates_model_before_reading_brief(self):
         environment = dict(os.environ, PATH=str(self.root) + os.pathsep + os.environ['PATH'])
-        environment.pop('CLAUDE_CODE_MESSAGING_SOCKET', None)
+        environment['HOME'] = str(self.root)
         result = subprocess.run([
-            '/bin/zsh', str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
+            sys.executable, str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
             '--model', 'test-v2-sol', '--effort', 'high', str(self.root),
-        ], input='brief', text=True, capture_output=True, env=environment, timeout=5)
+        ], input='', text=True, capture_output=True, env=environment, timeout=5)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('model test-v2-sol -> test-v2-sol', result.stderr)
-        self.assertIn('inbox socket', result.stderr)
-        self.assertNotIn('SESSION ', result.stdout)
+        self.assertIn('brief expected on stdin', result.stderr)
+        self.assertNotIn('ID ', result.stdout)
 
 
 if __name__ == '__main__':

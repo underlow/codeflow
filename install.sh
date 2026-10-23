@@ -42,8 +42,6 @@ claude_architecture_review=$target/.claude/skills/architecture-review
 codex_architecture_review=$target/.agents/skills/architecture-review
 claude_collab=$target/.claude/skills/work-with-codex
 claude_delegate=$target/.claude/skills/delegate-to-codex
-codex_sender=$target/.codex/collab/collab.sh
-codex_rule=$target/.codex/rules/collab.rules
 
 for path in "$claude_flow" "$codex_flow" "$claude_project" "$codex_project" \
   "$claude_architecture_review" "$codex_architecture_review"; do
@@ -53,7 +51,7 @@ for path in "$claude_flow" "$codex_flow" "$claude_project" "$codex_project" \
   fi
 done
 if [ "$with_collab" = true ]; then
-  for path in "$claude_collab" "$claude_delegate" "$codex_sender" "$codex_rule"; do
+  for path in "$claude_collab" "$claude_delegate"; do
     if { [ -e "$path" ] || [ -L "$path" ]; } && [ "$force" = false ]; then
       echo "Already exists: $path (use --force to replace)" >&2
       exit 1
@@ -100,21 +98,18 @@ done
 
 if [ "$with_collab" = true ]; then
   [ "$force" = false ] || rm -rf -- "$claude_collab"
-  mkdir -p "$claude_collab" "$target/.codex/collab" "$target/.codex/rules"
+  mkdir -p "$claude_collab" "$target/.codex/collab"
   cp -R "$source_dir/skills/work-with-codex/claude/." "$claude_collab/"
   [ "$force" = false ] || rm -rf -- "$claude_delegate"
   mkdir -p "$claude_delegate"
   cp -R "$source_dir/skills/delegate-to-codex/claude/." "$claude_delegate/"
   cp -R "$source_dir/skills/work-with-codex/claude/scripts" "$claude_delegate/"
-  cp "$source_dir/skills/work-with-codex/codex/collab.sh" "$codex_sender"
   if [ ! -e "$target/.codex/collab/model-aliases.json" ]; then
     cp "$source_dir/skills/work-with-codex/model-aliases.json" "$target/.codex/collab/model-aliases.json"
   fi
-  chmod +x "$claude_collab/scripts/collab.sh" "$claude_delegate/scripts/collab.sh" "$codex_sender"
-  printf 'prefix_rule(pattern=["%s"], decision="allow")\n' "$codex_sender" > "$codex_rule"
+  chmod +x "$claude_collab/scripts/collab.sh" "$claude_delegate/scripts/collab.sh"
   echo "Installed $claude_collab"
   echo "Installed $claude_delegate"
-  echo "Installed $codex_sender and $codex_rule"
 fi
 
 for platform in claude codex; do
