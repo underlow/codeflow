@@ -1,7 +1,7 @@
 #!/bin/zsh
 # Claude Code side of work-with-codex.
 #
-#   collab.sh start [--model M] [--effort E] [project-dir]
+#   collab.sh start [--task develop|review] [--model M] [--effort E] [project-dir]
 #                                   brief on stdin; opens Codex in a new Ghostty tab
 #   collab.sh send <id>             message on stdin; types it into the Codex tab
 #   collab.sh status <id>
@@ -35,14 +35,28 @@ codex_tab() {
 
 cmd_start() {
   local -a opts
+  local task=discuss model= sandbox=read-only
+  [[ ${SKILL_DIR:t} != delegate-to-codex ]] || task=develop
   while (( $# )); do
     case $1 in
-      --model)  (( $# >= 2 )) || die "--model needs a value"; opts+=(--model $2); shift 2 ;;
+      --task) (( $# >= 2 )) || die "--task needs a value"; task=$2; shift 2 ;;
+      --model)  (( $# >= 2 )) || die "--model needs a value"; model=$2; opts+=(--model $2); shift 2 ;;
       --effort) (( $# >= 2 )) || die "--effort needs a value"; opts+=(-c "model_reasoning_effort=\"$2\""); shift 2 ;;
       --*) die "unknown option $1" ;;
       *) break ;;
     esac
   done
+  if [[ ${SKILL_DIR:t} == delegate-to-codex && $task == discuss ]]; then
+    die "delegation task must be develop or review"
+  fi
+  case $task in
+    discuss) ;;
+    develop|review)
+      [[ -n $model ]] || die "delegation requires --model; ask the user which model to use"
+      [[ $task != develop ]] || sandbox=workspace-write
+      ;;
+    *) die "unknown task '$task': use develop or review" ;;
+  esac
   local dir=${1:-$PWD}
   dir=${dir:A}
   [[ -d $dir ]] || die "no directory $dir"
@@ -60,6 +74,7 @@ cmd_start() {
   mkdir -p $sdir
   print -r -- $sock > $sdir/target
   print -r -- $dir > $sdir/project
+  print -r -- $task > $sdir/task
 
   sed -e "s|{{ID}}|$id|g" -e "s|{{SEND}}|$ROOT/collab.sh|g" $SKILL_DIR/codex-prompt.md > $sdir/prompt.md
   print -r -- $brief >> $sdir/prompt.md
@@ -82,7 +97,7 @@ cmd_start() {
   cat > $sdir/launch.sh <<EOF
 #!/bin/zsh
 export PATH=${(q)PATH}
-codex --sandbox read-only --ask-for-approval on-request $args "\$(<${(q)sdir}/prompt.md)"
+codex --sandbox $sandbox --ask-for-approval on-request $args "\$(<${(q)sdir}/prompt.md)"
 EOF
   chmod +x $sdir/launch.sh
 
@@ -137,5 +152,5 @@ case ${1:-} in
   send)   shift; cmd_send "$@" ;;
   status) shift; cmd_status "$@" ;;
   close)  shift; cmd_close "$@" ;;
-  *) die "usage: collab.sh start [--model M] [--effort E] [dir] | send <id> | status <id> | close <id>" ;;
+  *) die "usage: collab.sh start [--task develop|review] [--model M] [--effort E] [dir] | send <id> | status <id> | close <id>" ;;
 esac

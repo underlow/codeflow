@@ -46,7 +46,7 @@ For an architecture audit outside `flow`, run `/architecture-review [path-or-sub
 in Claude Code or `$architecture-review [path-or-subsystem]` in Codex. The command
 creates an offline HTML report in a temporary directory and opens it when possible.
 
-The separate `work-with-codex` skill uses Ghostty on macOS and installs a Codex
+The separate `work-with-codex` and `delegate-to-codex` skills use Ghostty on macOS and install a Codex
 sender plus a rule allowing that sender to contact Claude. Install it explicitly:
 
 ```sh
@@ -57,6 +57,13 @@ Use `--force` to replace an existing installation. The command above updates an
 already installed `flow` while adding `work-with-codex`. `--target DIR` installs into
 another home directory, which is useful for trying the installer without
 changing your own setup. See [work-with-codex details](docs/work-with-codex.md).
+
+Use `/delegate-to-codex [task]` in Claude Code to assign implementation or review
+to Codex in a new tab. Claude briefs Codex, verifies the result, and sends
+corrections until the task is complete. If you have not explicitly named a model,
+Claude asks before launching. Development permits workspace edits; review runs
+read-only. Both skills are included with `--with-collab`. See
+[delegation details](docs/delegate-to-codex.md).
 
 The source layout is `skills/flow/`, `skills/underlow/project/`, and
 `skills/architecture-review/`, each with
