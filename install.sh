@@ -23,6 +23,15 @@ target=$(cd "$target" && pwd)
 case "$target" in /*) ;; *) usage ;; esac
 source_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
+claude_backlog=$target/.claude/skills/backlog
+codex_backlog=$target/.agents/skills/backlog
+for path in "$claude_backlog" "$codex_backlog"; do
+  if { [ -e "$path" ] || [ -L "$path" ]; } && [ "$force" = false ]; then
+    echo "Already exists: $path (use --force to replace)" >&2
+    exit 1
+  fi
+done
+
 claude_flow=$target/.claude/skills/flow
 codex_flow=$target/.agents/skills/flow
 claude_project=$target/.claude/skills/project
@@ -93,3 +102,12 @@ if [ "$with_collab" = true ]; then
   echo "Installed $claude_delegate"
   echo "Installed $codex_sender and $codex_rule"
 fi
+
+for platform in claude codex; do
+  if [ "$platform" = claude ]; then destination=$claude_backlog; else destination=$codex_backlog; fi
+  [ "$force" = false ] || rm -rf -- "$destination"
+  mkdir -p "$destination"
+  cp -R "$source_dir/skills/underlow/backlog/shared/." "$destination/"
+  cp -R "$source_dir/skills/underlow/backlog/$platform/." "$destination/"
+  echo "Installed $destination"
+done

@@ -28,7 +28,7 @@ If you already have the repository locally, run:
 ./install.sh
 ```
 
-This copies `flow`, `project`, and `architecture-review` to `~/.claude/skills/` and
+This copies `flow`, `project`, `backlog`, and `architecture-review` to `~/.claude/skills/` and
 `~/.agents/skills/`.
 Invoke it as `/flow [plan-folder-or-description-file]` in Claude Code or
 `$flow [plan-folder-or-description-file]` in Codex. Codex discovers local skills
@@ -45,6 +45,17 @@ map at any time.
 For an architecture audit outside `flow`, run `/architecture-review [path-or-subsystem]`
 in Claude Code or `$architecture-review [path-or-subsystem]` in Codex. The command
 creates an offline HTML report in a temporary directory and opens it when possible.
+
+`backlog` records explicitly deferred work and confirmed bugs outside the active
+task in the repository's `backlog.md` (or its configured backlog). Features retain
+their purpose, agreed behavior, boundaries, and completion checks; bugs retain
+reproduction evidence, impact, findings, and unknowns. Recording does not start
+implementation. Use `/backlog [item-ID or request]` in Claude Code or
+`$backlog [item-ID or request]` in Codex; no argument offers open items.
+
+The skill uses ordinary skill discovery and selection. The installer only copies
+skill files; it does not modify `AGENTS.md` or `CLAUDE.md`. Automatic selection
+depends on the agent and is not a guaranteed session-start hook.
 
 The separate `work-with-codex` and `delegate-to-codex` skills use Ghostty on macOS and install a Codex
 sender plus a rule allowing that sender to contact Claude. Install it explicitly:
@@ -65,7 +76,7 @@ Claude asks before launching. Development permits workspace edits; review runs
 read-only. Both skills are included with `--with-collab`. See
 [delegation details](docs/delegate-to-codex.md).
 
-The source layout is `skills/flow/`, `skills/underlow/project/`, and
+The source layout is `skills/flow/`, `skills/underlow/project/`, `skills/underlow/backlog/`, and
 `skills/architecture-review/`, each with
 shared instructions and platform entrypoints. When a platform needs hooks or
 other files, add them to its platform directory and the installer will copy
