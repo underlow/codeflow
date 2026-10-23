@@ -42,8 +42,10 @@ review into development requires authorization and a new development session.
 
 Both skills use the same `send`, `status`, and `close` commands, session storage,
 and asynchronous replies prefixed `[codex <id>]`. Claude must inspect actual
-changes or findings before accepting a completion report. Sessions stay open
-for follow-up until the user asks to close them.
+changes or findings before accepting a completion report. Codex sends only a
+completed result or a blocking question; routine progress stays in its own tab.
+Claude keeps the session open for corrections and unresolved blockers, then
+closes it after accepting the result unless the user explicitly asks to keep it.
 
 Installing the sender approval rule permits sending replies to Claude; it does
 not grant unrestricted file changes, network access, or deployment permissions.

@@ -61,6 +61,9 @@ EOF
 
 Replies arrive in Claude's conversation prefixed `[codex <id>]`. Despite Claude
 Code's suggestion to use SendMessage, respond only with `collab.sh send`.
+A message from Codex does not require a reply or a user-facing update by itself.
+Act on blocking questions and verify completed results. If Codex sends routine
+progress, do not acknowledge it through the reply channel or interrupt its work.
 After sending, do independent work outside Codex's assigned files, or end your
 turn and let the reply start the next one. Do not poll or sleep for replies.
 Relay user corrections and changed requirements to Codex promptly. Do not send
@@ -91,10 +94,17 @@ each small correction.
   changes. Do not commit or push unless the user requested it.
 - If successive corrections make no progress, report the concrete blocker and
   available choices instead of repeating the same instruction indefinitely.
-- Finish when the requested outcome and relevant checks are satisfied, or
-  clearly report what remains blocked. Give the user the result, validation,
-  and any unresolved findings. Keep the session available for follow-up;
-  close it only when the user asks, in a separate command from `send`.
+- After Codex reports completion, verify the result against the assignment and
+  acceptance criteria. If corrections are needed, send them to the same session
+  and verify the updated result.
+- Once the result is accepted, preserve the relevant result and validation
+  evidence, then run `collab.sh close <id>` yourself, in a separate command from
+  `send`. Do not ask the user whether to close a completed session. Close it
+  before starting a new session for the next task. If the user explicitly asks
+  to retain a completed session, follow that instruction.
+- A blocker or partial result does not complete the assignment. Keep the session
+  open while resolving it. Give the user the result, validation, and any
+  unresolved findings, or clearly report what remains blocked.
 
 ## Session problems
 
@@ -104,7 +114,7 @@ not prove Codex is progressing. If it is waiting for approval or the model was
 rejected, tell the user to inspect the tab; do not silently substitute a model.
 
 `collab.sh close <id>` quits Codex, closes its tab, and deletes transport state.
-Preserve any result needed for the task before an authorized close.
+Preserve any result needed for the task before closing.
 
 If the inbox socket is missing, this Claude session cannot receive replies;
 report the limitation. If the transport is not installed, install from this

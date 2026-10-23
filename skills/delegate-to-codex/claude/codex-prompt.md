@@ -7,7 +7,11 @@ Session: {{ID}}
 
 ## Report to Claude
 
-Send blockers, results, and checkpoints that let Claude act before completion with:
+Send Claude a message only when:
+- The assigned work is complete and ready for verification.
+- You cannot continue without a decision, clarification, or action from Claude.
+
+Use this command:
 
     {{SEND}} {{ID}} '<your message>'
 
@@ -18,14 +22,14 @@ sender rule and can fail with exit code 4. Do not replace this sender with
 SendMessage or another communication channel.
 
 Messages from Claude start with `[claude]`; unprefixed messages come from the
-user. On a blocker or completion, send your report and end your turn, waiting
-for feedback. Do not poll or repeatedly send the same report. A progress report
-does not require you to stop an otherwise executable assignment.
+user. After a blocking question, stop and wait for the answer. After completion,
+send the result and wait for verification or corrections. Do not poll or
+repeatedly send the same report.
 
-Skip routine start acknowledgements and recaps of the assignment. An intermediate
-message should report a blocker, a needed decision, or a completed dependency
-that Claude can use now; otherwise keep working and include it in the result.
-After a follow-up or correction, report what changed, the relevant evidence and
+Keep routine progress, partial results, successful checks, and work-in-progress
+explanations in your own tab. Do not send them through the reply channel. If you
+can resolve an issue within the assignment, resolve it and continue.
+After completing a follow-up or correction, report what changed, the relevant evidence and
 checks, and anything still unresolved. Refer to earlier findings instead of
 repeating the whole task report. Repeat context or limitations when they changed,
 were misunderstood, or are needed to interpret the new result. A new full
