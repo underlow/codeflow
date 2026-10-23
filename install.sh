@@ -107,6 +107,9 @@ if [ "$with_collab" = true ]; then
   cp -R "$source_dir/skills/delegate-to-codex/claude/." "$claude_delegate/"
   cp -R "$source_dir/skills/work-with-codex/claude/scripts" "$claude_delegate/"
   cp "$source_dir/skills/work-with-codex/codex/collab.sh" "$codex_sender"
+  if [ ! -e "$target/.codex/collab/model-aliases.json" ]; then
+    cp "$source_dir/skills/work-with-codex/model-aliases.json" "$target/.codex/collab/model-aliases.json"
+  fi
   chmod +x "$claude_collab/scripts/collab.sh" "$claude_delegate/scripts/collab.sh" "$codex_sender"
   printf 'prefix_rule(pattern=["%s"], decision="allow")\n' "$codex_sender" > "$codex_rule"
   echo "Installed $claude_collab"

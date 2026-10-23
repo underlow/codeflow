@@ -18,6 +18,11 @@ with Ghostty, using the same inbox transport as `work-with-codex`.
    answer before starting. Do not silently use the configured default or choose
    a model yourself. Pass the chosen model with `--model`. Pass `--effort` only
    if the user specified it; otherwise keep the configured effort.
+   Pass the user's model name directly to `start`: it resolves short names
+   through `~/.codex/collab/model-aliases.json` and validates against the local
+   Codex catalog in the same call. Do not guess IDs or separately fetch a model
+   list. If resolution fails, show the returned choices and ask the user to
+   select one; do not retry spelling variants or substitute a model.
 2. Determine whether the assignment is `develop` or `review` from the request.
    Development uses `workspace-write`; review uses `read-only`. A review request
    does not authorize fixing the findings. Ask only if the intended assignment

@@ -19,6 +19,16 @@ to Codex. Name the model in the request, or Claude must ask which model to use
 and wait for the answer. The transport also rejects delegation without an
 explicit `--model`. Effort follows configuration unless explicitly specified.
 
+Model names are resolved inside `start`, without a separate discovery command.
+Short names are configured in `~/.codex/collab/model-aliases.json`; the installer
+creates this file once and preserves it on updates, including `--force`.
+The launcher accepts an alias or exact catalog ID and also recognizes an
+unambiguous display name, ignoring case. It validates the selected model and
+explicit effort using the same Codex executable it will launch. If it cannot
+select a model, it returns the catalog choices before creating session state or
+opening a tab. Claude should present those choices rather than guess another
+spelling. Python 3 is required when an explicit model is provided.
+
 The launcher accepts `start --task develop|review --model <model>`:
 
 - `develop` uses `--sandbox workspace-write --ask-for-approval on-request`.

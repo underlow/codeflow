@@ -15,6 +15,15 @@ uses `~/.codex/config.toml`. They are set at start; changing the model of a
 running Codex would mean driving its `/model` picker, which the skill does not
 do.
 
+An explicit model is resolved within that same `start` call. Short names live in
+`~/.codex/collab/model-aliases.json`, created once by the installer and preserved
+on updates. Exact model IDs and unambiguous display names also work. The launcher
+checks the model and explicit effort against the chosen Codex binary's catalog
+before creating a session or touching Ghostty; failure returns a model list.
+Python 3 is required for this check. Catalog refresh falls back to the bundled
+catalog with a warning if unavailable; catalog membership does not prove account
+access. No separate model-list exchange is required.
+
 ## How the two talk
 
 - **Claude to Codex**: Claude types into the Codex tab through Ghostty's

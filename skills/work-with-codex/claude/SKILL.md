@@ -103,8 +103,14 @@ EOF
 
 It prints `SESSION <id>`. Remember the id. Add `--model` or `--effort` only
 when the user names them ("with gpt-6.1-sol", "high effort"). Otherwise Codex
-uses `~/.codex/config.toml`. A wrong model name shows as an error in the Codex
-tab and no reply arrives.
+uses `~/.codex/config.toml`. A catalog match does not guarantee account access;
+Codex can still reject a model at runtime.
+
+Pass the user's model name directly. In the same `start` call, the script resolves
+aliases from `~/.codex/collab/model-aliases.json` and checks the Codex model catalog
+and explicit effort before opening a tab. Do not guess model IDs or fetch a
+separate model list first. If it cannot choose, show the choices returned by the
+script and ask the user; do not retry case variants or silently change models.
 
 Send a message:
 

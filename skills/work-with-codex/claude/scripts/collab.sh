@@ -35,13 +35,13 @@ codex_tab() {
 
 cmd_start() {
   local -a opts
-  local task=discuss model= sandbox=read-only
+  local task=discuss model= effort= sandbox=read-only
   [[ ${SKILL_DIR:t} != delegate-to-codex ]] || task=develop
   while (( $# )); do
     case $1 in
       --task) (( $# >= 2 )) || die "--task needs a value"; task=$2; shift 2 ;;
-      --model)  (( $# >= 2 )) || die "--model needs a value"; model=$2; opts+=(--model $2); shift 2 ;;
-      --effort) (( $# >= 2 )) || die "--effort needs a value"; opts+=(-c "model_reasoning_effort=\"$2\""); shift 2 ;;
+      --model)  (( $# >= 2 )) || die "--model needs a value"; model=$2; shift 2 ;;
+      --effort) (( $# >= 2 )) || die "--effort needs a value"; effort=$2; shift 2 ;;
       --*) die "unknown option $1" ;;
       *) break ;;
     esac
@@ -60,11 +60,23 @@ cmd_start() {
   local dir=${1:-$PWD}
   dir=${dir:A}
   [[ -d $dir ]] || die "no directory $dir"
+  local codex_bin
+  codex_bin=$(command -v codex) || die "codex is not on PATH"
+  if [[ -n $model ]]; then
+    command -v python3 >/dev/null || die "Python 3 is required to resolve model names"
+    local selected
+    local -a resolve_opts
+    resolve_opts=(--codex "$codex_bin" --aliases "$ROOT/model-aliases.json")
+    [[ -z $effort ]] || resolve_opts+=(--effort "$effort")
+    selected=$(python3 "$SKILL_DIR/scripts/resolve-model.py" "${resolve_opts[@]}" "$model") || return $?
+    print -u2 -- "collab.sh: model $model -> $selected"
+    opts+=(--model "$selected")
+  fi
+  [[ -z $effort ]] || opts+=(-c "model_reasoning_effort=\"$effort\"")
   local sock=${CLAUDE_CODE_MESSAGING_SOCKET:-}
   [[ -S $sock ]] || die "this Claude Code session has no inbox socket, so Codex cannot reply"
   [[ -x $ROOT/collab.sh && -f $HOME/.codex/rules/collab.rules ]] ||
     die "Codex side is not installed, run ./install.sh --with-collab --force from the CodeFlow skills repository"
-  command -v codex >/dev/null || die "codex is not on PATH"
 
   local brief=$(cat)
   [[ -n $brief ]] || die "brief expected on stdin"
@@ -97,7 +109,7 @@ cmd_start() {
   cat > $sdir/launch.sh <<EOF
 #!/bin/zsh
 export PATH=${(q)PATH}
-codex --sandbox $sandbox --ask-for-approval on-request $args "\$(<${(q)sdir}/prompt.md)"
+${(q)codex_bin} --sandbox $sandbox --ask-for-approval on-request $args "\$(<${(q)sdir}/prompt.md)"
 EOF
   chmod +x $sdir/launch.sh
 
