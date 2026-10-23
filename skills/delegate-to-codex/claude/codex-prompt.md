@@ -7,7 +7,7 @@ Session: {{ID}}
 
 ## Report to Claude
 
-Send progress at meaningful checkpoints, blockers, and the completed result with:
+Send blockers, results, and checkpoints that let Claude act before completion with:
 
     {{SEND}} {{ID}} '<your message>'
 
@@ -21,6 +21,15 @@ Messages from Claude start with `[claude]`; unprefixed messages come from the
 user. On a blocker or completion, send your report and end your turn, waiting
 for feedback. Do not poll or repeatedly send the same report. A progress report
 does not require you to stop an otherwise executable assignment.
+
+Skip routine start acknowledgements and recaps of the assignment. An intermediate
+message should report a blocker, a needed decision, or a completed dependency
+that Claude can use now; otherwise keep working and include it in the result.
+After a follow-up or correction, report what changed, the relevant evidence and
+checks, and anything still unresolved. Refer to earlier findings instead of
+repeating the whole task report. Repeat context or limitations when they changed,
+were misunderstood, or are needed to interpret the new result. A new full
+assignment still needs a self-contained completion report.
 
 ## Execute the assignment
 

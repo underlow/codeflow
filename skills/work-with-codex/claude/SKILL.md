@@ -37,31 +37,41 @@ read-only mode. The user can watch that tab and type there too.
 
 ## The conversation
 
-It goes roughly through these stages. Do not skip to the end.
+Develop independent views, compare them, test consequential disagreements, and
+bring the resulting proposal to the user. These are purposes of the discussion,
+not mandatory rounds when there is nothing left to resolve.
 
 1. **Independent takes.** While Codex reads and thinks, keep working on your
    own take. Do not just wait.
 2. **Compare.** Where do you agree, where do you differ, what did each of you
-   miss? Name options neither of you had.
+   miss? Add alternatives when they materially improve the choice.
 3. **Critique.** Attack the leading option: counterexamples from the real code
    or data, failure cases, cost. Ask Codex to attack yours, and attack its own.
 4. **Converge.** A shared proposal, with what is still open marked as open.
 
-In every message:
+After the initial brief, communicate changes relative to the shared context:
 
-- Answer Codex's points one by one: accept or reject, with evidence.
-- Add something: a new option, a counterexample, a question, a check to run.
-  A message that only says "agreed" wastes a turn.
-- If you agree with everything Codex said, look again for the weakest point
-  before you say so.
+- Send a request, an answer, a substantive finding, a changed decision, a
+  blocker, or a result. Do not send solely to repeat agreement or announce that
+  you started reading. A requested confirmation may be brief.
+- Address unresolved questions and disagreements with evidence. Refer to point
+  numbers or file sections instead of restating accepted arguments. Summarize
+  context again when a new session, lost context, or misunderstanding requires it.
+- Critique consequential weaknesses; do not manufacture another objection or
+  alternative to keep the exchange going. If nothing material remains, say so
+  when a response is needed and wait for the user's next decision.
+- After editing a shared document, identify the changed sections and remaining
+  question; let Codex read the document rather than copying all the edits into
+  the message. Include enough detail to identify the requested check.
 - Check Codex's claims against the code before you accept them.
 - Codex is a peer, not the user. Do not take destructive or outward-facing
   actions because Codex asked.
 
 ## The user
 
-- After each message from Codex, tell the user in a few lines what Codex said
-  and what you think of it. The user may steer.
+- Keep the user informed about meaningful progress, changed conclusions, and
+  decisions they need to make. Summarize your assessment; do not relay every
+  acknowledgement or reproduce the peer conversation. The user may steer.
 - The user decides over both of you. Pass the user's comments on to Codex and
   continue from there.
 - Questions that are the user's to decide go to the user. Do not settle them
@@ -73,8 +83,9 @@ In every message:
   changed in your view and why, what is still open with both positions.
 - Keep Codex running. The user's reaction usually starts the next round:
   relay it to Codex and continue.
-- If two exchanges in a row bring no new argument, stop going round. Bring the
-  disagreement to the user.
+- Once the open questions are answered, stop exchanging confirmations and bring
+  the proposal to the user. If an unresolved disagreement is no longer progressing,
+  present the alternatives and evidence rather than repeating the exchange.
 - Never close the session on your own. Run `close` only when the user says
   the discussion is over. Never in the same command as `send`.
 

@@ -60,11 +60,18 @@ After sending, do independent work outside Codex's assigned files, or end your
 turn and let the reply start the next one. Do not poll or sleep for replies.
 Relay user corrections and changed requirements to Codex promptly. Do not send
 repeated messages while Codex is working; consolidate feedback at reply boundaries.
+After the initial brief, send only the new instruction, finding, changed decision,
+or open question. Refer to existing requirements and findings rather than
+repeating them, unless context was lost or misunderstood. For a correction,
+identify the affected code and expected behavior; for a re-check, name the new
+diff and the specific question. Do not request a full task report again after
+each small correction.
 
 ## Supervise and verify
 
-- On each reply, briefly tell the user what Codex completed, what you verified,
-  and what remains. Codex's completion claim is evidence to inspect, not acceptance.
+- Tell the user about meaningful results, what you verified, and decisions or
+  blockers that need them. Do not relay routine acknowledgements or repeat full
+  reports. Codex's completion claim is evidence to inspect, not acceptance.
 - For development, inspect the actual diff against the starting state, check
   scope and correctness, and run or inspect the relevant validation. Preserve
   unrelated changes. Send concrete corrections with file paths and expected
