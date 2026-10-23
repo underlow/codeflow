@@ -28,7 +28,7 @@ If you already have the repository locally, run:
 ./install.sh
 ```
 
-This copies `flow`, `project`, `backlog`, and `architecture-review` to `~/.claude/skills/` and
+This copies `flow`, `project`, `backlog`, `talk-to-designer`, and `architecture-review` to `~/.claude/skills/` and
 `~/.agents/skills/`.
 Invoke it as `/flow [plan-folder-or-description-file]` in Claude Code or
 `$flow [plan-folder-or-description-file]` in Codex. Codex discovers local skills
@@ -60,6 +60,16 @@ implementation. Use `/backlog [item-ID or request]` in Claude Code or
 The skill uses ordinary skill discovery and selection. The installer only copies
 skill files; it does not modify `AGENTS.md` or `CLAUDE.md`. Automatic selection
 depends on the agent and is not a guaranteed session-start hook.
+
+Use `/talk-to-designer [request]` in Claude Code or `$talk-to-designer [request]`
+in Codex to consult a separate Claude designer session. It offers relevant open
+sessions or a new one and explains how the designer should reply in its first
+message. Claude uses native session messaging when available. Codex uses a
+Python 3 script to discover local Claude sockets and send messages; the designer
+replies through that script into a persistent local inbox. Codex can wait for or
+read replies, but they do not automatically wake a finished Codex turn. Saved
+connections let a later session resume the conversation. If session creation
+is unavailable, the skill asks you to open the designer session yourself.
 
 The separate `work-with-codex` and `delegate-to-codex` skills use Ghostty on macOS and install a Codex
 sender plus a rule allowing that sender to contact Claude. Install it explicitly:

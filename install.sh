@@ -25,7 +25,9 @@ source_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 claude_backlog=$target/.claude/skills/backlog
 codex_backlog=$target/.agents/skills/backlog
-for path in "$claude_backlog" "$codex_backlog"; do
+claude_designer=$target/.claude/skills/talk-to-designer
+codex_designer=$target/.agents/skills/talk-to-designer
+for path in "$claude_backlog" "$codex_backlog" "$claude_designer" "$codex_designer"; do
   if { [ -e "$path" ] || [ -L "$path" ]; } && [ "$force" = false ]; then
     echo "Already exists: $path (use --force to replace)" >&2
     exit 1
@@ -66,6 +68,15 @@ for platform in claude codex; do
   mkdir -p "$destination"
   cp -R "$source_dir/skills/flow/shared/." "$destination/"
   cp -R "$source_dir/skills/flow/$platform/." "$destination/"
+  echo "Installed $destination"
+done
+
+for platform in claude codex; do
+  if [ "$platform" = claude ]; then destination=$claude_designer; else destination=$codex_designer; fi
+  [ "$force" = false ] || rm -rf -- "$destination"
+  mkdir -p "$destination"
+  cp -R "$source_dir/skills/talk-to-designer/shared/." "$destination/"
+  cp -R "$source_dir/skills/talk-to-designer/$platform/." "$destination/"
   echo "Installed $destination"
 done
 
