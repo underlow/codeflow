@@ -2,34 +2,17 @@ on run argv
     set op to item 1 of argv
     tell application "Ghostty"
         if op is "identify" then
-            -- Snapshot titles before the temporary marker changes the parent's title.
-            set originals to {}
+            set ttyPath to item 2 of argv
             repeat with w in windows
                 repeat with parentTab in tabs of w
                     repeat with t in terminals of parentTab
-                        set end of originals to {id of t, name of t, name of parentTab}
-                    end repeat
-                end repeat
-            end repeat
-            set ttyPath to item 2 of argv
-            set marker to item 3 of argv
-            do shell script "/usr/bin/printf '\\033]2;%s\\007' " & quoted form of marker & " > " & quoted form of ttyPath
-            repeat 20 times
-                repeat with w in windows
-                    repeat with t in terminals of w
-                        if name of t is marker then
-                            repeat with original in originals
-                                if item 1 of original is (id of t) then
-                                    do shell script "/usr/bin/printf '\\033]2;%s\\007' " & quoted form of (item 2 of original) & " > " & quoted form of ttyPath
-                                    return (id of t) & linefeed & (item 3 of original)
-                                end if
-                            end repeat
+                        if tty of t is ttyPath then
+                            return (id of t) & linefeed & (name of parentTab)
                         end if
                     end repeat
                 end repeat
-                delay 0.1
             end repeat
-            error "cannot find the originating terminal in Ghostty"
+            error "cannot find the originating terminal in Ghostty for TTY " & ttyPath
         end if
         if op is "find-title" then
             repeat with w in windows

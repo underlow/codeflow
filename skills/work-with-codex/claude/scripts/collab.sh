@@ -92,10 +92,13 @@ cmd_start() {
   print -r -- $brief >> $sdir/prompt.md
   log $sdir claude-brief $brief
 
-  # Ghostty reports no tty per terminal, so mark this tab by title and look it up.
-  local tty=/dev/$(ps -o tty= -p ${sock:t:r} | tr -d ' ')
+  # Match Claude's TTY directly; requires Ghostty with AppleScript tty support.
+  local claude_tty
+  claude_tty=$(ps -o tty= -p ${sock:t:r} | tr -d ' ') || die "cannot determine Claude Code TTY"
+  [[ -n $claude_tty && $claude_tty != '??' && $claude_tty != '?' ]] || die "Claude Code has no terminal TTY"
+  local tty=/dev/$claude_tty
   local origin me parent_title
-  origin=$(ghostty identify "$tty" "collab-$id")
+  origin=$(ghostty identify "$tty")
   me=${origin%%$'\n'*}
   parent_title=${origin#*$'\n'}
   [[ -n $me ]] || die "cannot find this Claude Code tab in Ghostty"

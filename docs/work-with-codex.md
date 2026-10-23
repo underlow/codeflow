@@ -96,10 +96,12 @@ Found while testing:
   Codex is told to write `’` instead of `'`; the script's error says the same.
 - A tab opened through AppleScript gets Ghostty's environment, not the
   shell's, so `launch.sh` carries over `PATH`.
-- Ghostty does not report a terminal's tty. `start` finds Claude's tab by
-  writing a unique title to Claude's tty and looking it up, then restores the
-  original terminal title. The new tab gets `(1) <parent tab title>`, using the
-  first available positive number among tab titles in the same window.
+- `start` matches Claude's process TTY against Ghostty's AppleScript `tty`
+  property, without changing terminal titles or depending on the focused tab.
+  This requires a Ghostty build with AppleScript `tty` support (currently Tip;
+  stable 1.3.1 does not expose it). No terminal ID cache is used for lookup.
+  The new tab gets `(1) <parent tab title>`, using the first available positive
+  number among tab titles in the same window.
 
 ## Open
 
