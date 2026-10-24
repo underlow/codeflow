@@ -13,8 +13,11 @@ from terminals import detect
 skill = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('action', choices=['start'])
-parser.add_argument('--task', choices=['discuss', 'develop', 'review'],
-                    default='develop' if skill.name == 'delegate-to-codex' else 'discuss')
+tasks = {
+    'develop': "Implement Claude's assignment below.",
+    'review': "Review as Claude's assignment below asks; report findings without editing.",
+} if skill.name == 'delegate-to-codex' else {'discuss': ''}
+parser.add_argument('--task', choices=tasks, default=next(iter(tasks)))
 parser.add_argument('--model')
 parser.add_argument('--effort')
 parser.add_argument('directory', nargs='?', default=os.getcwd())
@@ -23,8 +26,6 @@ args = parser.parse_intermixed_args()
 try:
     if args.task != 'discuss' and not args.model:
         raise ValueError('delegation requires --model; ask the user which model to use')
-    if skill.name == 'delegate-to-codex' and args.task == 'discuss':
-        raise ValueError('delegation task must be develop or review')
     cwd = Path(args.directory).resolve()
     if not cwd.is_dir():
         raise ValueError(f'no directory {cwd}')
@@ -47,10 +48,10 @@ try:
         raise ValueError('brief expected on stdin')
     terminal = detect()
     reply, _ = terminal.commands(terminal.origin, 'claude')
-    prompt = (skill / 'codex-prompt.md').read_text().replace('{{REPLY}}', reply)
+    prompt = (skill / 'codex-prompt.md').read_text().replace('{{REPLY}}', reply).replace('{{TASK}}', tasks[args.task])
     command = shlex.join(['/usr/bin/env', 'PATH=' + os.environ.get('PATH', os.defpath), binary,
                           '--sandbox', 'workspace-write' if args.task == 'develop' else 'read-only',
-                          '--ask-for-approval', 'on-request', *options, 'Mode: ' + args.task + '\n' + prompt + '\n' + brief])
+                          '--ask-for-approval', 'on-request', *options, prompt + '\n' + brief])
     target = terminal.start(command, cwd)
     send, close = terminal.commands(target, 'codex')
     print(f'ID {target}\nSEND {send}\nCLOSE {close}')

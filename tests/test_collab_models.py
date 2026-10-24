@@ -86,7 +86,7 @@ class ModelResolutionTest(unittest.TestCase):
         environment = dict(os.environ, PATH=str(self.root) + os.pathsep + os.environ['PATH'])
         environment['HOME'] = str(self.root)
         result = subprocess.run([
-            sys.executable, str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
+            sys.executable, str(SCRIPTS / 'collab.sh'), 'start',
             '--model', 'unknown', '--effort', 'high', str(self.root),
         ], input='brief', text=True, capture_output=True, env=environment, timeout=5)
         self.assertNotEqual(result.returncode, 0)
@@ -98,7 +98,7 @@ class ModelResolutionTest(unittest.TestCase):
         environment = dict(os.environ, PATH=str(self.root) + os.pathsep + os.environ['PATH'])
         environment['HOME'] = str(self.root)
         result = subprocess.run([
-            sys.executable, str(SCRIPTS / 'collab.sh'), 'start', '--task', 'review',
+            sys.executable, str(SCRIPTS / 'collab.sh'), 'start',
             '--model', 'test-v2-sol', '--effort', 'high', str(self.root),
         ], input='', text=True, capture_output=True, env=environment, timeout=5)
         self.assertNotEqual(result.returncode, 0)
