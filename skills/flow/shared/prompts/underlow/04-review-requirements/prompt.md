@@ -12,13 +12,10 @@ Inspect code, tests, or documentation only when needed to verify a claim about
 current behavior. Do not invent product decisions or implementation constraints.
 A repeated implementation-detail leak can be one finding, not one per line.
 
-Derive acceptance cases independently from what the requirements actually
-guarantee. Each proposed case needs a requirement reference, initial state,
+Derive acceptance examples independently from what the requirements actually
+guarantee. Each proposed example needs a requirement reference, initial state,
 actions, expected observations, and important continuation. Do not fill a
-missing guarantee by guessing; report the gap. When the requirements change,
-recheck retained cases and update only those affected. Return proposed cases to
-the coordinator so accepted expectations can be added to the authoritative
-contract. Do not leave them as authority only in a review response.
-
-Follow the common review contract for findings, uncertainty, and a concise
-account of limits. Do not edit requirements or code, commit, or launch agents.
+missing guarantee by guessing; report the gap. When the requirements have
+changed since an earlier review, recheck the examples it proposed and update only
+those affected. Return proposed examples in your final response; the coordinator
+adds accepted ones to the requirements.

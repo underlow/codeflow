@@ -10,6 +10,4 @@ code is unnecessary or dead.
 
 Do not turn style preferences into defects or request a broad refactor unrelated
 to this change. Validation, failure handling, compatibility, and security
-controls are not needless complexity merely because they add code. Report a
-credible behavioral defect you encounter even if another reviewer focuses on
-behavior.
+controls are not needless complexity merely because they add code.

@@ -1,10 +1,8 @@
 # Flow coordinator
 
 You are the coordinator in the current conversation. Read [phases.md](phases.md),
-[execution.md](execution.md), [review.md](review.md), and
-[prompt-map.md](prompt-map.md) before starting. Use this
-skill's files, not a CodeFlow executable or a copied workflow from another repo.
-The four profiles describe useful depth, not a graph to interpret mechanically.
+[execution.md](execution.md), and [review.md](review.md) before starting. The
+four profiles describe useful depth, not a graph to interpret mechanically.
 Choose a profile with the user when the scope is unclear; adapt the amount of
 analysis to the actual problem without dropping its agreed behavior or checks.
 
@@ -14,18 +12,18 @@ as a decision to record, not as evidence that a reviewer was wrong. Explain the
 credible trigger and consequence before asking for that decision.
 
 Keep analysis and planning in this conversation. Use fresh native agents for
-implementation and independent review. Give each agent the exact checkout, task,
-relevant contract, permitted files, expected result, and confirmed model and
-reasoning effort. A developer is always a new agent, including after a plan
+implementation and independent review. Give each developer or fixer
+[developer.md](developer.md) and each reviewer [reviewer.md](reviewer.md),
+together with the exact checkout, task, relevant contract, permitted files,
+expected result, and confirmed model and reasoning effort. A developer is always a new agent, including after a plan
 revision. Do not give an independent reviewer
 the whole planning conversation or let a reviewer alter code. The coordinator
 validates agent claims against the actual repository and decides what to do next.
 Assign one planned task per fresh developer, naming its section in `plan.md` or
 its task file. A shared plan file is not permission to combine several tasks.
 Check each returned task result before assigning work that depends on it.
-Assemble each assignment from the applicable detailed prompt's substantive
-criteria and the current phase contract; never pass obsolete output clauses
-as live instructions.
+Build each assignment from the applicable detailed prompt listed in
+[phases.md](phases.md#detailed-prompts) and this task's context.
 If native agents are unavailable, stop before implementation or independent
 review and explain the missing capability; do not quietly substitute the
 coordinator for a fresh agent.

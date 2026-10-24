@@ -12,5 +12,4 @@ and file boundaries.
 
 Read [the coordinator instructions](references/coordinator.md),
 [the phase guide](references/phases.md), [the review guide](references/review.md),
-[workspace and resume rules](references/execution.md), and
-[the detailed prompt map](references/prompt-map.md) before acting.
+and [workspace and resume rules](references/execution.md) before acting.

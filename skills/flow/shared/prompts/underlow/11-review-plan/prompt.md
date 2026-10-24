@@ -17,7 +17,3 @@ choices. Report contradictions or missing consequential decisions, not a private
 implementation detail the developer can choose. Do not require pseudocode,
 helper organization, copied requirements, or detailed test bodies. A plan need
 not prescribe every edit, but its developer must know the result to deliver.
-
-Follow the common review contract. Return concrete findings and limitations in
-the final response. Do not edit the plan or contract, implement code, commit, or
-launch agents.

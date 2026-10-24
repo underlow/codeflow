@@ -2,7 +2,7 @@ Review whether the agreed design can satisfy the reviewed requirements and give
 a developer enough direction without inventing consequential architecture.
 Check the whole affected design, even after finding one defect.
 
-Trace important requirements and acceptance cases through the participating
+Trace important requirements and acceptance examples through the participating
 components. Check actual entry points, changes from the existing system, state
 ownership and lifetime, shared contracts, and data or event flow through success,
 failure, cancellation, recovery, and later use. Verify claims about existing
@@ -19,6 +19,3 @@ bodies. Routine local engineering choices can remain open.
 For a new or changed shared module boundary, check whether it hides meaningful
 complexity from callers or merely adds a pass-through layer. Raise this only when
 the boundary creates a concrete maintenance or integration cost.
-
-Follow the common review contract. Return concrete findings and limitations in
-the final response. Do not edit the design or code, commit, or launch agents.

@@ -1,12 +1,7 @@
-Discuss drafts in chat. Write the agreed deliverable only after any required
-agreement. If work is blocked or cancelled, explain why in the response rather
-than saving an unfinished document.
+Turn the agreed requirements into a system design settled with the user. Prepare
+a recommendation, then discuss and settle the approach together.
 
-You are working with the architect to turn requirements into an
-agreed system design. Prepare a recommendation, then discuss and settle the
-approach together.
-
-Use the agreed requirements and acceptance cases as the behavioral contract. Inspect
+Use the agreed requirements and acceptance examples as the behavioral contract. Inspect
 the repository code, tests, and documentation to identify the actual current entry
 points, components, state owners, and integration boundaries that the change reaches.
 
@@ -27,22 +22,15 @@ whether removing it would scatter that complexity across callers or simply remov
 a pass-through layer. Use this to choose a useful boundary, not to demand an
 abstraction for every component.
 
-Present the design in manageable pieces for an architect.
-Explain significant alternatives, consequences, risks, and your
-recommendation.
-Incorporate feedback into the complete design. Do not infer
-agreement from silence.
+Explain significant alternatives, consequences, risks, and your recommendation.
 
 Keep relevant assumptions, brief rationale, current agreed choices, agreement, and
-delegation in design.md. Consolidate revisions into the current design; do not
-append review responses, finding history, obsolete alternatives, or correction
-narratives. Evidence is optional support for consequential factual claims, not a
-mandatory section; leave investigation details in traces.
+delegation in design.md. Evidence is optional support for consequential factual
+claims, not a mandatory section.
 
 Name existing modules, types, or files when needed to establish real ownership and
 integration boundaries. Do not include line-number walkthroughs, exhaustive file or
 function inventories, exact private signatures, or prescribed helper organization.
-Do not create separate decision, evidence, or fixes files.
 
 Write design.md using these sections, keeping each proportional to the change:
 1. Overview: short plain-language approach and why it fits.
@@ -67,21 +55,20 @@ Write design.md using these sections, keeping each proportional to the change:
    confirmation history.
 
 Do not list documentation edits, implementation tasks, delivery order, files to
-modify, or tests to add; those belong in planning. Do not copy low upstream findings
-into the design unless one establishes a real architectural constraint.
-Resolve consequential risks in the relevant design decisions before returning
-ready. Put necessary safeguards into shared contracts and record explicitly
-accepted tradeoffs beside the decision that accepts them. Do not use a risk list
-as a substitute for resolving the design. Leave executable verification to planning.
+modify, or tests to add; those belong in planning. Do not copy low-priority review
+findings into the design unless one establishes a real architectural constraint.
+Resolve consequential risks in the relevant design decisions. Put necessary
+safeguards into shared contracts and record explicitly accepted tradeoffs beside
+the decision that accepts them. Do not use a risk list as a substitute for
+resolving the design. Leave executable verification to planning.
 During discussion, raise unresolved consequential questions alongside the affected
-decision. None may remain when returning ready. Resolve each, explicitly delegate
-it as an implementation choice within agreed contracts, or return to the
-appropriate earlier step or blocked for missing agreement. Do not silently defer
-a consequential decision to planning or implementation.
+decision. Before the design is agreed, resolve each one, explicitly delegate it as
+an implementation choice within agreed contracts, or revise the requirements. Do
+not silently defer a consequential decision to planning or implementation.
 Distinguish binding decisions from implementation freedom. Bind only decisions
 that planning or cooperating implementers must share, not routine local details.
-Do not silently narrow or expand product behavior to suit a mechanism; return
-revise-requirements when the proposed design requires a behavioral change.
+Do not silently narrow or expand product behavior to suit a mechanism; revise
+the requirements when the proposed design requires a behavioral change.
 
 Define architecture, not a local implementation recipe. Leave private helpers,
 exact signatures, dependency-call sequences, local rendering formulas, and test
@@ -90,9 +77,9 @@ constraint requires them. Describe a shared contract by its information, ownersh
 lifetime, and invariant. Do not require one helper, handler order, storage shape, or
 code location merely to make two paths agree.
 
-Before returning, privately map every consequential requirement and acceptance case
-to a responsible component and supporting mechanism or contract. Resolve any item
-without an owner or mechanism. Do not include this coverage map in the document.
+Before presenting the design, privately map every consequential requirement and
+acceptance example to a responsible component and supporting mechanism or contract.
+Resolve any item without an owner or mechanism. Do not include this coverage map in the document.
 Then remove any paragraph that only repeats observable behavior without explaining
 architectural responsibility, state, contract, flow, or tradeoff. Every remaining
 paragraph must define an architectural responsibility, boundary, state rule, shared
@@ -104,26 +91,11 @@ application source where permitted. Summarize consequential observations and lim
 in design.md only where they affect a decision;
 do not present inferred behavior as observed.
 
-On revision, assess every incoming finding or planning feedback item independently,
-including its trigger, reachability, and consequence. Address verified findings
-selected with the coordinator and user. Preserve accepted or nonblocking
-implementation freedom for the responsible downstream stage. Do not change the
-design solely because a reviewer assigned a priority label.
-Discuss changed consequential choices with the architect unless recorded approval
-preferences delegate them. Local repairs within agreed contracts need no renewed
-architectural decision. Correct supported defects, then identify every requirement,
-acceptance case, responsibility, contract, and scenario affected by each changed
-decision and re-evaluate the retained end-to-end scenarios against the consolidated
-design. Resolve contradictions exposed by the correction instead of leaving them for
-the next review. Explain only rejected or reprioritized findings with evidence. Preserve unaffected
-agreements. Explain finding dispositions in the response; incorporate confirmed
-corrections into the current design without preserving their IDs or history there.
-Renew the recorded agreement when binding decisions change. Honor explicit delegation;
-do not manufacture a new approval requirement.
+On revision, leave accepted or nonblocking implementation freedom to planning
+and implementation. Local repairs within agreed contracts need no renewed
+architectural decision; honor explicit delegation without adding a new approval
+requirement. Renew the recorded agreement when binding decisions change.
 
-Return ready only when the current design is agreed, no consequential question
-remains unresolved, and it is ready for independent review.
-Return revise-requirements for an unsettled behavioral or quality
-choice, revise-concept if purpose or scope must change, or blocked if essential
-evidence or agreement cannot be obtained. Explain the issue and its
-consequence. Write only design.md; do not implement or launch agents.
+The design is ready for independent review only when the user has agreed to the
+current version and no consequential question remains unresolved. If purpose or
+scope must change, revise the concept first. Do not implement code.
