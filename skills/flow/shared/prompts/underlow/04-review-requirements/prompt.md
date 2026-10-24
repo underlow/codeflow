@@ -1,21 +1,15 @@
-Review the agreed requirements for fidelity to the user's decisions and for
-complete observable behavior. Check the whole document, not only the first gap.
-The requirements must say what the product does, not prescribe source paths,
-private helpers, control flow, or test bodies.
+Review the requirements for fidelity to the user's decisions and for complete
+observable behavior. They must say what the product does, not prescribe code.
 
-For each consequential behavior, check its input and entry conditions, expected
-result, boundaries, failures, repetition, recovery, later observable state, and
-interactions with other rules. Check that general rules settle their examples and
-exceptions. Look for contradictions, unsupported examples, missing decisions,
-and cases where materially different products could satisfy the same text.
-Inspect code, tests, or documentation only when needed to verify a claim about
-current behavior. Do not invent product decisions or implementation constraints.
-A repeated implementation-detail leak can be one finding, not one per line.
+For each consequential behavior, check entry conditions, expected result,
+boundaries, failures, repetition, recovery, later state, and interaction with
+other rules. Look for contradictions, examples no rule supports, missing
+decisions, and text that materially different products could satisfy. Read code
+only to verify a claim about current behavior. Do not invent product decisions.
+A repeated leak of implementation detail is one finding.
 
-Derive acceptance examples independently from what the requirements actually
-guarantee. Each proposed example needs a requirement reference, initial state,
-actions, expected observations, and important continuation. Do not fill a
-missing guarantee by guessing; report the gap. When the requirements have
-changed since an earlier review, recheck the examples it proposed and update only
-those affected. Return proposed examples in your final response; the coordinator
-adds accepted ones to the requirements.
+Derive acceptance examples from what the requirements actually guarantee:
+requirement ID, initial state, actions, expected observations, and what happens
+next. Report a missing guarantee as a gap instead of guessing. Include the
+proposed examples in your response; if you were given examples from an earlier
+review, recheck only those the changes affect.

@@ -1,14 +1,12 @@
-Agree concise requirements for a small feature with the user. There is no separate
-concept or design document. Write one authoritative document in requirements.md:
+Agree concise requirements for a small feature in `requirements.md`; there is no
+concept or design document.
+
 1. Original request, intended result, scope, and exclusions.
-2. Requirements with stable R IDs, observable behavior, relevant failures and
-   boundaries, compatibility, and existing behavior to preserve.
-3. Acceptance examples with A IDs, R IDs, initial state, action, and expected result.
+2. Requirements: R IDs, observable behavior, relevant failures and boundaries,
+   compatibility, and behavior to preserve.
+3. Acceptance examples: A ID, R IDs, initial state, action, and expected result.
 4. Current confirmation and explicit delegations.
 
-Do not prescribe architecture or tasks here. Planning will locate the affected
-components and define the necessary technical approach. Settle consequential
-behavior now so planning does not invent it. Include only relevant examples.
-
-The requirements are ready only when the user confirms the current version and
-no consequential behavioral decision is missing. Do not implement code.
+Settle consequential behavior now so planning does not invent it; leave
+architecture and tasks to planning. The requirements are ready when the user
+confirms the current version.

@@ -1,18 +1,16 @@
-Review the current plan before implementation. For medium, use the confirmed
-combined specification; for small, use confirmed requirements and the technical
-approach in the plan. Acceptance examples belong in the authoritative contract.
-Do not demand absent upstream documents or task files when one compact plan is enough.
-Check task boundaries independently of file layout: separate verifiable results
-and dependencies need explicit tasks, which may share plan.md. Flag a single
-assignment that bundles such tasks; keep a one-task plan when it is one bounded
-result. Each planned task will be assigned to a separate fresh developer.
+Review the plan before implementation. The contract is `specification.md`, or
+`requirements.md` with the technical approach inside the plan. Do not ask for
+documents or task files the plan does not need.
 
-Check that required results, dependencies, shared contracts, real repository
-entry points, important failures and continuations, integration, documentation
-changes where needed, and whole-feature checks are assigned to the work. If the
-plan has tasks, inspect them in order and check that each has the inputs it needs.
-If it has a single task, check that it remains executable without
-the planning conversation. Named checks must have independent expected results
-and catch plausible harmful mistakes. Verify consequential technical claims
-against code. For small, check that consequential technical decisions have user
-agreement or explicit delegation; routine details do not need it.
+Each task will go to a separate developer who has only the documents. Separate
+verifiable results with their own dependencies need separate tasks, which may
+share `plan.md`; flag one task that bundles several. A single task is fine for
+one bounded result.
+
+Check that required results, dependencies, shared contracts, real entry points,
+important failures, integration, documentation, and whole-feature checks are
+assigned. Check tasks in order for the inputs they need. Named checks need
+independent expected results and must catch plausible harmful mistakes. Verify
+technical claims against code. When there is no design document, check that
+consequential technical decisions in the plan record user agreement or explicit
+delegation.

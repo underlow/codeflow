@@ -1,16 +1,14 @@
-Review the current combined specification for a medium feature. Its purpose and
-requirements are the behavioral contract; its design is the technical proposal.
-Do not require separate concept, requirements, or design files.
+Review `specification.md`, which combines the requirements (the behavioral
+contract) and the design (the technical proposal) in one document.
 
 Check scope, ambiguous behavior, failures and later actions, compatibility,
 feasibility, component ownership, and shared contracts. Verify consequential
-claims against the affected repository code. Each material requirement needs a
-plausible mechanism, but do not demand private implementation detail. Identify
-missing user agreement rather than approving a product choice on their behalf.
+claims against the code. Each material requirement needs a plausible mechanism,
+but do not demand private implementation detail. Point out missing user
+agreement instead of approving a product choice on the user's behalf.
 
-Derive acceptance examples from the requirements, not from the proposed mechanism.
-Each proposed example needs a requirement reference, initial state, actions,
-expected observations, and important continuations. Missing expected behavior
-is a finding, not a place to guess. When the specification has changed since
-an earlier review, recheck the examples it proposed. Return proposed examples in
-your final response; the coordinator adds accepted ones to the specification.
+Derive acceptance examples from the requirements, not from the proposed
+mechanism: requirement ID, initial state, actions, expected observations, and
+what happens next. Missing expected behavior is a finding, not a place to guess.
+Include the proposed examples in your response; if you were given examples from
+an earlier review, recheck only those the changes affect.

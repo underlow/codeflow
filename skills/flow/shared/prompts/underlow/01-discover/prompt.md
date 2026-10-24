@@ -1,46 +1,28 @@
 ## Product discovery
 
-Work with the user to agree on the problem, affected users, intended outcome,
-scope, and major product choices. Detailed requirements will be based on this
-concept. Keep the conversation and document understandable without code knowledge.
+Agree with the user on the problem, affected users, intended outcome, scope, and
+major product choices; requirements will be built on this concept. Keep the
+conversation and the document understandable without code knowledge.
 
-If the intended change is unclear, ask the user what they want to explore.
-Otherwise start from their request and the answers they have already given.
+If the intended change is unclear, ask what the user wants to explore. Inspect
+the repository when you need current behavior or feasibility, and explain
+findings by their product effect. Walk through representative journeys,
+including failures, interruptions, recovery, and interaction with existing
+behavior, to find product choices nobody has made yet. A rare failure matters
+here only if it could change the product direction.
 
-Investigate assumptions and alternatives that could change the outcome or
-scope. Bring consequential product choices to the user; routine engineering
-questions do not need them.
-
-When needed, inspect relevant repository code, tests, and documentation to
-understand current behavior and feasibility. Distinguish evidence from
-assumptions and explain findings through their product effect. Explore
-representative journeys, including relevant failures, interruptions, recovery,
-and interactions with existing behavior, to uncover missing product choices.
-
-When you and the user agree on the concept, write `concept.md` in the plan folder with:
+Write `concept.md`:
 
 1. Problem, affected users, and intended outcome.
 2. Scope, major decisions, supplied constraints, exclusions, and reasons for tradeoffs.
-3. Representative journeys: situations, actions, and intended results.
+3. Representative journeys: situation, action, and intended result.
 4. Open questions, assumptions, and accepted risks, with their consequences.
 
-Keep the concept short, product-focused, and understandable without code knowledge.
-Leave exact key rules, matching details, counts, and behavioral boundaries to
-requirements unless they determine scope or a major product choice. Keep supplied
-answers, constraints, brief rationale, and relevant evidence in `concept.md` without
-expanding them into a specification. Code links are allowed where useful;
-understanding the concept must not require reading code.
-A rare failure matters here only if it could change the product direction.
+Keep it short. Leave exact rules, counts, and behavioral boundaries to
+requirements unless they decide scope or a major choice. Keep the user's
+detailed answers and architectural constraints with their basis. Separate
+confirmed decisions from proposals and uncertainty. Code links are fine, but
+understanding the concept must not depend on them.
 
-Keep confirmed decisions distinct from proposals and uncertainty. Preserve detailed
-answers and explicit architectural constraints the user supplies, including their
-basis. Leave unresolved behavioral details for requirements and implementation
-design for later work. Keep the document concise and internally consistent.
-Do not implement the feature or modify application code.
-
-When revising, judge findings by their demonstrated effect on purpose, scope,
-and major product choices. Carry unresolved behavioral details into
-requirements.
-
-The concept is ready only after the user confirms it and no open issue could
-materially change its purpose, scope, or major product choices.
+The concept is ready when the user confirms it and no open issue could change
+its purpose, scope, or major choices.

@@ -1,74 +1,43 @@
-Turn the requirements and design into an ordered implementation plan. The plan
-must give the developer enough information to do the work without inventing
-product behavior or design decisions.
+Turn the requirements and design into an ordered implementation plan that lets a
+developer work without inventing product behavior or design decisions. Do not
+reopen settled decisions; if the documents contradict each other or miss a
+decision the plan needs, revise them first.
 
-Use the requirements to decide what the feature must do and what is in scope.
-Use the design to decide how the system should be changed. Do not reconsider
-decisions already settled in the requirements or design. Revise an earlier
-document only when the documents contradict each other or leave out a decision
-needed for the plan; do not settle an open product or design question inside
-the plan.
+Read enough of the repository to find affected code, patterns, dependencies, and
+usable checks.
 
-Read enough of the repository to find the affected code, existing patterns,
-dependencies, and useful validation commands. Do not inspect unrelated areas.
+Split the work into tasks when that helps a developer, ordered so each task has
+what it needs. Cover every requirement. Where tasks must use the same data or
+behavior, state what they agree on. Include integration work, whole-feature
+checks, and documentation updates after the behavior they need exists. Describe
+what each task must achieve, not how; file paths are starting points, not a
+complete list. Do not prescribe pseudocode, private helpers, or test bodies
+unless the design decided them.
 
-Split the work into tasks when that helps a fresh developer. Order the work so
-earlier results provide what later work needs. Make sure every requirement is
-covered. When several tasks must use the same data or behavior, explain what
-they must agree on. Include the work needed to join the results into the
-working feature, the whole-feature checks, and any updates to maintained
-documentation once the behavior they describe exists.
+Sections of `plan.md`:
 
-Describe what each task must achieve, not every step the developer should take.
-Do not prescribe private helpers, algorithms, file organization, exact private
-signatures, pseudocode, or detailed test bodies unless the design already decided
-them. File paths may show the developer where to start; they are not a complete
-list of files that may change.
+1. What the work will deliver, in plain language.
+2. Ordered tasks and dependencies, with links when tasks are separate files.
+3. What tasks must agree on.
+4. A map from requirements to tasks and whole-feature checks.
 
-Use these sections in `plan.md`:
-1. A plain-language summary of what the work will deliver.
-2. Ordered work and dependencies, with links when separate task files help.
-3. Anything that several tasks must agree on.
-4. A map from requirements to work and checks for the complete feature.
+Each task, as a section or a file under `tasks/`:
 
-Put a short reason beside a planning choice when the reason matters. Do not create
-separate risk, evidence, decision, or agreement documents. Put optional
-task files under `tasks/`.
+1. Result: what must be true afterwards, with requirement IDs.
+2. Inputs: documents, current behavior, or earlier results it needs.
+3. Work: what it delivers and how it joins the rest.
+4. Behavior to preserve.
+5. Verification: what to observe and where, setup it needs, and the harmful
+   mistake it catches.
 
-When separate task files help, write one numbered file per task, in execution
-order. Each task contains:
-1. Result: what must be true when the task is finished, with the relevant
-   requirement IDs.
-2. Inputs and dependencies: the documents, current behavior, or earlier task
-   results it needs.
-3. Work: what it must deliver and how that work joins the rest of the feature.
-   Name useful starting places when needed.
-4. Behavior to preserve: limits and existing behavior that must not be broken.
-5. Verification: what to observe, where to observe it, anything the check needs
-   first, and the harmful mistake the check must catch. Do not prescribe the test
-   body.
+A task must make sense to a developer who has only the documents. Refer to
+requirements instead of copying them, and take expected results from the
+requirements, not from one possible implementation. Checks spanning several
+tasks go in `plan.md`.
 
-Refer to requirements and acceptance examples instead of copying them. A task must
-make sense without conversation history. Expected results must come from the
-requirements, not from one possible implementation. Give each task only the
-checks needed to show that it produced its result. Put checks that cover several
-tasks in `plan.md` instead of repeating them in every task.
-
-Before presenting the plan, check that:
-- every required result is assigned to work;
-- each task has the inputs it needs before it starts;
-- tasks that must agree describe the same data or behavior;
-- the tasks join into the complete feature;
-- every named check can run and can catch the mistake it names.
-
-On revision, preserve accepted or nonblocking findings for the developer
-without changing the plan only because a reviewer assigned a priority label.
-Update every affected task and every agreement between tasks, not only the place
-named by the reviewer.
-
-When implementation shows the plan is wrong, inspect the work that already
-exists. Keep valid completed work. Update work that is obsolete or still
-needed so the developer does not repeat finished work.
-
-The plan is ready when it and any tasks can be followed as written and no
-required product or design decision is missing. Do not implement code.
+Before presenting, check that every result is assigned, every task has its
+inputs, agreeing tasks describe the same thing, the tasks add up to the feature,
+and every check can run and would catch its mistake. On revision, update every
+affected task and agreement, not just the place a reviewer named. When
+implementation shows the plan is wrong, keep valid finished work and plan only
+what remains.

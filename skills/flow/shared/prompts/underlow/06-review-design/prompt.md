@@ -1,21 +1,14 @@
-Review whether the agreed design can satisfy the reviewed requirements and give
-a developer enough direction without inventing consequential architecture.
-Check the whole affected design, even after finding one defect.
+Review whether the design can satisfy the requirements and gives a developer
+enough direction without inventing consequential architecture.
 
-Trace important requirements and acceptance examples through the participating
-components. Check actual entry points, changes from the existing system, state
-ownership and lifetime, shared contracts, and data or event flow through success,
-failure, cancellation, recovery, and later use. Verify claims about existing
-components in the repository. A restatement of requirements without a component
-or mechanism responsible for each consequential behavior is not a design.
+Trace important requirements and acceptance examples through the components:
+entry points, changes from the current system, state ownership and lifetime,
+shared contracts, and flows through success, failure, cancellation, recovery,
+and later use. Verify claims about existing code. Report missing mechanisms,
+incompatible contracts, ownership gaps, and any narrowing or change of required
+behavior. When a shared mechanism is faulty, check the behaviors that depend on
+it. An unresolved product choice is a question for the user, not a design fix.
 
-Check that the design neither narrows nor silently changes the required behavior.
-Report missing mechanisms, incompatible contracts, or ownership gaps that would
-force planning to make a consequential decision. If a shared mechanism is
-problematic, inspect the other behaviors that depend on it. An unresolved product
-choice belongs back with the user through requirements. Do not demand line
-numbers, exhaustive file inventories, private signatures, task order, or test
-bodies. Routine local engineering choices can remain open.
-For a new or changed shared module boundary, check whether it hides meaningful
-complexity from callers or merely adds a pass-through layer. Raise this only when
-the boundary creates a concrete maintenance or integration cost.
+Do not demand line numbers, file inventories, private signatures, task order, or
+test bodies. Flag a new module boundary only when it adds a concrete maintenance
+or integration cost without hiding real complexity.
