@@ -38,8 +38,9 @@ and the outcome with the completion state.
 You alone write `state.json`, atomically, after the work it records exists. It
 holds `profile`, `phase`, and the `base_commit` captured before any flow change;
 `task` only while a task is active; `status` only for `paused`, `blocked`,
-`complete`, or `cancelled`; and a reviewed commit when you need to know whether
-later code invalidated a clean review. Derive worktree and branch from Git.
+`complete`, or `cancelled`; `codex` with the roles assigned to Codex, if any; and
+a reviewed commit when you need to know whether later code invalidated a clean
+review. Derive worktree and branch from Git.
 
 After the user confirms development agent settings, store them as
 `development_agent` with `platform`, `model`, and `effort`, plus an optional

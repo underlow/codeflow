@@ -7,7 +7,7 @@ Run the flow with `$ARGUMENTS`. An empty argument means offer unfinished plans o
 start a new flow.
 
 Use Claude's native Agent tool for fresh implementation and independent review
-agents. Give each agent the exact checkout, relevant contract, task, and file
+agents, or Codex through `delegate-to-codex` for roles the user assigns to it. Give each agent the exact checkout, relevant contract, task, and file
 boundaries.
 
 Read [the coordinator instructions](references/coordinator.md),

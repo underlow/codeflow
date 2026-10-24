@@ -43,6 +43,6 @@ looping.
 
 Reuse a confirmed reviewer's model and effort for the same focus when they still
 fit; include any new reviewer or changed setting in the next proposal to the
-user. Apply selections through native agent settings. If a selected combination
+user. Apply selections through the agent invocation. If a selected combination
 is unavailable, return to the user with an alternative instead of silently
 falling back.

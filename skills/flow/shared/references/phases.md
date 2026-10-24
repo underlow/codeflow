@@ -22,7 +22,8 @@ one planned assignment for one developer. A *stage* is only a project stage.
 The [prompts](../prompts/) hold the questions, document structure, and quality
 criteria for each kind of work; read the relevant prompt before doing or
 assigning that work. `coordinator` means you do it in this conversation. Other
-executors are new native agents. A developer or fixer reports `done`,
+executors are new agents, native or Codex as described in
+[coordinator.md](coordinator.md#codex-agents). A developer or fixer reports `done`,
 `needs-decision`, or `blocked`; you decide what happens next.
 
 | Phase and profile | Prompt | Executor |

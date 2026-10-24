@@ -11,7 +11,8 @@ record, not proof that a reviewer was wrong; explain the trigger and consequence
 before asking for it.
 
 Do analysis and planning yourself in this conversation. Implementation and
-independent review go to new native agents: give each developer or fixer
+independent review go to new agents, native ones unless the user assigned the
+role to Codex (see below): give each developer or fixer
 [developer.md](developer.md), each reviewer [reviewer.md](reviewer.md), and
 both the detailed prompt from [phases.md](phases.md#detailed-prompts), the
 checkout, the task, the contract, and the confirmed model and effort. Assign one
@@ -37,8 +38,8 @@ are committed. At that point, before any developer starts:
 Start the first developer only after the user has settled both. If they stop
 without settling the model, ask on resume.
 
-Apply the confirmed model and effort through the native agent invocation, not
-only as words in its prompt. Check that the current platform supports the
+Apply the confirmed model and effort through the agent invocation, not only as
+words in its prompt. Check that the current platform supports the
 combination. If it is unavailable, propose an alternative and wait for the
 user's choice rather than silently substituting another model or effort. Reuse
 the confirmed choice on later development assignments. After a consequential
@@ -55,3 +56,21 @@ is not proof of quality.
 Give the user useful progress updates without announcing state writes or routine
 agent launches. Do not push, merge, remove a worktree, or move completed plans
 unless asked.
+
+## Codex agents
+
+This applies only when you run in Claude and the `delegate-to-codex` skill is
+installed. When a new flow's profile is chosen, ask once which roles Codex
+should take: none, document reviews, code reviews, or implementation and fixes;
+several are allowed. Record the answer in `state.json` as `codex`, a list of
+`document-review`, `code-review`, and `develop`, and update it whenever the user
+changes it.
+
+For those roles, launch the agent by following the `delegate-to-codex` skill
+instead of using the Agent tool: `--task review` for reviewers and `--task
+develop` for developers and fixers. Send the same brief a native agent would
+get. Choose its model at the same point as for a native agent of that role; for
+document reviews, ask when the first one starts and reuse the choice. Its reply arrives as a message
+prefixed `[codex]`; treat it as that agent's final response and verify it the
+same way. Run `CLOSE` once you have accepted the result. If Codex cannot start,
+tell the user and offer a native agent instead.
