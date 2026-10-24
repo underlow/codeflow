@@ -19,33 +19,33 @@ one planned assignment for one developer. A *stage* is only a project stage.
 
 ## Detailed prompts
 
-The [prompt library](../prompts/underlow/) holds the questions, document
-structure, and quality criteria for each kind of work; read the relevant prompt
-before doing or assigning that work. `coordinator` means you do it in this
-conversation. Other executors are new native agents. A developer or fixer
-reports `done`, `needs-decision`, or `blocked`; you decide what happens next.
+The [prompts](../prompts/) hold the questions, document structure, and quality
+criteria for each kind of work; read the relevant prompt before doing or
+assigning that work. `coordinator` means you do it in this conversation. Other
+executors are new native agents. A developer or fixer reports `done`,
+`needs-decision`, or `blocked`; you decide what happens next.
 
 | Phase and profile | Prompt | Executor |
 | --- | --- | --- |
-| Full analysis | `01-discover`, `03-requirements`, `05-design-approach` | coordinator |
-| | `02-challenge-concept`, `04-review-requirements`, `06-review-design` | reviewer |
-| Medium analysis | `22-specify-medium` | coordinator |
-| | `23-review-medium-spec` | reviewer |
-| Small analysis | `24-specify-small` | coordinator |
-| Bug investigation | `32-investigate-bug` | coordinator |
-| Full planning | `08-plan-code`; `10-review-plan-with-user` when discussing the plan | coordinator |
-| | `11-review-plan` | reviewer |
-| Medium planning | `25-plan-medium` | coordinator |
-| Small planning | `26-plan-small` | coordinator |
-| Medium or small planning | `27-review-compact-plan` | reviewer |
-| Implementation | `12-implement` | developer |
-| | `13-review-task` for a full-profile task later tasks depend on, with `15-review/aspects/test-quality.md` when tests changed | reviewer |
-| Bug correction | `33-fix-bug` | developer |
-| Whole-change review | `15-review` with selected `15-review/aspects/*.md`, or `29-review-single` for one combined reviewer | reviewer |
-| Correct findings | `17-fix`; `33-fix-bug` for bugfix | fixer |
+| Full analysis | `concept`, `requirements`, `design` | coordinator |
+| | `review-concept`, `review-requirements`, `review-design` | reviewer |
+| Medium analysis | `specification` | coordinator |
+| | `review-specification` | reviewer |
+| Small analysis | `requirements-small` | coordinator |
+| Bug investigation | `investigation` | coordinator |
+| Full planning | `plan-full`; `discuss-plan` when walking the user through it | coordinator |
+| | `review-plan-full` | reviewer |
+| Medium planning | `plan-medium` | coordinator |
+| Small planning | `plan-small` | coordinator |
+| Medium or small planning | `review-plan-compact` | reviewer |
+| Implementation | `implement` | developer |
+| | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
+| Bug correction | `fix-bug` | developer |
+| Whole-change review | `review-change` with selected `aspects/*`, or `review-change-single` for one combined reviewer | reviewer |
+| Correct findings | `fix`; `fix-bug` for bugfix | fixer |
 
-Each numbered directory contains `prompt.md`. An aspect file adds a focus to
-`15-review` or `29-review-single`; no aspect requires its own reviewer.
+Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or
+`review-change-single`; no aspect requires its own reviewer.
 
 ## Analysis
 

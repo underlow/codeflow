@@ -104,7 +104,7 @@ them with its entrypoint.
 
 The profiles are `full`, `medium`, `small`, and `bugfix`. See the
 [phase guide](skills/flow/shared/references/phases.md). The detailed
-[prompt library](skills/flow/shared/prompts/underlow/) holds the analysis,
+[prompt library](skills/flow/shared/prompts/) holds the analysis,
 planning, implementation, and review criteria.
 
 After agreeing on a plan, `flow` proposes a model and reasoning effort for its
