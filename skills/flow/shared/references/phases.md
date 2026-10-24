@@ -77,7 +77,6 @@ These rules apply to every document you agree with the user, including a plan.
   obsolete alternatives, or separate decision or evidence files.
 - Record the confirmation and explicit delegations in the document, and keep the
   initial request and any source link.
-- Commit the agreed document with explicit paths.
 
 When a later document needs a change that belongs to an earlier one, explain the
 conflict to the user and revise the earlier document first.
@@ -88,16 +87,17 @@ Tasks may be numbered sections of `plan.md` or files under `tasks/`. Draw task
 boundaries by independently verifiable results and dependencies, not by files;
 one plan file does not make one task. Each task must be understandable without
 the planning conversation. Get an independent plan review when uncertainty,
-size, or integration risk warrants it. Commit the final plan, then present the
-coordinator-session choice in [coordinator.md](coordinator.md).
+size, or integration risk warrants it. When the plan is final, commit the
+contract documents and the plan together, then follow the start of
+implementation in [coordinator.md](coordinator.md).
 
 ## Implementation
 
 Give each task to its own developer with the committed contract and plan, the
 exact task, and the checkout. Check the returned commit and result before
 dependent work. When a developer reports `needs-decision` or the plan proves
-wrong, keep valid work, revise the plan with the user, and present the
-coordinator-session choice again before more implementation.
+wrong, keep valid work, revise the plan with the user, commit the revision, and
+recheck the development model before more implementation.
 
 ## Review
 

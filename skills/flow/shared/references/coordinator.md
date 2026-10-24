@@ -21,22 +21,21 @@ the repository before dependent work; you decide what happens next. If native
 agents are unavailable, stop before implementation or review and say so instead
 of doing that work yourself.
 
-After the implementation plan is agreed and committed, propose a concrete
-available model and reasoning effort for the development agent, with a short
-reason based on the actual tasks and cost/quality tradeoff. If tasks differ
-enough to warrant different choices, propose them together by task; otherwise
-use one development choice. Do not infer the model from `full`, `medium`, or
-`small`, and do not put runtime choices in the implementation plan. Honor an
-already explicit user choice without asking them to repeat it.
+Planning is finished when plan reviews are resolved and the contract and plan
+are committed. At that point, before any developer starts:
 
-At this same boundary, always ask whether to continue development in this
-coordinator session or end here so the user can start a new coordinator session
-with clean context. Starting a fresh developer agent does not clear the
-coordinator's context. The user confirms or changes the proposed development
-model and effort before any developer starts. If they choose to stop without
-settling the model, keep implementation pending and ask on resume. Report the
-plan path, branch, and how to resume from the main repository. If they continue,
-start a fresh implementation agent only after both choices are settled.
+1. Propose a concrete available model and reasoning effort for developers, with
+   a short reason based on the actual tasks and the cost/quality tradeoff.
+   Propose per-task choices only when tasks differ enough to warrant them. Do not
+   infer the model from the profile, and do not put model choices in the plan.
+   Honor a choice the user already made without asking again.
+2. Ask whether to continue implementation in this session or stop so the user
+   can resume in a new session with clean context; a fresh developer agent does
+   not clear your context. If they stop, report the plan path, branch, and how to
+   resume from the main repository.
+
+Start the first developer only after the user has settled both. If they stop
+without settling the model, ask on resume.
 
 Apply the confirmed model and effort through the native agent invocation, not
 only as words in its prompt. Check that the current platform supports the

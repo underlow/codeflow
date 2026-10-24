@@ -40,9 +40,8 @@ Choose the profile with the user; do not infer it from the roadmap.
 Once the user starts the stage and the checkout is settled, create the plan
 directory and write an initial `state.json` before substantive investigation:
 `base_commit` captured before any flow change, `project` (repository-relative
-path), `stage`, `phase: analysis`, and `profile` once chosen. Commit it with
-explicit paths so a later project session can find the work. Keep `project` and
-`stage` in every later state update.
+path), `stage`, `phase: analysis`, and `profile` once chosen, so a later project
+session can find the work. Keep `project` and `stage` in every later state update.
 
 ## Complete the stage
 

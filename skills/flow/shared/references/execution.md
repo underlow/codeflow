@@ -26,8 +26,12 @@ documents.
 
 Each plan lives in `docs/plans/<date>-<slug>/` and holds only the contract
 documents, `plan.md` with optional `tasks/`, `state.json`, and `findings.md`
-when needed. Routine progress lives in the conversation and Git history. Commit
-documents and code in focused commits with explicit paths.
+when needed. Routine progress lives in the conversation and Git history.
+
+Commit only at three points, always with explicit paths: the contract documents
+and plan together once planning is finished (for a bugfix, the investigation
+before the fix), each developer's completed task,
+and the outcome with the completion state.
 
 ## State
 
