@@ -8,7 +8,8 @@ assignment. Say which changes you could not attribute.
 
 Review the whole scope, not just the latest diff or the first problem you find.
 When a defect sits in shared logic, check its other uses. Report a credible
-issue outside your focus too.
+issue outside your focus too, including any change listed in
+[approval.md](approval.md) that the contract does not record as approved.
 
 You may run a focused test or probe when it settles a material doubt and is safe
 in an isolated or disposable environment. Do not change project files, commit,

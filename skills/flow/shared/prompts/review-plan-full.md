@@ -13,3 +13,7 @@ dependent task.
 Report contradictions and missing decisions, not private details the developer
 can choose. Do not ask for pseudocode, helper structure, copied requirements, or
 test bodies.
+
+Flag planned automated tests that [tests.md](../references/tests.md)
+excludes, and changes from [approval.md](../references/approval.md) that are
+not recorded as approved.

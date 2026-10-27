@@ -10,7 +10,12 @@ Local details are yours to choose. Continue valid existing work and preserve
 changes that are not yours.
 
 Derive test expectations from the behavioral document, not from the code under
-test. Never weaken an expectation to make a check pass.
+test. Never weaken an expectation to make a check pass. Write the automated
+tests your task lists and a regression test for a fixed bug; any other test
+needs a reason in your report. Follow [tests.md](tests.md).
+
+Changes listed in [approval.md](approval.md) need the user's approval recorded in
+the contract; report `needs-decision` when you need one that is missing.
 
 Commit only your own completed work. Do not edit planning documents, start
 another task, or launch agents.
@@ -41,7 +46,7 @@ two. Then report briefly:
 
 1. What now works, in plain language.
 2. Checks you actually ran and their results; name required checks you could
-   not run.
+   not run. List tests you added beyond the task with the reason for each.
 3. For each given finding: its ID and disposition (fixed, rejected, or
    unresolved), with the reason for a rejection.
 4. Unmet requirements or deviations and their consequence.

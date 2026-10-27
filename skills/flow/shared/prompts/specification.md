@@ -9,7 +9,9 @@ proportional to the feature.
    owners and lifetime where relevant, shared contracts, consequential choices,
    and how success and important failures produce the required behavior.
 4. Acceptance examples: A ID, initial state, action, expected result, and R IDs.
-5. Agreement: current confirmation and delegated local choices.
+5. Changes needing approval, as described in
+   [approval.md](../references/approval.md).
+6. Agreement: current confirmation and delegated local choices.
 
 Requirements say what happens; the design explains the mechanism rather than
 paraphrasing the requirement. Leave tasks, private helpers, and signatures to

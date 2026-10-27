@@ -28,7 +28,8 @@ Each task, as a section or a file under `tasks/`:
 3. Work: what it delivers and how it joins the rest.
 4. Behavior to preserve.
 5. Verification: what to observe and where, setup it needs, and the harmful
-   mistake it catches.
+   mistake it catches. Mark which checks become automated tests; the rest are
+   run once and reported. Follow [tests.md](../references/tests.md).
 
 A task must make sense to a developer who has only the documents. Refer to
 requirements instead of copying them, and take expected results from the

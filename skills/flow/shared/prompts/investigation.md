@@ -22,7 +22,9 @@ Write `investigation.md`:
    preserve with the cases that rely on it, and what the correction could break
    (other callers, cases relying on current behavior, stored data,
    compatibility) with how the correction avoids each.
-5. Agreement on expected behavior and scope.
+5. Changes needing approval, as described in
+   [approval.md](../references/approval.md).
+6. Agreement on expected behavior and scope.
 
 This document is the developer's whole contract; no other planning documents are
 needed. It is ready when the scope is agreed and the evidence supports a bounded,

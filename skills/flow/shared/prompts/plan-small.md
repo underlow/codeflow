@@ -15,5 +15,10 @@ expected result, and checks that would catch a plausible harmful mistake. Put
 whole-feature checks and documentation after the implementation they need. Leave
 helpers, signatures, and test bodies to the developer.
 
+Name the automated tests each task adds: the behavior, the boundary it is
+observed at, and the mistake it catches. Other checks are run once and
+reported. Follow [tests.md](../references/tests.md). Record changes needing
+approval as described in [approval.md](../references/approval.md).
+
 When implementation shows the plan is wrong, keep valid finished work and plan
 only what remains.

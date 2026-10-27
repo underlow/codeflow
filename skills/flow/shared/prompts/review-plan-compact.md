@@ -14,3 +14,7 @@ independent expected results and must catch plausible harmful mistakes. Verify
 technical claims against code. When there is no design document, check that
 consequential technical decisions in the plan record user agreement or explicit
 delegation.
+
+Flag planned automated tests that [tests.md](../references/tests.md)
+excludes, and changes from [approval.md](../references/approval.md) that are
+not recorded as approved.

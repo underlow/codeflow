@@ -13,5 +13,9 @@ with expected observations and the mistake they catch. A single task is right
 only for one bounded result. Put whole-feature checks and documentation updates
 after the implementation they need. Leave private choices to the developer.
 
+Name the automated tests each task adds: the behavior, the boundary it is
+observed at, and the mistake it catches. Other checks are run once and
+reported. Follow [tests.md](../references/tests.md).
+
 When implementation shows the plan is wrong, keep valid finished work and plan
 only what remains.

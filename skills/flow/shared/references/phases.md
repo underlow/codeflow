@@ -42,7 +42,7 @@ executors are new agents, native or Codex as described in
 | Implementation | `implement` | developer |
 | | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
 | Bug correction | `fix-bug` | developer |
-| Whole-change review | `review-change` with selected `aspects/*`, or `review-change-single` for one combined reviewer | reviewer |
+| Whole-change review | `review-change` with selected `aspects/*`, always including `aspects/test-quality` when tests changed, or `review-change-single` for one combined reviewer | reviewer |
 | Correct findings | `fix` | fixer |
 
 Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or
@@ -66,6 +66,8 @@ These rules apply to every document you agree with the user, including a plan.
   already answered.
 - Bring each consequential choice with options, their effects, and a
   recommendation. Ask focused questions, normally one at a time.
+- Bring each change listed in [approval.md](approval.md) as its own question,
+  even when the user already agreed the surrounding text.
 - Show the proposal in the conversation and wait for explicit confirmation of the
   current version before writing the file. Silence or approval of an earlier
   draft is not confirmation.

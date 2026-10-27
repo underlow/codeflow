@@ -26,3 +26,7 @@ Review tests for necessity as well as missing coverage:
   for more tests. Mocks, strings, fixed values, and call checks are not defects
   by themselves when they verify a real contract. Do not add tests merely to
   increase counts or coverage percentages.
+- Report every test that [tests.md](../../references/tests.md) excludes and
+  every added test the plan did not list without a reason in the developer's
+  report. When test code grows much more than the code it checks, or one test
+  is long, find the cause.

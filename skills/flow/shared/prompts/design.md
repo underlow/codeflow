@@ -35,7 +35,9 @@ Write `design.md`, each section proportional to the change:
    decision.
 7. Component flows: a few end-to-end flows showing cooperation, asynchronous
    work, failure, cancellation, or ownership changes, referencing requirement IDs.
-8. Agreement: current confirmation and explicit delegations.
+8. Changes needing approval, as described in
+   [approval.md](../references/approval.md).
+9. Agreement: current confirmation and explicit delegations.
 
 Leave out line-number walkthroughs, file inventories, tasks, delivery order, and
 tests to add; those belong in planning. Resolve risks in decisions and shared
