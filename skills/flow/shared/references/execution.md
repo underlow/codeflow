@@ -18,6 +18,12 @@ overlap, offer a separate worktree or let them resolve it; never stash, discard,
 or commit their work. In a worktree, pass its absolute path to every tool and
 agent.
 
+When the request is a backlog item file, it is the flow's source document. Move
+it into the plan directory as `backlog-item.md` and commit only that move on the
+current branch before creating the flow branch or worktree, so other checkouts
+stop offering it. Record the item's original path and that branch as `backlog`
+in `state.json`.
+
 When the user supplies a project document or the plan's state names a project,
 also follow [project-stage.md](project-stage.md). Otherwise ignore project
 documents.
@@ -25,10 +31,11 @@ documents.
 ## Plan directory
 
 Each plan lives in `docs/plans/<date>-<slug>/` and holds only the contract
-documents, `plan.md` with optional `tasks/`, `state.json`, and `findings.md`
-when needed. Routine progress lives in the conversation and Git history.
+documents, `plan.md` with optional `tasks/`, `state.json`, `backlog-item.md`
+when taken from the backlog, and `findings.md` when needed. Routine progress lives in the conversation and Git history.
 
-Commit only at three points, always with explicit paths: the contract documents
+Besides the backlog item move, commit only at three points, always with
+explicit paths: the contract documents
 and plan together once planning is finished (for a bugfix, the investigation
 before the fix), each developer's completed task,
 and the outcome with the completion state.
@@ -38,7 +45,8 @@ and the outcome with the completion state.
 You alone write `state.json`, atomically, after the work it records exists. It
 holds `profile`, `phase`, and the `base_commit` captured before any flow change;
 `task` only while a task is active; `status` only for `paused`, `blocked`,
-`complete`, or `cancelled`; `codex` with the roles assigned to Codex, if any; and
+`complete`, or `cancelled`; `codex` with the roles assigned to Codex, if any; `backlog` for a taken backlog
+item; and
 a reviewed commit when you need to know whether later code invalidated a clean
 review. Derive worktree and branch from Git.
 
@@ -70,6 +78,10 @@ Before marking a flow complete, add a concise outcome to `plan.md` or the
 analysis document: what was delivered or why no change was warranted, links to
 the relevant commits, actual verification, material limits, and any implication
 for dependent work. Then write the completion state and commit both.
+
+When cancelling a flow that took a backlog item, move the item back to its
+original path on the recorded branch, add what the flow learned, and commit
+only that file there.
 
 ## Resume
 
