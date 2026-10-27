@@ -89,7 +89,7 @@ boundaries by independently verifiable results and dependencies, not by files;
 one plan file does not make one task. Each task must be understandable without
 the planning conversation. Get an independent plan review when uncertainty,
 size, or integration risk warrants it. When the plan is final, commit the
-contract documents and the plan together, then follow the start of
+remaining contract documents and the plan together, then follow the start of
 implementation in [coordinator.md](coordinator.md).
 
 ## Implementation

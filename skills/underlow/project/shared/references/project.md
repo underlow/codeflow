@@ -81,8 +81,7 @@ invocation. Project reconciles the overview on return, including flows from
 other branches and older flows that did not update it. Read the project document
 and inspect linked flow plans. Also look
 in `docs/plans/` in the selected checkout and registered worktrees for native plans
-whose `state.json` has the matching `project` path and `stage` ID, including initial
-registrations without a selected profile. Match both the active and archived
+whose `state.json` has the matching `project` path and `stage` ID. Match both the active and archived
 paths of the same project so moving it does not hide earlier flows, including
 those in other worktrees. Existing links may omit a just-started
 or reopened flow, so do not search only when links are missing.
