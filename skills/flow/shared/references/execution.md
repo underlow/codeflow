@@ -11,10 +11,12 @@ branch, and absolute path. A plan is recognized by its `state.json`. Completed
 and cancelled plans are terminal. A backlog item file as the request is the
 flow's source document.
 
-For a new request, understand the feature, propose a profile, and let the user
-choose. Until the user confirms the first contract document, create no branch,
-plan directory, state, or commit; keep experiments outside the repository or
-remove them. On that confirmation, start the work:
+For a new request, first discuss the task with the user and inspect the
+repository until the problem, the desired result, and the rough size are clear.
+Only then propose a profile with a short reason and let the user choose; do not
+ask for it earlier. Until the user confirms the first contract document, create
+no branch, plan directory, state, or commit; keep experiments outside the
+repository or remove them. On that confirmation, start the work:
 
 1. Choose a `flow/<slug>` branch in the current checkout by default, adding a
    suffix if the name is taken. If the user's uncommitted changes would overlap,
