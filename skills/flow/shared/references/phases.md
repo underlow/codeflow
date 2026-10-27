@@ -43,7 +43,7 @@ executors are new agents, native or Codex as described in
 | | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
 | Bug correction | `fix-bug` | developer |
 | Whole-change review | `review-change` with selected `aspects/*`, or `review-change-single` for one combined reviewer | reviewer |
-| Correct findings | `fix`; `fix-bug` for bugfix | fixer |
+| Correct findings | `fix` | fixer |
 
 Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or
 `review-change-single`; no aspect requires its own reviewer.
