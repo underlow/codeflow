@@ -13,10 +13,12 @@ flow's source document.
 
 For a new request, first discuss the task with the user and inspect the
 repository until the problem, the desired result, and the rough size are clear.
-Only then propose a profile with a short reason and let the user choose; do not
-ask for it earlier. Until the user confirms the first contract document, create
-no branch, plan directory, state, or commit; keep experiments outside the
-repository or remove them. On that confirmation, start the work:
+If the work is more than two weeks for a developer who knows the code, offer to
+split it into `project` stages or separate flows. Only then propose a profile
+with a short reason and let the user choose; do not ask for it earlier. Until
+the user confirms the first contract document, create no branch, plan directory,
+state, or commit; keep experiments outside the repository or remove them. On
+that confirmation, start the work:
 
 1. Choose a `flow/<slug>` branch in the current checkout by default, adding a
    suffix if the name is taken. If the user's uncommitted changes would overlap,

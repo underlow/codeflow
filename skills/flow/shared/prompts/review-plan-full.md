@@ -1,6 +1,7 @@
 Review whether the plan can deliver the agreed behavior without a developer
 inventing a product or design decision. Each task will go to a separate
-developer who has only the documents.
+developer who has only the documents. Flag a task over two days of work for a
+developer who knows the code, and say how to split it.
 
 Check that every required result is assigned, dependencies arrive before they
 are needed, tasks agree on shared data and behavior, and the results join

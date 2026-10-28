@@ -5,7 +5,8 @@ documents or task files the plan does not need.
 Each task will go to a separate developer who has only the documents. Separate
 verifiable results with their own dependencies need separate tasks, which may
 share `plan.md`; flag one task that bundles several. A single task is fine for
-one bounded result.
+one bounded result. Flag a task over two days of work for a developer who knows
+the code, and say how to split it.
 
 Check that required results, dependencies, shared contracts, real entry points,
 important failures, integration, documentation, and whole-feature checks are

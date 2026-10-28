@@ -88,11 +88,14 @@ conflict to the user and revise the earlier document first.
 
 Tasks may be numbered sections of `plan.md` or files under `tasks/`. Draw task
 boundaries by independently verifiable results and dependencies, not by files;
-one plan file does not make one task. Each task must be understandable without
-the planning conversation. Get an independent plan review when uncertainty,
-size, or integration risk warrants it. When the plan is final, commit the
-remaining contract documents and the plan together, then follow the start of
-implementation in [coordinator.md](coordinator.md).
+one plan file does not make one task. A task is at most two days of work for a
+developer who knows the code; split a bigger one into steps that can each be
+checked. If the plan adds up to more than two weeks, offer to split the work
+into `project` stages or separate flows. Each task must be understandable
+without the planning conversation. Get an independent plan review when
+uncertainty, size, or integration risk warrants it. When the plan is final,
+commit the remaining contract documents and the plan together, then follow the
+start of implementation in [coordinator.md](coordinator.md).
 
 ## Implementation
 
