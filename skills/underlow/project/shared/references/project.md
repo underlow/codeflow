@@ -40,8 +40,11 @@ implement or consume it, without deciding the API here. Frontend work that does
 not require that API may come earlier. Clarify an ambiguous stage only enough to
 understand its dependency.
 
-Keep one `docs/projects/<slug>.md` directly in `docs/projects/`, without a
-per-project directory, containing:
+For a new project, create `docs/projects/<date>-<slug>.md` directly in
+`docs/projects/`, without a per-project directory. Use the creation date in
+`YYYY-MM-DD` format, for example `docs/projects/2026-10-28-tv-startup.md`,
+matching flow's date-prefixed naming. Preserve existing project filenames when
+resuming them. The document contains:
 
 - the project goal;
 - shared context and constraints needed to understand the plan;
@@ -144,8 +147,8 @@ Do not overwrite another active project or silently reopen completed work.
 ## Start or resume a stage
 
 Use the project document and selected stage ID directly as flow's input. For a
-new stage, offer `$flow docs/projects/<slug>.md S1` in Codex or
-`/flow docs/projects/<slug>.md S1` in Claude Code, using the actual document
+new stage, offer `$flow docs/projects/<date>-<slug>.md S1` in Codex or
+`/flow docs/projects/<date>-<slug>.md S1` in Claude Code, using the actual document
 path for an existing project. For an existing flow,
 resume its plan instead of starting a duplicate. Check terminal flows too: when
 the selected stage is already complete, show the result and distinguish viewing
