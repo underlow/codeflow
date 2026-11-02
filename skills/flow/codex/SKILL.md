@@ -5,6 +5,7 @@ description: Plan, develop, and review a change with phase guidance, fresh agent
 
 Run the flow with the argument supplied after `$flow` (or the skill selection).
 An empty argument means offer unfinished plans or start a new flow.
+A new flow starts with the problem step; choose the profile only after it.
 
 Use Codex's native subagent tools for fresh implementation and independent
 review agents. Give each agent the exact checkout, relevant contract, task,

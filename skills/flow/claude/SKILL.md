@@ -4,10 +4,12 @@ description: Plan, develop, and review a change with phase guidance, fresh agent
 ---
 
 Run the flow with `$ARGUMENTS`. An empty argument means offer unfinished plans or
-start a new flow.
+start a new flow. A new flow starts with the problem step; choose the profile
+only after it.
 
 Use Claude's native Agent tool for fresh implementation and independent review
-agents, or Codex through `delegate-to-codex` for roles the user assigns to it. Give each agent the exact checkout, relevant contract, task, and file
+agents, or Codex through `delegate-to-codex` when the chosen model preset is
+`codex`. Give each agent the exact checkout, relevant contract, task, and file
 boundaries.
 
 Read [the coordinator instructions](references/coordinator.md),

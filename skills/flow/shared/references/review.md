@@ -2,11 +2,10 @@
 
 Before the first code review, the coordinator proposes a concrete review plan to
 the user: what changed, which risks deserve a separate reviewer, and which can
-be covered together. Include a concrete available model and reasoning effort
-for each proposed reviewer, with a short reason where the choice matters. Wait
-for the user's selection or agreement on both the reviewers and their model
-settings before launching them. The development choice is not automatically
-the review choice. Risks to consider: behavior across supported entry paths
+be covered together. With it, ask for the reviewers' model as in
+[coordinator.md](coordinator.md#choosing-a-model); one choice covers all
+reviewers of the round unless the user wants otherwise. Wait for agreement on
+both before launching them. Risks to consider: behavior across supported entry paths
 (completeness, logic, reliability, component connections), test quality,
 security, performance, and code quality. Add a specialist only when the change
 gives it a real question.
@@ -41,8 +40,4 @@ Broaden review when a fix changes shared behavior. When another broad round has
 uncertain value or the same findings keep returning, ask the user instead of
 looping.
 
-Reuse a confirmed reviewer's model and effort for the same focus when they still
-fit; include any new reviewer or changed setting in the next proposal to the
-user. Apply selections through the agent invocation. If a selected combination
-is unavailable, return to the user with an alternative instead of silently
-falling back.
+Reuse the reviewers' chosen preset in later rounds unless the user changes it.

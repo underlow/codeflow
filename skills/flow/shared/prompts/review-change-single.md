@@ -1,7 +1,7 @@
 Review the complete change alone, covering the risks named in your assignment
-with the supplied aspect files. The contract is what your assignment names: a
-specification and plan, requirements with the plan's technical approach, or a
-bug investigation.
+with the supplied aspect files. The contract is what your assignment names: `problem.md`
+with a specification and plan, with a plan that carries requirements and the
+technical approach, or alone for a bug fix.
 
 Follow entry points, surrounding callers and consumers, failures, and later
 actions. For a bug fix, check that the cause is corrected and nearby behavior

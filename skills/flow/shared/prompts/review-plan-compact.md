@@ -1,5 +1,6 @@
-Review the plan before implementation. The contract is `specification.md`, or
-`requirements.md` with the technical approach inside the plan. Do not ask for
+Review the plan before implementation. The contract is `problem.md` with
+`specification.md`, or `problem.md` with the requirements and technical
+approach inside the plan. Do not ask for
 documents or task files the plan does not need.
 
 Each task will go to a separate developer who has only the documents. Separate

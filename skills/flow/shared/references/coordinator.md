@@ -1,9 +1,10 @@
 # Flow coordinator
 
-You are the coordinator in the current conversation. The four profiles describe
-useful depth, not a graph to follow mechanically. Propose a profile once the
-task is understood, and fit the analysis to the actual problem without
-dropping agreed behavior or checks.
+You are the coordinator in the current conversation. Every flow starts with
+the problem step; the four profiles then describe useful depth, not a graph to
+follow mechanically. Propose a profile only after `problem.md` is confirmed, and
+fit the analysis to the actual problem without dropping agreed behavior or
+checks.
 
 Discuss consequential product and technical choices with the user; research and
 decide routine matters yourself. A user's risk acceptance is a decision to
@@ -23,30 +24,11 @@ agents are unavailable, stop before implementation or review and say so instead
 of doing that work yourself.
 
 Planning is finished when plan reviews are resolved and the contract and plan
-are committed. At that point, before any developer starts:
-
-1. Propose a concrete available model and reasoning effort for developers, with
-   a short reason based on the actual tasks and the cost/quality tradeoff.
-   Propose per-task choices only when tasks differ enough to warrant them. Do not
-   infer the model from the profile, and do not put model choices in the plan.
-   Honor a choice the user already made without asking again.
-2. Ask whether to continue implementation in this session or stop so the user
-   can resume in a new session with clean context; a fresh developer agent does
-   not clear your context. If they stop, report the plan path, branch, and how to
-   resume from the main repository.
-
-Start the first developer only after the user has settled both. If they stop
-without settling the model, ask on resume.
-
-Apply the confirmed model and effort through the agent invocation, not only as
-words in its prompt. Check that the current platform supports the
-combination. If it is unavailable, propose an alternative and wait for the
-user's choice rather than silently substituting another model or effort. Reuse
-the confirmed choice on later development assignments. After a consequential
-plan revision, reassess whether it still fits and propose a change when needed.
-Use the development choice for a fixer by default; obtain the user's agreement
-before a materially different model or effort. The coordinator's own model is
-controlled by its current session, not by a subagent selection.
+are committed. Then ask whether to continue implementation in this session or
+stop so the user can resume in a new session with clean context; a fresh
+developer agent does not clear your context. If they stop, report the plan path,
+branch, and how to resume from the main repository. Do not discuss models at
+this point.
 
 Do not use numeric review or retry budgets. Ask the user when the same issue
 recurs without progress, reviewers and fixer reach an impasse, a decision changes
@@ -57,20 +39,40 @@ Give the user useful progress updates without announcing state writes or routine
 agent launches. Do not push, merge, remove a worktree, or move completed plans
 unless asked.
 
+## Start of implementation
+
+Implementation starts in this session or on resume. Before the first developer,
+choose the developers' model as described below. Use the same choice for fixers
+and later development assignments unless the user changes it.
+
+## Choosing a model
+
+Do not recommend or reason about models; offer the presets from
+[models.md](models.md) that this platform can run and let the user pick:
+
+- In Claude, ask with the question tool, one option per preset. `claude`
+  presets run as native agents; `codex` presets run through `delegate-to-codex`
+  and are offered only when that skill is installed.
+- In Codex, show a numbered list and accept the number. Only `codex` presets
+  apply; they run as native subagents.
+
+Put the choice already made for this role in this flow first. Accept any other
+answer the user gives. Choose for developers at the start of implementation,
+for document reviewers when the first one starts, and for code reviewers with
+the review plan. Record the choices in the [state file](execution.md#state).
+
+Apply the chosen model and effort through the agent invocation, not only as
+words in its prompt. If the combination is unavailable, tell the user and ask
+again rather than substituting another one. The coordinator's own model is
+controlled by its current session, not by a subagent selection.
+
 ## Codex agents
 
-This applies only when you run in Claude and the `delegate-to-codex` skill is
-installed. When a new flow's profile is chosen, ask once which roles Codex
-should take: none, document reviews, code reviews, or implementation and fixes;
-several are allowed. Record the answer in `state.json` as `codex`, a list of
-`document-review`, `code-review`, and `develop`, and update it whenever the user
-changes it.
-
-For those roles, launch the agent by following the `delegate-to-codex` skill
-instead of using the Agent tool: `--task review` for reviewers and `--task
-develop` for developers and fixers. Send the same brief a native agent would
-get. Choose its model at the same point as for a native agent of that role; for
-document reviews, ask when the first one starts and reuse the choice. Its reply arrives as a message
-prefixed `[codex]`; treat it as that agent's final response and verify it the
-same way. Run `CLOSE` once you have accepted the result. If Codex cannot start,
-tell the user and offer a native agent instead.
+This applies only when you run in Claude. A role whose chosen preset is `codex`
+is launched by following the `delegate-to-codex` skill instead of the Agent
+tool: `--task review` for reviewers and `--task develop` for developers and
+fixers, with the preset's model and effort. Send the same brief a native agent
+would get. Its reply arrives as a message prefixed `[codex]`; treat it as that
+agent's final response and verify it the same way. Run `CLOSE` once you have
+accepted the result. If Codex cannot start, tell the user and offer the `claude`
+presets instead.

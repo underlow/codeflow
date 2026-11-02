@@ -7,18 +7,17 @@ argument may name a plan directory in any worktree, a description file, or a
 project document with a stage ID, such as `docs/projects/app.md S12`; ask about
 an argument that matches none. Without an argument, look for unfinished plans in
 `docs/plans/` of every worktree and show each one's feature, profile, phase,
-branch, and absolute path. A plan is recognized by its `state.json`. Completed
-and cancelled plans are terminal. A backlog item file as the request is the
-flow's source document.
+branch, and absolute path. A plan is recognized by its `state.txt`, or
+`state.json` in older plans. Completed and cancelled plans are terminal. A
+backlog item file as the request is the flow's source document.
 
-For a new request, first discuss the task with the user and inspect the
-repository until the problem, the desired result, and the rough size are clear.
-If the work is more than two weeks for a developer who knows the code, offer to
-split it into `project` stages or separate flows. Only then propose a profile
-with a short reason and let the user choose; do not ask for it earlier. Until
-the user confirms the first contract document, create no branch, plan directory,
-state, or commit; keep experiments outside the repository or remove them. On
-that confirmation, start the work:
+A new request starts with the problem step from [phases.md](phases.md); do not
+ask for a profile before `problem.md` is confirmed. If the work is more than two
+weeks for a developer who knows the code, offer to split it into `project`
+stages or separate flows. Until the user confirms `problem.md` and either
+chooses the profile or agrees that no change is warranted, create no branch,
+plan directory, state, or commit; keep experiments outside the repository or
+remove them. Then start the work:
 
 1. Choose a `flow/<slug>` branch in the current checkout by default, adding a
    suffix if the name is taken. If the user's uncommitted changes would overlap,
@@ -28,9 +27,9 @@ that confirmation, start the work:
 2. For a backlog item, move it into the plan directory as `backlog-item.md` and
    commit only that move on the current branch, so other checkouts stop
    offering it.
-3. Create the branch or worktree, write the document and `state.json`, and
-   commit them. Record the item's original path and the branch from step 2 as
-   `backlog` in `state.json`.
+3. Create the branch or worktree, write the document and `state.txt`, and
+   commit them. Record the item's original path and the branch from step 2 in
+   the `backlog` line.
 
 In a worktree, pass its absolute path to every tool and agent.
 
@@ -41,7 +40,7 @@ documents.
 ## Plan directory
 
 Each plan lives in `docs/plans/<date>-<slug>/` and holds only the contract
-documents, `plan.md` with optional `tasks/`, `state.json`, `backlog-item.md`
+documents, `plan.md` with optional `tasks/`, `state.txt`, `backlog-item.md`
 when taken from the backlog, and `findings.md` when needed. Routine progress
 lives in the conversation and Git history.
 
@@ -52,31 +51,28 @@ developer's completed task; and the outcome with the completion state.
 
 ## State
 
-You alone write `state.json`, atomically, after the work it records exists. It
-holds `profile` and `phase`; `task` only while a task is active; `status` only
-for `paused`, `blocked`, `complete`, or `cancelled`; `codex` with the roles
-assigned to Codex, if any; `backlog` for a taken backlog item; and a reviewed
-commit when you need to know whether later code invalidated a clean review.
-Derive worktree and branch from Git. The base of the change is the parent of the
-first commit that added the plan directory:
-`git rev-parse "$(git rev-list --reverse HEAD -- docs/plans/<plan> | head -1)^"`.
+You alone write `state.txt`, after the work it records exists: a few plain
+`key: value` lines that you read whole. Record what resume needs and Git cannot
+show, for example:
 
-After the user confirms development agent settings, store them as
-`development_agent` with `platform`, `model`, and `effort`, plus an optional
-`tasks` object for per-task exceptions the user chose. If the user stops after
-confirming a review plan but before reviewers start, keep the pending reviewer
-choices with their scope and commit; discard them when the scope changes or the
-review starts. Model choices never go into the contract or plan.
-
-Example after stopping at the committed plan:
-
-```json
-{
-  "profile": "medium",
-  "phase": "implementation",
-  "status": "paused"
-}
+```text
+profile: medium
+phase: implementation
+status: paused
+task: T2
+developer: codex sol low
+code reviewers: claude opus medium
+reviewed: 537f44de53
+project: docs/projects/mvp.md S4
+backlog: docs/backlog/2026-10-24-item.md on master
 ```
+
+Use `status` only for `paused`, `blocked`, `complete`, or `cancelled`. Derive
+worktree and branch from Git. The base of the change is the parent of the first
+commit that added the plan directory:
+`git rev-parse "$(git rev-list --reverse HEAD -- docs/plans/<plan> | head -1)^"`.
+Model choices never go into the contract or plan. Older plans have `state.json`
+instead; read it the same way and write `state.txt` when updating them.
 
 `findings.md` holds unresolved findings, their evidence, and user-accepted
 dispositions only when they must survive a session. Keep one current file and
@@ -84,8 +80,8 @@ remove findings once resolved.
 
 ## Complete a flow
 
-Before marking a flow complete, add a concise outcome to `plan.md` or the
-analysis document: what was delivered or why no change was warranted, links to
+Before marking a flow complete, add a concise outcome to `plan.md` or
+`problem.md`: what was delivered or why no change was warranted, links to
 the relevant commits, actual verification, material limits, and any implication
 for dependent work. Then write the completion state and commit both.
 
@@ -102,7 +98,8 @@ relevant commits, and determine what actually finished; the state file may be
 stale. Rerun any check whose result is not retained. If an agent may still be
 running, account for it first. Ask only what cannot be inferred.
 
-When resuming at implementation, use the stored development settings, or ask for
-them if absent or unavailable on this platform. If code changed after a clean
+When resuming at implementation, use the recorded developer choice, or choose
+as described in [coordinator.md](coordinator.md#choosing-a-model) if it is
+absent or unavailable on this platform. If code changed after a clean
 review, reassess the affected scope before delivery. Do not push, merge, delete
 branches or worktrees, or move plan directories as routine cleanup.

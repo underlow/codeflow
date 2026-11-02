@@ -18,7 +18,7 @@ completed and cancelled ones, and compare their contracts or outcomes with the
 current stage goal, not just the IDs. Resume unfinished work instead of
 duplicating it. If the stage is already complete, show its outcome and ask
 whether the user wants to inspect it or reopen the work. Reopened work is a new
-flow that references the earlier result in its analysis document; never rewrite
+flow that references the earlier result in its `problem.md`; never rewrite
 a finished flow or silently restart a cancelled one. A materially different goal
 needs a new stage ID agreed in the project plan first.
 
@@ -26,10 +26,10 @@ needs a new stage ID agreed in the project plan first.
 
 Agreement on a roadmap does not establish that a reported bug exists, a proposed
 cause is correct, a change is necessary, or a dependency is required. Verify the
-stage's premises during analysis, including whether required earlier results
-exist in this checkout. Analysis may show that no change is warranted: present
+stage's premises in the problem step, including whether required earlier
+results exist in this checkout. Analysis may show that no change is warranted: present
 the evidence, agree the conclusion with the user, record it with its evidence and
-limits in the analysis document, and complete the flow without implementation or
+limits in `problem.md`, and complete the flow without implementation or
 review. Unavailable reproduction does not prove there is no defect. If the result
 affects later stages, explain the implication without changing them.
 
@@ -37,9 +37,9 @@ Choose the profile with the user; do not infer it from the roadmap.
 
 ## Register the started work
 
-When the flow starts its work, the initial `state.json` also holds `project`
-(repository-relative path) and `stage`, so a later project session can find the
-work. Keep them in every later state update.
+When the flow starts its work, the initial state file also holds the `project`
+line with the repository-relative path and stage ID, so a later project session
+can find the work. Keep it in every later state update.
 
 ## Complete the stage
 

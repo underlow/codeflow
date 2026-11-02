@@ -1,17 +1,16 @@
 Agree behavior and design for a medium feature in one document,
-`specification.md`, with one confirmation rather than three. Keep detail
-proportional to the feature.
+`specification.md`, with one confirmation rather than two. Scope comes from the
+agreed `problem.md`; do not restate it. Keep detail proportional to the feature.
 
-1. Purpose and scope: original request, intended outcome, included and excluded work.
-2. Requirements: R IDs, observable behavior, important failures and later
+1. Requirements: R IDs, observable behavior, important failures and later
    actions, compatibility, and behavior to preserve.
-3. Design: affected components, their responsibilities and interactions, state
+2. Design: affected components, their responsibilities and interactions, state
    owners and lifetime where relevant, shared contracts, consequential choices,
    and how success and important failures produce the required behavior.
-4. Acceptance examples: A ID, initial state, action, expected result, and R IDs.
-5. Changes needing approval, as described in
+3. Acceptance examples: A ID, initial state, action, expected result, and R IDs.
+4. Changes needing approval, as described in
    [approval.md](../references/approval.md).
-6. Agreement: current confirmation and delegated local choices.
+5. Agreement: current confirmation and delegated local choices.
 
 Requirements say what happens; the design explains the mechanism rather than
 paraphrasing the requirement. Leave tasks, private helpers, and signatures to

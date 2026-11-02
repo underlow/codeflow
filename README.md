@@ -107,6 +107,7 @@ The profiles are `full`, `medium`, `small`, and `bugfix`. See the
 [prompt library](skills/flow/shared/prompts/) holds the analysis,
 planning, implementation, and review criteria.
 
-After agreeing on a plan, `flow` proposes a model and reasoning effort for its
-developer agents and waits for your choice. It proposes reviewer models and
-effort alongside the review plan, once the actual change is known.
+After agreeing on a plan, `flow` asks whether to continue in this session or a
+new one. Developer and reviewer models are picked from fixed presets in
+[models.md](skills/flow/shared/references/models.md) when those agents are first
+needed.
