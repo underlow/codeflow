@@ -8,12 +8,46 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import activity
 import install
 
 
 class ActivityTests(unittest.TestCase):
+    def test_computer_tool_names_and_code_mode(self):
+        for name in ("mcp__cua_repl.js", "mcp__cua_repl__js", "cua_repl.js", "computer", "computer_use"):
+            self.assertEqual(activity.tool_activity(name, {}), "Computer Use")
+        code = 'await tools.exec_command({cmd:"git diff"}); await tools.mcp__cua_repl__js({code:"await tab.click()"});'
+        self.assertEqual(activity.tool_activity("functions.exec", {"code": code}), "Computer Use")
+        self.assertNotEqual(activity.tool_activity("exec_command", {"cmd": "rg computer_use README.md"}), "Computer Use")
+
+    def test_computer_use_has_priority_until_its_result(self):
+        state = {}
+        cua = self.event("PreToolUse", key="cua")
+        cua.update(tool_name="mcp__cua_repl.js", tool_input={"code": "await cua.getState()"})
+        self.assertEqual(activity.transition(state, cua, "left", 1), "Computer Use")
+        self.assertEqual(activity.transition(state, self.event("PreToolUse"), "right", 2), "Computer Use (+1)")
+        self.assertEqual(activity.transition(state, dict(cua, hook_event_name="PostToolUse"), "left", 3), "Тесты · test")
+        self.assertEqual(activity.transition(state, self.event("PostToolUse"), "right", 4), "Думаю")
+
+    def test_computer_use_red_and_plain_text_reset_at_control_boundary(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            env = dict(AGTERM_SESSION_ID="session", AGTERM_SOCKET="/specific.sock",
+                       AGTERM_ACTIVITY_STATE_DIR=tmp, AGTERMCTL=sys.executable)
+            event = self.event("PreToolUse")
+            event.update(tool_name="mcp__cua_repl.js", tool_input={})
+            with patch.object(activity.subprocess, "run") as send:
+                send.return_value.returncode = 0
+                activity.run(event, env)
+                args = send.call_args.args[0]
+                self.assertIn('^[Computer Use](color: "red")', args)
+                self.assertIn("--markdown", args)
+                activity.run(dict(event, hook_event_name="PostToolUse"), env)
+                args = send.call_args.args[0]
+                self.assertIn("Думаю", args)
+                self.assertNotIn("--markdown", args)
+
     def test_utf8_limit_with_four_byte_characters(self):
         for text, limit in (("😀" * 200, 130), ("a" * 508 + "😀b", 1000),
                             ("a" * 509 + "😀", 1000)):

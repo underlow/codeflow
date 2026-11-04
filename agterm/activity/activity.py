@@ -122,7 +122,20 @@ def shell_activity(command):
     return clean(" / ".join(labels[:2])) if labels else "Выполняю команду"
 
 
+def computer_tool(name):
+    # Match tool namespaces, not mentions of computer use in arbitrary arguments.
+    return bool(re.fullmatch(r"(?:mcp__)?cua_repl(?:__|\.)[A-Za-z0-9_]+", name)) or name in {
+        "computer", "computer_use", "computer.use",
+    }
+
+
+def has_computer_activity(text):
+    return "Computer Use" in text.split(" / ")
+
+
 def tool_activity(name, data):
+    if computer_tool(name):
+        return "Computer Use"
     short = name.split(".")[-1]
     data = data if isinstance(data, dict) else {"code" if short in {"exec", "js_repl"} else "command": data}
     if short in {"exec", "js_repl"} and "code" not in data and isinstance(data.get("input"), str):
@@ -153,6 +166,9 @@ def tool_activity(name, data):
     if short in {"exec", "js_repl"} and isinstance(data.get("code"), str):
         # Codex code-mode: extract string literals passed to nested calls. Never eval JS.
         code = data["code"]
+        nested = re.findall(r"tools\.([A-Za-z0-9_]+)\s*\(", code)
+        if any(computer_tool(n) for n in nested):
+            return "Computer Use"
         quoted = r'''("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')'''
         labels = []
         for match in re.finditer(r'(?:"?(?:cmd|command)"?)\s*:\s*' + quoted, code):
@@ -245,7 +261,8 @@ def transition(state, payload, pane, now):
     # Only Claude's real permission_prompt notification sets the waiting label.
     pending = [tool for item in panes.values() for tool in item["tools"].values()]
     if pending:
-        latest = max(pending, key=lambda t: t["at"])
+        computer = [t for t in pending if has_computer_activity(t["text"])]
+        latest = max(computer or pending, key=lambda t: t["at"])
         # A real prompt in this pane takes precedence over its pending tool.
         waiting = any(p.get("text") == "Жду подтверждения" for p in panes.values())
         text = "Жду подтверждения" if waiting else latest["text"]
@@ -291,7 +308,13 @@ def run(payload, env=None):
         state["event_count"] = state.get("event_count", 0) + 1
         previous = state.get("shown")
         if previous != text or time.time() - state.get("shown_at", 0) > 30:
-            args = [binary, "session", "info"] + ([text, "--hide-after", "600"] if text else ["--clear"])
+            if text.startswith("Computer Use"):
+                # Only our fixed label and generated count enter markdown.
+                display = '^[%s](color: "red")' % text
+                options = [display, "--markdown", "--hide-after", "600"]
+            else:
+                options = [text, "--hide-after", "600"] if text else ["--clear"]
+            args = [binary, "session", "info"] + options
             args += ["--target", sid, "--socket", socket]
             result = subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=1)
             if result.returncode == 0:

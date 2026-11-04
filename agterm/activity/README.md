@@ -7,6 +7,12 @@ permission decisions, or replace agterm's status hooks.
 
 Examples: `Читаю · Auth.kt`, `Редактирую · Auth.kt`, `Ищу в коде`,
 `Тесты · :app:test`, `git diff`, `Думаю`, `Готово`.
+Computer-control calls (`mcp__cua_repl.js`, including the flattened MCP name
+inside code-mode calls, and `computer`/`computer_use`) show `Computer Use` in red
+using agterm's inline markdown. This activity takes precedence over other pending
+tools until its result arrives; the next ordinary update restores plain text.
+It marks the tool invocation, including any approval delay, rather than claiming
+that a human permission prompt is open. It does not detect browser or OS dialogs.
 Shell commands are parsed, never executed by the classifier; command arguments,
 HTTP headers, prompt text and tool responses are not copied into the sidebar.
 
