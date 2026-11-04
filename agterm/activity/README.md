@@ -18,7 +18,12 @@ HTTP headers, prompt text and tool responses are not copied into the sidebar.
 
 Parallel tools and split panes share a locked row state in the user's temporary
 directory. A finished tool cannot clear another pending tool. Subagent events
-and Codex memory-consolidation transcripts are ignored. Lines expire after ten
+and Codex memory-consolidation transcripts are ignored.
+Nested CLI agents launched through scripts (including ephemeral `codex exec`)
+are also ignored: the hook checks process ancestry by executable name, so they
+cannot overwrite the interactive parent's row through inherited agterm variables.
+If process inspection is unavailable, the existing transcript filters still apply.
+Lines expire after ten
 minutes without an update, including long-running tools; the hook needs no
 polling process. Stop means the answer is ready, not that the task succeeded.
 Codex PermissionRequest is not treated as a human prompt because Auto Review

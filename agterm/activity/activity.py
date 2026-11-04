@@ -191,6 +191,24 @@ def tool_activity(name, data):
     return detail("Инструмент", name.split("__")[-1])
 
 
+def nested_agent(processes, pid):
+    """Detect CLI agents launched by another CLI agent, through shells/scripts."""
+    parents = {}
+    for line in processes.splitlines():
+        fields = line.strip().split(None, 2)
+        if len(fields) == 3 and fields[0].isdigit() and fields[1].isdigit():
+            parents[int(fields[0])] = (int(fields[1]), Path(fields[2]).name)
+    seen, agents = set(), 0
+    while pid in parents and pid not in seen:
+        seen.add(pid)
+        pid, command = parents[pid]
+        if command in {"codex", "claude"}:
+            agents += 1
+            if agents > 1:
+                return True
+    return False
+
+
 def owned_event(payload):
     if payload.get("agent_id"):
         return False
@@ -208,6 +226,17 @@ def owned_event(payload):
                     return False
         except (OSError, ValueError):
             pass
+    # Batch scripts may launch independent `codex exec --ephemeral` processes.
+    # They inherit the pane address but have neither a subagent marker nor a
+    # transcript. Their lifecycle must not replace the interactive parent's row.
+    try:
+        processes = subprocess.check_output(
+            ["/bin/ps", "-axo", "pid=,ppid=,comm="], text=True,
+            stderr=subprocess.DEVNULL, timeout=1)
+        if nested_agent(processes, os.getpid()):
+            return False
+    except (OSError, subprocess.SubprocessError):
+        pass
     return True
 
 

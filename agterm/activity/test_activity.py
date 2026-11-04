@@ -15,6 +15,41 @@ import install
 
 
 class ActivityTests(unittest.TestCase):
+    def test_nested_cli_agents_through_batch_script(self):
+        processes = '''
+1 0 launchd
+10 1 /bin/zsh
+20 10 claude
+30 20 /bin/bash
+40 30 /usr/bin/python3
+50 40 /opt/homebrew/bin/codex
+60 50 /bin/sh
+70 60 /usr/bin/python3
+80 20 /bin/sh
+90 80 /usr/bin/python3
+100 10 /opt/homebrew/bin/codex
+110 100 /bin/sh
+120 110 /usr/bin/python3
+'''
+        self.assertTrue(activity.nested_agent(processes, 70))
+        self.assertFalse(activity.nested_agent(processes, 90))
+        self.assertFalse(activity.nested_agent(processes, 120))
+        # Missing ancestors and malformed/cyclic records must terminate safely.
+        self.assertFalse(activity.nested_agent('1 2 python3\n2 1 sh\nbad', 1))
+        with patch.object(activity.subprocess, "check_output", return_value=processes), patch.object(activity.os, "getpid", return_value=70):
+            for event in ("SessionStart", "UserPromptSubmit", "PreToolUse", "Stop", "SessionEnd"):
+                self.assertFalse(activity.owned_event(self.event(event)))
+
+    def test_nested_cli_event_does_not_touch_row_or_control_channel(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            env = dict(AGTERM_SESSION_ID="session", AGTERM_SOCKET="/specific.sock",
+                       AGTERM_ACTIVITY_STATE_DIR=tmp, AGTERMCTL=sys.executable)
+            processes = '1 0 claude\n2 1 python3\n3 2 codex\n4 3 python3'
+            with patch.object(activity.subprocess, "check_output", return_value=processes), patch.object(activity.os, "getpid", return_value=4), patch.object(activity.subprocess, "run") as send:
+                activity.run(self.event("SessionStart"), env)
+                send.assert_not_called()
+                self.assertEqual(list(Path(tmp).iterdir()), [])
+
     def test_computer_tool_names_and_code_mode(self):
         for name in ("mcp__cua_repl.js", "mcp__cua_repl__js", "cua_repl.js", "computer", "computer_use"):
             self.assertEqual(activity.tool_activity(name, {}), "Computer Use")
