@@ -22,7 +22,13 @@ and Codex memory-consolidation transcripts are ignored.
 Nested CLI agents launched through scripts (including ephemeral `codex exec`)
 are also ignored: the hook checks process ancestry by executable name, so they
 cannot overwrite the interactive parent's row through inherited agterm variables.
-If process inspection is unavailable, the existing transcript filters still apply.
+Ephemeral hooks with an explicit null transcript path are rejected before process
+inspection, including when their sandbox denies `ps`.
+Claude background shells are tracked by `backgroundTaskId` and completion
+notifications in its transcript. At Stop, unfinished shells show `Жду скрипт`;
+ordinary foreground tools still show their current activity. Transcript reading
+is incremental and retains only task IDs and a byte offset. Existing running
+shells are recovered on the next hook event. Monitor tasks are not shell jobs.
 Lines expire after ten
 minutes without an update, including long-running tools; the hook needs no
 polling process. Stop means the answer is ready, not that the task succeeded.

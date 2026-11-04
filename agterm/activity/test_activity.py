@@ -15,6 +15,53 @@ import install
 
 
 class ActivityTests(unittest.TestCase):
+    def test_ephemeral_hooks_are_ignored_even_when_ps_is_denied(self):
+        with patch.object(activity.subprocess, "check_output", side_effect=PermissionError) as ps:
+            for name in ("SessionStart", "UserPromptSubmit", "PreToolUse", "Stop", "SessionEnd"):
+                self.assertFalse(activity.owned_event(dict(self.event(name), transcript_path=None)))
+            ps.assert_not_called()
+
+    def test_background_wait_survives_intervening_tools_and_turns(self):
+        state = {}
+        activity.transition(state, self.event("PreToolUse"), "left", 1)
+        post = dict(self.event("PostToolUse"), tool_response={"stdout": "", "backgroundTaskId": "job"})
+        activity.transition(state, post, "left", 2)
+        self.assertEqual(activity.transition(state, self.event("Stop"), "left", 3), "Жду скрипт")
+        activity.transition(state, self.event("UserPromptSubmit", turn="t2"), "left", 4)
+        activity.transition(state, self.event("PreToolUse", turn="t2"), "left", 5)
+        activity.transition(state, self.event("PostToolUse", turn="t2"), "left", 6)
+        self.assertEqual(activity.transition(state, self.event("Stop", turn="t2"), "left", 7), "Жду скрипт")
+        self.assertEqual(activity.transition(state, self.event("Stop", turn="t2"), "left", 8, [("end", "job")]), "Готово")
+
+    def test_background_transcript_recovery_and_incremental_completion(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            transcript = Path(tmp) / ".claude/projects/session.jsonl"
+            transcript.parent.mkdir(parents=True)
+            rows = [
+                {"type": "user", "toolUseResult": {"backgroundTaskId": "finished", "stdout": "private"}},
+                {"type": "user", "message": {"content": [{"type": "text", "text": '<task-notification><task-id>finished</task-id><status>completed</status></task-notification>'}]}},
+                {"type": "user", "toolUseResult": {"backgroundTaskId": "running"}},
+                {"type": "user", "toolUseResult": {"backgroundTaskId": "cancelled"}},
+                {"type": "user", "toolUseResult": {"task_id": "cancelled", "message": "Successfully stopped task: cancelled"}},
+                {"type": "user", "toolUseResult": {"taskId": "monitor"}},
+            ]
+            transcript.write_text(''.join(json.dumps(row) + '\n' for row in rows))
+            state = {}
+            event = dict(self.event("Stop"), transcript_path=str(transcript))
+            updates = activity.read_background_updates(state, "left", event)
+            self.assertEqual(activity.transition(state, event, "left", 1, updates), "Жду скрипт")
+            self.assertEqual(state['panes']['left']['background'], {"running": True})
+            self.assertEqual(activity.read_background_updates(state, "left", event), [])
+            notice = {"type": "user", "message": {"content": '<task-notification><task-id>running</task-id><status>failed</status></task-notification>'}}
+            with transcript.open('a') as stream:
+                stream.write(json.dumps(notice))
+            self.assertEqual(activity.read_background_updates(state, "left", event), [])
+            with transcript.open('a') as stream:
+                stream.write('\n')
+            updates = activity.read_background_updates(state, "left", event)
+            self.assertEqual(activity.transition(state, event, "left", 2, updates), "Готово")
+            self.assertNotIn('private', json.dumps(state))
+
     def test_nested_cli_agents_through_batch_script(self):
         processes = '''
 1 0 launchd

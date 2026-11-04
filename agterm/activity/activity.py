@@ -210,6 +210,10 @@ def nested_agent(processes, pid):
 
 
 def owned_event(payload):
+    # Native ephemeral Codex hooks explicitly have no transcript. Process
+    # inspection can be denied inside their sandbox, so reject them first.
+    if "transcript_path" in payload and payload["transcript_path"] is None:
+        return False
     if payload.get("agent_id"):
         return False
     transcript = payload.get("transcript_path")
@@ -240,8 +244,62 @@ def owned_event(payload):
     return True
 
 
-def transition(state, payload, pane, now):
-    """Pure state reducer; rows aggregate independent tool calls and split panes."""
+def background_updates(row):
+    """Extract task IDs only; never retain command output or assistant prose."""
+    result = row.get("toolUseResult", {})
+    if isinstance(result, dict) and result.get("backgroundTaskId"):
+        yield ("start", str(result["backgroundTaskId"]))
+    if isinstance(result, dict):
+        if result.get("task_id") and str(result.get("message", "")).startswith("Successfully stopped task:"):
+            yield ("end", str(result["task_id"]))
+        task = result.get("task", {})
+        if isinstance(task, dict) and task.get("task_id") and task.get("status") in {"completed", "failed", "killed", "stopped"}:
+            yield ("end", str(task["task_id"]))
+    content = row.get("message", {}).get("content", [])
+    if isinstance(content, str):
+        content = [{"type": "text", "text": content}]
+    for item in content if isinstance(content, list) else []:
+        if not isinstance(item, dict) or item.get("type") != "text":
+            continue
+        for notification in re.findall(r"<task-notification>(.*?)</task-notification>", item.get("text", ""), re.S):
+            task = re.search(r"<task-id>([^<]+)</task-id>", notification)
+            status = re.search(r"<status>(completed|failed|killed|stopped)</status>", notification)
+            if task and status:
+                yield ("end", task[1])
+
+
+def read_background_updates(state, pane, payload):
+    path = payload.get("transcript_path")
+    # Only Claude transcripts use this schema. Codex transcripts remain untouched.
+    if not path or "/.claude/" not in path:
+        return []
+    cursors = state.setdefault("transcripts", {})
+    cursor = cursors.get(pane, {})
+    updates = []
+    try:
+        with open(path, "rb") as stream:
+            if cursor.get("path") == path and cursor.get("offset", 0) <= os.fstat(stream.fileno()).st_size:
+                stream.seek(cursor.get("offset", 0))
+            while True:
+                offset = stream.tell()
+                line = stream.readline()
+                if not line or not line.endswith(b"\n"):
+                    stream.seek(offset)
+                    break
+                try:
+                    row = json.loads(line)
+                    if row.get("type") in {"user", "api-request-blob"}:
+                        updates.extend(background_updates(row))
+                except (ValueError, TypeError):
+                    continue
+            cursors[pane] = {"path": path, "offset": stream.tell()}
+    except OSError:
+        pass
+    return updates
+
+
+def transition(state, payload, pane, now, background=()):
+    """Pure reducer; aggregate independent tool calls, background jobs and panes."""
     event = payload.get("hook_event_name")
     if event not in {"SessionStart", "SessionEnd", "UserPromptSubmit", "PreToolUse", "PostToolUse", "PostToolUseFailure", "Stop", "Interrupt", "PreCompact", "Notification"}:
         return None
@@ -260,6 +318,12 @@ def transition(state, payload, pane, now):
         if current.get("turn") and turn != current["turn"]:
             return None
         current["turn"] = turn
+    jobs = current.setdefault("background", {})
+    for action, task in background:
+        if action == "start":
+            jobs[task] = True
+        else:
+            jobs.pop(task, None)
     if event in {"SessionStart", "UserPromptSubmit"}:
         current.update(tools={}, turn=turn, text="Работаю" if event == "UserPromptSubmit" else "Готов к работе")
     elif event == "PreToolUse":
@@ -272,9 +336,12 @@ def transition(state, payload, pane, now):
         key = payload.get("tool_use_id")
         if key:
             current["tools"].pop(key, None)
+        response = payload.get("tool_response", {})
+        if event == "PostToolUse" and isinstance(response, dict) and response.get("backgroundTaskId"):
+            jobs[str(response["backgroundTaskId"])] = True
         current["text"] = "Ошибка" if event == "PostToolUseFailure" else "Думаю"
     elif event == "Stop":
-        current.update(tools={}, text="Готово")
+        current.update(tools={}, text="Жду скрипт" if jobs else "Готово")
     elif event == "Interrupt":
         current.update(tools={}, text="Что не так?")
     elif event == "SessionEnd":
@@ -330,7 +397,8 @@ def run(payload, env=None):
             state = json.load(stream)
         except ValueError:
             state = {}
-        text = transition(state, payload, pane, time.time())
+        updates = read_background_updates(state, pane, payload)
+        text = transition(state, payload, pane, time.time(), updates)
         if text is None:
             return
         state["last_event"] = payload.get("hook_event_name")
