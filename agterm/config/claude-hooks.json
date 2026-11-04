@@ -1,0 +1,63 @@
+{
+  "Notification": [
+    {
+      "matcher": "permission_prompt",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "'@HOME@/.config/agterm/agent-status/agterm-claude-status.sh' blocked"
+        }
+      ]
+    }
+  ],
+  "PermissionRequest": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "'@HOME@/.config/agterm/agent-status/agterm-claude-status.sh' blocked"
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "'@HOME@/.config/agterm/agent-status/agterm-claude-status.sh' active --blink"
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 ~/.local/bin/agterm-annotate/save-transcript-path.py",
+          "timeout": 5,
+          "async": true
+        }
+      ]
+    },
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "'@HOME@/.config/agterm/agent-status/agterm-claude-status.sh' completed --auto-reset"
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "'@HOME@/.config/agterm/agent-status/agterm-claude-status.sh' active --blink"
+        }
+      ]
+    }
+  ]
+}

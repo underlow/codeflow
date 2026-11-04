@@ -1,0 +1,11 @@
+{
+  "inactivePaneMuteStrength" : 4,
+  "newSessionDirectory" : "currentSession",
+  "restoreMode" : "none",
+  "sidebarBackgroundShift" : 6,
+  "sidebarFontSize" : 14,
+  "theme" : "agterm",
+  "toolbarMode" : "normal",
+  "welcomeShown" : true,
+  "workspaceRowClickExpands" : false
+}

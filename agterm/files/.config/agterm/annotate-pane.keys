@@ -1,0 +1,4 @@
+
+
+# Exit the main view on Esc; modal interfaces handle Esc first.
+map esc quit
