@@ -142,6 +142,9 @@ def tool_activity(name, data):
         data = dict(data, code=data["input"])
     lower = name.lower()
     if short in {"Bash", "exec_command", "shell_command", "shell"}:
+        description = data.get("description")
+        if isinstance(description, str) and clean(description):
+            return clean(description)
         cmd = data.get("command", data.get("cmd", ""))
         if isinstance(cmd, list):
             cmd = shlex.join(cmd)

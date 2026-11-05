@@ -15,6 +15,10 @@ It marks the tool invocation, including any approval delay, rather than claiming
 that a human permission prompt is open. It does not detect browser or OS dialogs.
 Shell commands are parsed, never executed by the classifier; command arguments,
 HTTP headers, prompt text and tool responses are not copied into the sidebar.
+For shell tools, a nonempty string `description` takes precedence over command
+classification. It is shown in its original language, with control characters
+removed and the usual activity-line length limits applied. Missing or empty
+descriptions fall back to command classification.
 
 Parallel tools and split panes share a locked row state in the user's temporary
 directory. A finished tool cannot clear another pending tool. Subagent events

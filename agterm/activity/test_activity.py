@@ -15,6 +15,31 @@ import install
 
 
 class ActivityTests(unittest.TestCase):
+    def test_shell_description_reaches_activity_line(self):
+        event = self.event("PreToolUse")
+        event["tool_input"] = {
+            "command": "swift test",
+            "description": "Export orders for next words of other pairs",
+        }
+        self.assertEqual(activity.transition({}, event, "left", 1),
+                         "Export orders for next words of other pairs")
+
+    def test_shell_description_is_cleaned_and_bounded(self):
+        description = "Export\norders\x00 " + "😀" * 200
+        label = activity.tool_activity("Bash", {"description": description})
+        self.assertTrue(label.startswith("Export orders "))
+        self.assertNotIn("\x00", label)
+        self.assertNotIn("\n", label)
+        self.assertLessEqual(len(label), 90)
+        self.assertLessEqual(len(label.encode("utf-8")), 512)
+
+    def test_unusable_shell_description_falls_back_to_command(self):
+        for description in (None, "", " \n\x00", 42, {"text": "title"}):
+            with self.subTest(description=description):
+                self.assertEqual(activity.tool_activity("Bash", {
+                    "command": "swift test", "description": description,
+                }), "Тесты · test")
+
     def test_ephemeral_hooks_are_ignored_even_when_ps_is_denied(self):
         with patch.object(activity.subprocess, "check_output", side_effect=PermissionError) as ps:
             for name in ("SessionStart", "UserPromptSubmit", "PreToolUse", "Stop", "SessionEnd"):
