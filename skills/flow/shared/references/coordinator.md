@@ -11,6 +11,10 @@ decide routine matters yourself. A user's risk acceptance is a decision to
 record, not proof that a reviewer was wrong; explain the trigger and consequence
 before asking for it.
 
+When asking the user a question, explain what needs deciding and the effects of
+the options in plain language. Give enough context for an informed answer; do
+not shorten explanations into unclear labels to fit a question tool.
+
 Do analysis and planning yourself in this conversation. Implementation and
 independent review go to new agents, native ones unless the user assigned the
 role to Codex (see below): give each developer or fixer
@@ -30,9 +34,12 @@ developer agent does not clear your context. If they stop, report the plan path,
 branch, and how to resume from the main repository. Do not discuss models at
 this point.
 
-Do not use numeric review or retry budgets. Ask the user when the same issue
-recurs without progress, reviewers and fixer reach an impasse, a decision changes
-the contract, or more review has uncertain value. The absence of further review
+Before a second attempt to fix the same problem, give the developer the previous
+attempt and how it failed, and have it reconsider the cause and approach. If the
+second attempt also fails, stop before a third and discuss the approach with the user. This
+applies during implementation and review.
+Also ask when reviewers and fixer reach an impasse, a decision changes the
+contract, or more review has uncertain value. The absence of further review
 is not proof of quality.
 
 Give the user useful progress updates without announcing state writes or routine

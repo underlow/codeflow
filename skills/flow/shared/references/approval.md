@@ -23,6 +23,6 @@ approval": what changes, why, the consequence, and how to roll it back. Write
 "none" when there are none. Bring each item to the user separately and record
 the approval beside it.
 
-A developer who needs such a change that is not approved reports
-`needs-decision`. A reviewer reports every such change in the diff that is not
-approved as a finding.
+A developer who needs such a change without approval explains the decision
+needed to the coordinator before making it. A reviewer reports every such change
+in the diff that is not approved as a finding.

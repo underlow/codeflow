@@ -13,10 +13,10 @@ one planned assignment for one developer. A *stage* is only a project stage.
 
 | Profile | Analysis and planning | Implementation and review |
 | --- | --- | --- |
-| `full` | After the problem, agree requirements with acceptance examples and design, then an ordered plan. Independent challenge is useful after each document. | Implement tasks; review a task result when later tasks depend on it; review the complete change with reviewers chosen by risk. |
-| `medium` | After the problem, agree one specification covering behavior and design, challenge it independently, then plan tasks. | Implement tasks; choose whole-change reviewers by risk. |
-| `small` | After the problem, agree a short plan with requirements, acceptance examples, and the technical approach. | Implement and review the change independently. |
-| `bugfix` | The problem holds the reproduction, cause, expected behavior, and correction scope; nothing more is needed. | Fix, verify the original failure and nearby behavior, then review independently. |
+| `full` | After the problem, agree requirements with acceptance examples and design, then an ordered plan. Review requirements, design, and plan independently. | Implement tasks; review a task result when later tasks depend on it; use at least two whole-change reviewers, then simplification review. |
+| `medium` | After the problem, discuss behavior, then design, in one specification; challenge it independently, then plan tasks. | Implement tasks; use at least two whole-change reviewers, then simplification review. |
+| `small` | After the problem, agree a short plan with requirements, acceptance examples, and the technical approach. | Implement and review the change independently, then simplification review. |
+| `bugfix` | The problem holds the reproduction, cause, expected behavior, and correction scope; nothing more is needed. | Fix, verify the original failure and nearby behavior, review independently, then simplification review. |
 
 ## Detailed prompts
 
@@ -24,8 +24,8 @@ The [prompts](../prompts/) hold the questions, document structure, and quality
 criteria for each kind of work; read the relevant prompt before doing or
 assigning that work. `coordinator` means you do it in this conversation. Other
 executors are new agents, native or Codex as described in
-[coordinator.md](coordinator.md#codex-agents). A developer or fixer reports `done`,
-`needs-decision`, or `blocked`; you decide what happens next.
+[coordinator.md](coordinator.md#codex-agents). A developer or fixer explains the
+result and any decision or help needed; you decide what happens next.
 
 | Phase and profile | Prompt | Executor |
 | --- | --- | --- |
@@ -43,11 +43,12 @@ executors are new agents, native or Codex as described in
 | Implementation | `implement` | developer |
 | | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
 | Bug correction | `fix-bug` | developer |
-| Whole-change review | `review-change` with selected `aspects/*`, always including `aspects/test-quality` when tests changed, or `review-change-single` for one combined reviewer | reviewer |
+| Whole-change review | `review-change` with selected `aspects/*`, always including `aspects/test-quality` when tests changed; `small` and `bugfix` may use `review-change-single` | reviewer |
 | Correct findings | `fix` | fixer |
+| After whole-change reviews and corrections, every profile | `review-simplification` | reviewer |
 
 Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or
-`review-change-single`; no aspect requires its own reviewer.
+`review-change-single`. Assign reviewers as described in [review.md](review.md).
 
 ## Analysis
 
@@ -93,8 +94,9 @@ one plan file does not make one task. A task is at most two days of work for a
 developer who knows the code; split a bigger one into steps that can each be
 checked. If the plan adds up to more than two weeks, offer to split the work
 into `project` stages or separate flows. Each task must be understandable
-without the planning conversation. Get an independent plan review when
-uncertainty, size, or integration risk warrants it. When the plan is final,
+without the planning conversation. For `full`, get an independent plan review;
+for other profiles, get one when uncertainty, size, or integration risk warrants
+it. When the plan is final,
 commit the remaining contract documents and the plan together, then follow the
 start of implementation in [coordinator.md](coordinator.md).
 
@@ -102,9 +104,9 @@ start of implementation in [coordinator.md](coordinator.md).
 
 Give each task to its own developer with the committed contract and plan, the
 exact task, and the checkout. Check the returned commit and result before
-dependent work. When a developer reports `needs-decision` or the plan proves
-wrong, keep valid work, revise the plan with the user, commit the revision, and
-recheck the development model before more implementation.
+dependent work. If the work requires changing the contract or plan, keep valid
+work, agree the changes with the user, commit the revision, and recheck the
+development model before more implementation.
 
 ## Review
 

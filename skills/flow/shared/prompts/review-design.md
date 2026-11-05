@@ -9,6 +9,11 @@ incompatible contracts, ownership gaps, and any narrowing or change of required
 behavior. When a shared mechanism is faulty, check the behaviors that depend on
 it. An unresolved product choice is a question for the user, not a design fix.
 
+Check that the component interaction diagram agrees with the explanation and
+that decisions about affected APIs, storage, compatibility, permissions, and
+dependencies are covered in the document. Report unnecessary layers or mechanisms
+with a simpler alternative that meets the same requirements.
+
 Do not demand line numbers, file inventories, private signatures, task order, or
 test bodies. Flag a new module boundary only when it adds a concrete maintenance
 or integration cost without hiding real complexity.

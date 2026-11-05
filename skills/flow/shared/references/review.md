@@ -1,14 +1,21 @@
 # Independent review
 
 Before the first code review, the coordinator proposes a concrete review plan to
-the user: what changed, which risks deserve a separate reviewer, and which can
-be covered together. With it, ask for the reviewers' model as in
+the user. For `medium` and `full`, assign at least two independent reviewers:
+
+- Behavior and integration, using `aspects/behavior`.
+- Design, code quality, and test quality, using `aspects/code-quality` and
+  `aspects/test-quality`.
+
+For `small` and `bugfix`, one combined reviewer may cover these concerns.
+Add specialists for concrete risks such as security and permissions, irreversible
+data changes, concurrency, or performance at the expected scale. Explain which
+risks need separate review and which the main reviewers can cover.
+
+With the plan, ask for the reviewers' model as in
 [coordinator.md](coordinator.md#choosing-a-model); one choice covers all
 reviewers of the round unless the user wants otherwise. Wait for agreement on
-both before launching them. Risks to consider: behavior across supported entry paths
-(completeness, logic, reliability, component connections), test quality,
-security, performance, and code quality. Add a specialist only when the change
-gives it a real question.
+both before launching them.
 
 ## Assignment
 
@@ -41,3 +48,16 @@ uncertain value or the same findings keep returning, ask the user instead of
 looping.
 
 Reuse the reviewers' chosen preset in later rounds unless the user changes it.
+
+## Simplification
+
+After the whole-change reviews and their corrections are resolved, assign a
+separate reviewer `review-simplification` for the complete implementation in
+every profile. This is a review, not permission to edit code. For a small change,
+keep it brief.
+
+Verify its findings and give the justified corrections to a developer using
+`fix`. A fresh reviewer using `review-change` with `aspects/behavior` and, when
+tests changed, `aspects/test-quality` then checks the corrections and affected
+behavior before delivery. No changes are required when there is no justified
+simplification.

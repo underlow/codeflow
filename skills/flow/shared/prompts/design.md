@@ -2,6 +2,15 @@ Design how the system will produce the agreed requirements and settle it with
 the user: prepare a recommendation, explain significant alternatives and risks,
 then agree the approach.
 
+Prefer the simplest design that meets current requirements. New layers,
+configuration, recovery, compatibility, and migrations need a current requirement
+or evidence from existing code or data, not a hypothetical future use.
+
+Explicitly discuss changes to APIs and component contracts, database schemas,
+stored data and file formats, compatibility and migration needs, state ownership
+and lifetime, external integrations, permissions, and dependencies. Cover only
+what the change affects.
+
 Inspect the repository to find the actual entry points, components, state
 owners, and integration boundaries the change reaches. For each consequential
 behavior, name the responsible component, the state or shared contract behind
@@ -24,7 +33,8 @@ Write `design.md`, each section proportional to the change:
 2. Existing system: the actual entry points, components, and ownership involved,
    named concretely (package, type, or representative file) so planning can find
    them.
-3. Proposed architecture: changed responsibilities and how components cooperate.
+3. Proposed architecture: changed responsibilities and a component interaction
+   diagram showing participants, information flow, and owners of important state.
 4. State and ownership: each consequential state value, its owner, readers,
    lifetime, transitions, reset, and handling of stale or concurrent results.
 5. Shared contracts: information exchanged between components, its meaning,
