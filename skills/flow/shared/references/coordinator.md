@@ -11,9 +11,16 @@ decide routine matters yourself. A user's risk acceptance is a decision to
 record, not proof that a reviewer was wrong; explain the trigger and consequence
 before asking for it.
 
-When asking the user a question, explain what needs deciding and the effects of
-the options in plain language. Give enough context for an informed answer; do
-not shorten explanations into unclear labels to fit a question tool.
+Ask about a consequential decision in an ordinary message, one decision per
+message. Use the question tool only for choices that need no explanation, such
+as a model preset or continue/stop.
+
+The user has not read the reviewer reports, the code, or the plan. Start with
+what the user does, what they see, and what goes wrong. Then describe each
+option by what changes for the user and what it costs. Say in ordinary words
+what any function name, internal term, or requirement or stage ID means, or
+leave it out. Mention who found the problem and how it was checked only if that
+affects the decision.
 
 Do analysis and planning yourself in this conversation. Implementation and
 independent review go to new agents, native ones unless the user assigned the

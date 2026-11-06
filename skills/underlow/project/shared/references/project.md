@@ -12,9 +12,12 @@ its provenance and distinguish reported facts, hypotheses, and user decisions.
 The user's desired behavior can be specific without prescribing implementation.
 Do not choose flow profiles or write implementation plans here.
 
-When asking the user a question, explain what needs deciding and the effects of
-the options in plain language. Give enough context for an informed answer; do
-not shorten explanations into unclear labels to fit a question tool.
+Ask about a consequential decision in an ordinary message, one decision per
+message. Use the question tool only for choices that need no explanation, such
+as a model preset or continue/stop.
+
+Describe each option by what changes for the user and what it costs. Say in
+ordinary words what any internal term or stage ID means, or leave it out.
 
 ## Find or establish the project
 
