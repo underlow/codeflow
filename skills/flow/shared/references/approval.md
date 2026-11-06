@@ -19,7 +19,7 @@ contains it:
 Project instructions may add categories or paths.
 
 The contract document lists each such change in a section "Changes needing
-approval": what changes, why, the consequence, and how to roll it back. Write
+approval": what changes, why, and the consequence. Write
 "none" when there are none. Bring each item to the user separately and record
 the approval beside it.
 
