@@ -11,8 +11,11 @@ directory. If the repository already names another backlog, use it instead.
 Resolve an ambiguous destination before writing. Do not read other
 repositories' backlogs.
 
-Each item is one file `docs/backlog/<YYYY-MM-DD>-<slug>.md`, dated by creation;
-the file name without `.md` is the item ID. Closed items move to
+Always create new items as `<YYYY-MM-DD>-<slug>.md` in the backlog directory,
+dated by creation; the file name without `.md` is the item ID. Use this format
+even if existing items use sequential IDs such as `B-022`; do not assign a
+separate numeric ID. Keep existing items' IDs unless the user requests migration.
+Closed items move to
 `docs/backlog/closed/`; items taken into a flow move to its plan directory. If a single-file `backlog.md` exists, read it as part of
 the backlog and offer once to split it into item files.
 
@@ -53,8 +56,10 @@ work that was missed. Do not invent missing details from a compacted history.
 
 Check existing titles before creating an item. Update a matching item instead
 of duplicating it; match behavior and scope, not just title. Preserve existing
-conventions. Use a short English kebab-case slug and today's date; if the file
-name is taken, choose another slug rather than overwriting.
+content conventions, but always use the dated ID format for new items. Use a
+short English kebab-case slug and today's date. Check for the same ID among open,
+closed, and flow-held items; if taken, choose another slug rather than overwriting
+or reusing the ID. Keep the creation date and ID when updating or moving an item.
 
 Dates use `YYYY-MM-DD`. Use statuses `open`, `done`, and `cancelled`. When
 closing, record the outcome and validation evidence, or the reason for
