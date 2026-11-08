@@ -10,7 +10,7 @@ class Agterm:
                      else ['--pane', env.get('AGTERM_PANE', 'left')])
 
     def start(self, command, cwd):
-        return run('agtermctl', 'session', 'new', '--after', self.origin, '--cwd', str(cwd),
+        return run('agtermctl', 'session', 'new', '--parent', self.origin, '--cwd', str(cwd),
                    '--name', 'Codex', '--command', command, '--no-select', *self.options)
 
     def commands(self, target, agent):

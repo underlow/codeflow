@@ -21,7 +21,10 @@ a native `SEND` command, and a native `CLOSE` command. Replace `MESSAGE` with
 shell-quoted text. Codex receives a native command for replying to Claude.
 No session registry, prompt files, logs, send wrappers, or relay processes are used.
 
-- agterm: `session new --no-select`; `session type` with paste framing and Enter.
+- agterm: `session new --parent <origin> --no-select` creates a companion under
+  the originating session without changing focus. If the origin is itself a
+  companion, agterm uses its parent. Requires `agtermctl` with `--parent` support.
+  Messages use `session type` with paste framing and Enter.
 - cmux: `new-surface --focus false`; `paste --submit` for Codex and `agent message`
   for Claude. Native Claude messaging requires `cmux hooks setup claude`.
   Native messages cannot wake an already-idle Codex.
