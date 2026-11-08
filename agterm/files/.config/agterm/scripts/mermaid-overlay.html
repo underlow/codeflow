@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'">
+<title>Mermaid</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--agterm-background, Canvas); color: var(--agterm-foreground, CanvasText); font: 14px system-ui; }
+  header { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); }
+  header strong { margin-right: auto; }
+  button { font: inherit; color: inherit; background: color-mix(in srgb, currentColor 8%, transparent); border: 1px solid color-mix(in srgb, currentColor 25%, transparent); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+  #viewport { overflow: auto; height: calc(100vh - 60px); padding: 20px; }
+  #diagram { width: max-content; margin: auto; }
+  #diagram svg { display: block; max-width: none !important; }
+  #message { white-space: pre-wrap; }
+  details { margin-top: 20px; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+</style>
+<header><strong>Mermaid</strong><button id="out" aria-label="Уменьшить">−</button><button id="fit">Вместить</button><button id="in" aria-label="Увеличить">+</button></header>
+<main id="viewport">
+  <div id="message" role="status">Рисую диаграмму…</div>
+  <div id="diagram"></div>
+  <details id="source-details"><summary>Исходник</summary><pre id="source"><!-- MERMAID_SOURCE --></pre></details>
+</main>
+<script>
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || event.isComposing) return;
+  event.preventDefault();
+  event.stopPropagation();
+  agterm.request('session.overlay.close');
+}, true);
+</script>
+<script src="mermaid.min.js"></script>
+<script>
+(async () => {
+  const message = document.getElementById('message');
+  const diagram = document.getElementById('diagram');
+  const viewport = document.getElementById('viewport');
+  try {
+    if (!window.mermaid) throw new Error('Не удалось загрузить библиотеку Mermaid.');
+    const bg = getComputedStyle(document.body).backgroundColor.match(/[\d.]+/g);
+    const dark = bg && (Number(bg[0]) * .299 + Number(bg[1]) * .587 + Number(bg[2]) * .114 < 128);
+    mermaid.initialize({startOnLoad: false, securityLevel: 'strict', theme: dark ? 'dark' : 'default',
+      fontFamily: 'Arial, sans-serif', flowchart: {htmlLabels: false}});
+    const result = await mermaid.render('mermaid-diagram', document.getElementById('source').textContent);
+    diagram.innerHTML = result.svg;
+    const svg = diagram.querySelector('svg');
+    const bounds = svg.viewBox.baseVal;
+    const naturalWidth = bounds.width || svg.getBoundingClientRect().width;
+    const naturalHeight = bounds.height || svg.getBoundingClientRect().height;
+    let scale = 1;
+    function zoom(value) {
+      scale = Math.max(.05, Math.min(8, value));
+      svg.style.width = naturalWidth * scale + 'px';
+      svg.style.height = naturalHeight * scale + 'px';
+    }
+    function fit() { zoom(Math.min(1, (viewport.clientWidth - 40) / naturalWidth, (viewport.clientHeight - 80) / naturalHeight)); }
+    document.getElementById('in').onclick = () => zoom(scale * 1.25);
+    document.getElementById('out').onclick = () => zoom(scale / 1.25);
+    document.getElementById('fit').onclick = fit;
+    message.hidden = true;
+    fit();
+    document.title = 'Mermaid — готово';
+  } catch (error) {
+    document.title = 'Mermaid — ошибка';
+    message.textContent = 'Не удалось нарисовать диаграмму.\n' + (error.message || String(error));
+    document.getElementById('source-details').open = true;
+  }
+})();
+</script>
+</html>
