@@ -1,6 +1,9 @@
 Review the requirements for fidelity to the user's decisions and for complete
 observable behavior. They must say what the product does, not prescribe code.
 
+Check whether the requirements prematurely commit to a way of solving the
+original problem and thereby exclude materially better approaches.
+
 For each consequential behavior, check entry conditions, expected result,
 boundaries, failures, repetition, recovery, later state, and interaction with
 other rules. Look for contradictions, examples no rule supports, missing

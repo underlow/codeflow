@@ -3,6 +3,10 @@ with the supplied aspect files. The contract is what your assignment names: `pro
 with a specification and plan, with a plan that carries requirements and the
 technical approach, or alone for a bug fix.
 
+Check whether the implementation reveals a problem with the approach itself,
+including local fixes that leave a shared architectural cause intact. Conformance
+to the design does not rule out a finding about the approach.
+
 Follow entry points, surrounding callers and consumers, failures, and later
 actions. For a bug fix, check that the cause is corrected and nearby behavior
 still works; a vanished symptom is not enough. Rerun the original reproduction

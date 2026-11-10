@@ -1,6 +1,10 @@
 Review whether the design can satisfy the requirements and gives a developer
 enough direction without inventing consequential architecture.
 
+First assess whether the approach itself fits the original problem. Do not take
+its direction or change boundaries for granted; consider materially different
+approaches and explain any concrete reason to reconsider the choice.
+
 Trace important requirements and acceptance examples through the components:
 entry points, changes from the current system, state ownership and lifetime,
 shared contracts, and flows through success, failure, cancellation, recovery,

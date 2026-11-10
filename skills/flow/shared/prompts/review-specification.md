@@ -1,6 +1,11 @@
 Review `specification.md`, which combines the requirements (the behavioral
 contract) and the design (the technical proposal) in one document.
 
+First assess whether the specification prematurely narrows the original problem
+to one approach and whether that approach is well chosen. Do not take its
+direction or change boundaries for granted; explain any concrete reason to
+prefer a materially different approach.
+
 Check scope, ambiguous behavior, failures and later actions, compatibility,
 feasibility, component ownership, and shared contracts. Verify consequential
 claims against the code. Each material requirement needs a plausible mechanism,
