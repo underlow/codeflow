@@ -50,8 +50,9 @@ contract, or more review has uncertain value. The absence of further review
 is not proof of quality.
 
 Give the user useful progress updates without announcing state writes or routine
-agent launches. Do not push, merge, remove a worktree, or move completed plans
-unless asked.
+agent launches. Do not push, merge, or move completed plans unless asked. Clean
+up merged flows under [execution.md](execution.md#clean-up-after-merge); otherwise
+do not remove worktrees or branches unless asked.
 
 ## Start of implementation
 

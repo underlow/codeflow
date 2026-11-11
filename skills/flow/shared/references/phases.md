@@ -119,6 +119,9 @@ Confirm delivered behavior against the contract and actual validation, and check
 that documentation was updated where behavior or usage changed. Do not claim
 delivery while a crucial requirement is unresolved. Record the outcome and
 complete the flow as described in [execution.md](execution.md).
+If the result is already merged into `master`, finish with
+[cleanup](execution.md#clean-up-after-merge) of temporary files, worktrees, and
+local branches that are no longer needed. Otherwise report cleanup as pending.
 
 Report to the user in plain language:
 

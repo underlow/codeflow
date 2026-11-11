@@ -85,6 +85,23 @@ Before marking a flow complete, add a concise outcome to `plan.md` or
 the relevant commits, actual verification, material limits, and any implication
 for dependent work. Then write the completion state and commit both.
 
+### Clean up after merge
+
+If the flow's result, including its recorded outcome, is merged into `master`,
+clean up the flow's temporary files, worktrees, and local branches that are no
+longer needed. Verify the merge against current Git history; a completed state
+alone is not evidence of a merge. If it has not been merged, leave the cleanup
+pending and report it; do not merge just to enable cleanup.
+
+Inventory the cleanup candidates and check for uncommitted or untracked work
+and active processes using them. Remove only artifacts belonging to this flow
+whose work is preserved in `master` or is disposable. Preserve committed plan
+documents and unrelated or still-needed files. Leave uncertain candidates in
+place and report why. Run worktree removal from a retained checkout, use Git's
+worktree and branch removal commands without force, and report what was removed
+and what remains. This cleanup needs no separate request once the conditions
+are verified.
+
 When cancelling a flow that took a backlog item, move the item back to its
 original path on the recorded branch, add what the flow learned, and commit
 only that file there.
@@ -101,5 +118,6 @@ running, account for it first. Ask only what cannot be inferred.
 When resuming at implementation, use the recorded developer choice, or choose
 as described in [coordinator.md](coordinator.md#choosing-a-model) if it is
 absent or unavailable on this platform. If code changed after a clean
-review, reassess the affected scope before delivery. Do not push, merge, delete
-branches or worktrees, or move plan directories as routine cleanup.
+review, reassess the affected scope before delivery. Do not push, merge, or move
+plan directories as routine cleanup. Remove branches and worktrees only under
+the [post-merge cleanup rules](#clean-up-after-merge) or an explicit user request.
