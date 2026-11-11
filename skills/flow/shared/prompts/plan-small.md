@@ -20,6 +20,12 @@ Write `plan.md` with:
    Put whole-feature checks and documentation after the implementation they
    need. Leave helpers, signatures, and test bodies to the developer.
 
+Use this as the default structure; merge or omit unneeded sections, add missing
+ones, and vary order and detail to suit the plan and its tasks. Do not write
+filler to satisfy the template or omit important context because it has no
+section. State shared context once. Tasks must preserve the agreed technical
+approach without predesigning local implementation details.
+
 Name the automated tests each task adds: the behavior, the boundary it is
 observed at, and the mistake it catches. Other checks are run once and
 reported. Follow [tests.md](../references/tests.md). Record changes needing

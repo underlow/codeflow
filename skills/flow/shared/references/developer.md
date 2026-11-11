@@ -9,10 +9,15 @@ The behavioral documents (`problem.md` and the requirements in
 Local details are yours to choose. Continue valid existing work and preserve
 changes that are not yours.
 
-Choose the simplest implementation that meets the contract. New abstractions,
-configuration, compatibility layers, migrations, and recovery paths need a
+Choose the simplest implementation that meets the requirements and agreed design.
+Consider extending an existing mechanism first; add a new one when the existing
+mechanism does not fit. Reuse should not require unnecessary complexity either.
+New abstractions, configuration, compatibility layers, migrations, and recovery paths need a
 current requirement or a demonstrated need in existing code or data, not a
 hypothetical future use.
+
+Before finishing, check not only that requirements are met, but whether the
+responsibilities and mechanisms your implementation adds are needed for this task.
 
 Derive test expectations from the behavioral document, not from the code under
 test. Never weaken an expectation to make a check pass. Write the automated

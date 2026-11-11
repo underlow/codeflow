@@ -8,10 +8,16 @@ Write `plan.md` with the result, technical approach, shared contracts,
 integration, and how requirements and examples will be verified. Divide the work
 into tasks by independently verifiable results and dependencies; each task goes
 to its own developer, as a section of `plan.md` or a file under `tasks/`. Each
-task names its result, inputs, dependencies, behavior to preserve, and checks
+task normally names its result, inputs, dependencies, behavior to preserve, and checks
 with expected observations and the mistake they catch. A single task is right
 only for one bounded result. Put whole-feature checks and documentation updates
 after the implementation they need. Leave private choices to the developer.
+
+Adapt the task structure where useful: merge or omit unneeded sections, add
+missing ones, and vary order and detail. Do not write filler to satisfy the
+template or omit important context because it has no section. State shared
+context once in the plan. Tasks must carry the agreed design's decisions and
+constraints through the split without predesigning local implementation details.
 
 Name the automated tests each task adds: the behavior, the boundary it is
 observed at, and the mistake it catches. Other checks are run once and

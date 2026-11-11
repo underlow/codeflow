@@ -10,8 +10,8 @@ Split the work into tasks when that helps a developer, ordered so each task has
 what it needs. Cover every requirement. Where tasks must use the same data or
 behavior, state what they agree on. Include integration work, whole-feature
 checks, and documentation updates after the behavior they need exists. Describe
-what each task must achieve, not how; file paths are starting points, not a
-complete list. Do not prescribe pseudocode, private helpers, or test bodies
+what each task must achieve within the agreed design; file paths are starting
+points, not a complete list. Do not prescribe pseudocode, private helpers, or test bodies
 unless the design decided them.
 
 Sections of `plan.md`:
@@ -21,7 +21,7 @@ Sections of `plan.md`:
 3. What tasks must agree on.
 4. A map from requirements to tasks and whole-feature checks.
 
-Each task, as a section or a file under `tasks/`:
+Default task structure, as a section or a file under `tasks/`:
 
 1. Result: what must be true afterwards, with requirement IDs.
 2. Inputs: documents, current behavior, or earlier results it needs.
@@ -30,6 +30,12 @@ Each task, as a section or a file under `tasks/`:
 5. Verification: what to observe and where, setup it needs, and the harmful
    mistake it catches. Mark which checks become automated tests; the rest are
    run once and reported. Follow [tests.md](../references/tests.md).
+
+Adapt this structure to the task: merge or omit unneeded sections, add missing
+ones, and vary order and detail. Do not write filler to satisfy the template or
+omit important context because it has no section. State shared context once in
+the plan. Tasks must carry the agreed design's decisions and constraints through
+the split without predesigning local implementation details.
 
 A task must make sense to a developer who has only the documents. Refer to
 requirements instead of copying them, and take expected results from the
