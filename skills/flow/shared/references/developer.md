@@ -10,11 +10,21 @@ Local details are yours to choose. Continue valid existing work and preserve
 changes that are not yours.
 
 Choose the simplest implementation that meets the requirements and agreed design.
-Consider extending an existing mechanism first; add a new one when the existing
-mechanism does not fit. Reuse should not require unnecessary complexity either.
+Start with a direct solution using existing code, libraries, or platform APIs.
+Verify its fit; justify substantial added machinery by a concrete requirement
+or demonstrated limitation of that simpler solution. Reuse should not require
+unnecessary complexity either.
 New abstractions, configuration, compatibility layers, migrations, and recovery paths need a
 current requirement or a demonstrated need in existing code or data, not a
 hypothetical future use.
+
+To reduce complexity, raise a requirement tradeoff with the coordinator before
+implementing the disputed mechanism only when all three hold: a specific
+requirement rules out verified simpler options; meeting it needs a subsystem, duplicated mechanism,
+coupling of independent components, or interacting exceptions; and you can
+propose a requirement change that removes this complexity, with its user-visible
+consequence. Ordinary branches, helpers, and error handling remain yours to
+decide. Do not change the contract yourself.
 
 Before finishing, check not only that requirements are met, but whether the
 responsibilities and mechanisms your implementation adds are needed for this task.

@@ -1,6 +1,13 @@
 Does the change make the code harder to understand, verify, or extend than its
 required behavior demands?
 
+Independently derive a simple solution from the task and requirements, then
+compare it with the implementation. Check existing code, libraries, and platform
+APIs. Added complexity needs a required benefit or a demonstrated limitation of
+the simpler option; passing tests alone do not justify it. Verify an alternative
+meets the same requirements with comparable reliability before calling its
+absence a defect; otherwise state what needs investigation.
+
 Look for tangled responsibilities, duplicated rules, hidden coupling, unclear
 state ownership, misleading abstractions, dead code, and difficult control flow.
 Show the concrete maintenance consequence: for example, a supported behavior
