@@ -27,7 +27,10 @@ needs a new stage ID agreed in the project plan first.
 Agreement on a roadmap does not establish that a reported bug exists, a proposed
 cause is correct, a change is necessary, or a dependency is required. Verify the
 stage's premises in the problem step, including whether required earlier
-results exist in this checkout. Analysis may show that no change is warranted: present
+results exist in this checkout. Evaluate the user need, expected benefit, and
+suitability of the proposed changes before asking about their detailed behavior;
+an inventory of what is missing is not that assessment. Analysis may show that
+no change is warranted: present
 the evidence, agree the conclusion with the user, record it with its evidence and
 limits in `problem.md`, and complete the flow without implementation or
 review. Unavailable reproduction does not prove there is no defect. If the result

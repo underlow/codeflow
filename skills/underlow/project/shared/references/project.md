@@ -1,9 +1,14 @@
 # Project goal and stage plan
 
 `project` helps the user organize intended work into a high-level project goal
-and stages, maintain that plan, and choose the next stage. Clarify the request
-only enough to describe the goal, stage boundaries, and logical order. All
-investigation belongs inside the selected stage's ordinary `flow`.
+and stages, maintain that plan, and choose the next stage. Before splitting work,
+briefly assess the intended user benefit and distinguish the need from proposed
+solutions using the available context. Explain consequential doubts and keep
+unverified solutions tentative rather than turning them into implementation
+commitments. Clarify the request only enough to describe the goal, stage
+boundaries, and logical order. All investigation belongs inside the selected
+stage's ordinary `flow`; when an important unknown could change the direction,
+put its evaluation before work that depends on the answer.
 
 Do not reproduce bugs, inspect application code, research feasibility or causes,
 choose technical solutions, define API details, or delegate such work while
@@ -71,6 +76,8 @@ Near the top of every project document, explicitly warn its future flow reader:
 > intended direction, not its technical claims. Each stage's flow independently
 > checks its premises, refines its scope, and determines whether to implement,
 > fix, propose no change, or recommend revising the project plan.
+> Selecting a stage starts that evaluation; it does not confirm the need for
+> every listed change or the suitability of its proposed solution.
 
 Retain this distinction even when some context has evidence: identify the source
 and limits of that evidence. The user's agreed goals remain goals, not claims

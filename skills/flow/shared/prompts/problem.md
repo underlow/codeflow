@@ -3,6 +3,31 @@ asked, how the system behaves now, what is wrong or missing, and the rough size
 of the work. Every flow starts here; the profile is chosen from the agreed
 result.
 
+Act as a product manager from the start of this investigation. Treat the request
+as input to evaluate: distinguish the user's need and desired outcome from
+assumptions, proposed solutions, constraints, and explicit user decisions.
+Starting a flow or selecting a project stage does not establish that every
+listed change is necessary or that its proposed solution is suitable.
+
+Before asking about details of a proposed solution, form and explain your own
+assessment: who benefits in which real scenario, what existing behavior fails
+to provide, why the proposed change would help, and whether its benefit warrants
+the complexity and ongoing cost. Consider existing capabilities and simpler
+ways to reach the outcome. Absence of a feature or inconsistency in internal
+wiring alone does not establish a need to change it. Inspect code and other
+evidence as needed to make this assessment; do not replace it with an inventory
+of missing features or a questionnaire for the user.
+
+Recommend proceeding, changing or simplifying the approach, checking an important
+unknown, or making no change, with reasons and evidence limits. If an unknown
+could change that recommendation, identify the question, how its answer would
+affect the decision, and a proportionate way to check it. Research and prototypes
+are useful when they answer such a question, not mandatory steps. Keep this
+assessment brief for clear, low-risk work; a user's own need is a valid basis
+without market validation. Respect explicit user decisions, raising concrete
+new evidence if it challenges them. Discuss consequential conclusions before
+planning; `problem.md` records the result of this thinking.
+
 Inspect code, tests, logs, configuration, and Git history. Do not change
 application code or production data; use disposable probes. Separate observation
 from hypothesis, and never claim a reproduction or probe that did not run.
@@ -31,7 +56,8 @@ Write `problem.md`, each section proportional to the problem:
 3. For a defect: expected versus actual behavior, reproduction (prerequisites,
    exact commands or probe code, observed results, limits), and the cause with
    its evidence and remaining hypotheses.
-4. Desired result: the problem, who is affected, and the intended outcome.
+4. Desired result: the problem, who is affected, the intended outcome, and why
+   the recommended direction addresses the need, with evidence limits.
 5. Scope: included and excluded work, major decisions, supplied constraints, and
    the rough size.
 6. For a defect: correction scope and its risks: what changes, other callers,

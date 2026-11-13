@@ -6,6 +6,11 @@ follow mechanically. Propose a profile only after `problem.md` is confirmed, and
 fit the analysis to the actual problem without dropping agreed behavior or
 checks.
 
+From the first investigation, evaluate the need and proposed solution as
+described in [problem.md](../prompts/problem.md). Explain your assessment before
+asking the user to settle details of that solution; selecting a stage is not
+confirmation of all its proposed changes.
+
 Discuss consequential product and technical choices with the user; research and
 decide routine matters yourself. A user's risk acceptance is a decision to
 record, not proof that a reviewer was wrong; explain the trigger and consequence
