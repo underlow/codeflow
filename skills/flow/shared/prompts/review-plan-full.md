@@ -3,6 +3,9 @@ inventing a product or design decision. Each task will go to a separate
 developer who has only the documents. Flag a task over two days of work for a
 developer who knows the code, and say how to split it.
 
+Consider whether there is a smaller solution worth offering the user before
+implementation, including changes to requirements already in the contract.
+
 Check that every required result is assigned, dependencies arrive before they
 are needed, tasks agree on shared data and behavior, and the results join
 through the application's real entry points, including failures, recovery, and

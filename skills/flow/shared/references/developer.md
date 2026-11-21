@@ -18,13 +18,11 @@ New abstractions, configuration, compatibility layers, migrations, and recovery 
 current requirement or a demonstrated need in existing code or data, not a
 hypothetical future use.
 
-To reduce complexity, raise a requirement tradeoff with the coordinator before
-implementing the disputed mechanism only when all three hold: a specific
-requirement rules out verified simpler options; meeting it needs a subsystem, duplicated mechanism,
-coupling of independent components, or interacting exceptions; and you can
-propose a requirement change that removes this complexity, with its user-visible
-consequence. Ordinary branches, helpers, and error handling remain yours to
-decide. Do not change the contract yourself.
+Before implementing, consider whether a cheaper option would still serve the
+user's main goal. Use it directly when it meets the contract. If it changes
+agreed behavior, tell the coordinator what the user could still do, what they
+would lose, and which work would disappear. Hold the affected work until the
+choice is resolved. Apply this check to review fixes as well.
 
 Before finishing, check not only that requirements are met, but whether the
 responsibilities and mechanisms your implementation adds are needed for this task.

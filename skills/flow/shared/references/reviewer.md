@@ -7,12 +7,11 @@ evidence shows it is unsuitable for the original problem. Agreement with those
 documents does not settle that question. Report the grounds for reconsideration;
 do not replace explicit user decisions yourself.
 
-To reduce complexity, propose reconsidering a requirement only when verified
-simpler options fail it, meeting it needs substantial machinery (a subsystem, duplicated mechanism,
-coupling of independent components, or interacting exceptions), and a concrete
-requirement change would remove that complexity. Explain the user-visible
-tradeoff; ordinary branches, helpers, and error handling do not meet this
-threshold. Keep these proposals separate from contract-preserving corrections.
+If an alternative serves the original goal with less work but changes a
+requirement, report the choice to the coordinator. Explain what the user could
+still do, what would change, and which work would disappear. This applies to
+explicit requirements too. Reopen a tradeoff the user already weighed only
+when you have new evidence about its cost or consequences.
 
 In a code review, the changes under review are the commits from base to current
 plus uncommitted changes, excluding unrelated user changes named in your

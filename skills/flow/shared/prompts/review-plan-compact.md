@@ -3,6 +3,9 @@ Review the plan before implementation. The contract is `problem.md` with
 approach inside the plan. Do not ask for
 documents or task files the plan does not need.
 
+Consider whether there is a smaller solution worth offering the user before
+implementation, including changes to requirements already in the contract.
+
 Each task will go to a separate developer who has only the documents. Separate
 verifiable results with their own dependencies need separate tasks, which may
 share `plan.md`; flag one task that bundles several. A single task is fine for

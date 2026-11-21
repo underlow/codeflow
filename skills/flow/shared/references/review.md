@@ -38,7 +38,8 @@ decision. When a reviewer rates a problem high but the user accepts its
 demonstrated consequence, show the exact scenario and both assessments, and
 record the decision. Do not reopen an accepted risk without new evidence. An
 unresolved requirement conflict needs correction or explicit acceptance
-regardless of its label. Give the fixer only the findings selected for
+regardless of its label. Resolve proposed requirement changes before assigning the affected fix.
+Give the fixer only the findings selected for
 correction, in the reviewers' original wording.
 
 After a fix, choose fresh review of the corrected behavior and whatever the fix
