@@ -3,6 +3,13 @@ Agree behavior and design for a medium feature in one document,
 the design before planning. Write the document after both are agreed. Scope comes
 from the agreed `problem.md`; do not restate it. Keep detail proportional to the feature.
 
+Before presenting the proposed approach, identify what makes it complicated.
+Which requirement or design choice accounts for that work? Consider dropping
+that part. If the agreed behavior still holds, simplify the proposal. If a
+smaller solution still serves the user's goal but changes agreed behavior,
+explain what the user would lose and which work would disappear before asking
+them to choose.
+
 1. Requirements: R IDs, observable behavior, important failures and later
    actions, compatibility, and behavior to preserve.
 2. Design: affected components, their responsibilities and interactions, state
