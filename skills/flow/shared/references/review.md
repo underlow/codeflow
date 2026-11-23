@@ -32,9 +32,17 @@ Do not send the planning conversation.
 
 ## Findings
 
-Merge duplicates and check each finding's scope and evidence yourself. Bring to
-the user the findings whose correction or acceptance is a real product or risk
-decision. When a reviewer rates a problem high but the user accepts its
+Merge duplicates and check each finding's scope and evidence yourself. When a
+review finds several problems, pause before revising the document or assigning
+fixes. Consider whether one mistake in the requirements,
+plan, or implementation could explain them. For a plan, ask whether you would still
+propose the revised plan for the original goal. For code, ask whether local
+fixes would leave the cause in place. If the findings share a cause, compare
+fixing them individually with revising the underlying decision. Handle
+independent findings individually.
+
+Bring findings to the user when their correction or acceptance requires a
+product or risk decision. When a reviewer rates a problem high but the user accepts its
 demonstrated consequence, show the exact scenario and both assessments, and
 record the decision. Do not reopen an accepted risk without new evidence. An
 unresolved requirement conflict needs correction or explicit acceptance

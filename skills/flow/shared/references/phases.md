@@ -66,6 +66,10 @@ These rules apply to every document you agree with the user, including a plan.
 - Inspect the repository before proposing behavior or technical decisions. Ask
   the user only what evidence cannot answer, and do not ask again what they
   already answered.
+- When turning a user goal into a precise requirement, check whether the wording
+  promises more than the user asked for. Prefer the simpler option when it
+  meets the agreed behavior. If a stronger guarantee would change the user's
+  experience and add work, explain both effects before agreeing on it.
 - Bring each consequential choice with options, their effects, and a
   recommendation. Ask focused questions, one decision per message.
 - Bring each change listed in [approval.md](approval.md) as its own question,
