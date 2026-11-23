@@ -12,7 +12,8 @@ with its CLI, or agterm with `agtermctl`.
 
 Invoke `/work-with-codex [topic]`. An explicit model/effort is passed to Codex;
 otherwise discussion uses its configured defaults. Model aliases live in
-`~/.codex/collab/model-aliases.json` and survive installation updates.
+`~/.codex/collab/model-aliases.json`. Installing with `--with-collab --force`
+replaces this file, including local edits, with the repository defaults.
 An invalid model returns choices before opening a terminal.
 
 The launcher reads the brief from stdin and passes it directly to Codex.

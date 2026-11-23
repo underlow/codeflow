@@ -104,7 +104,7 @@ if [ "$with_collab" = true ]; then
   mkdir -p "$claude_delegate"
   cp -R "$source_dir/skills/delegate-to-codex/claude/." "$claude_delegate/"
   cp -R "$source_dir/skills/work-with-codex/claude/scripts" "$claude_delegate/"
-  if [ ! -e "$target/.codex/collab/model-aliases.json" ]; then
+  if [ "$force" = true ] || [ ! -e "$target/.codex/collab/model-aliases.json" ]; then
     cp "$source_dir/skills/work-with-codex/model-aliases.json" "$target/.codex/collab/model-aliases.json"
   fi
   chmod +x "$claude_collab/scripts/collab.sh" "$claude_delegate/scripts/collab.sh"
