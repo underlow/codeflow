@@ -2,7 +2,7 @@
 
 An automated test is worth keeping when it checks required behavior or a
 contract others rely on, through a public boundary, and a plausible future
-change could break it. A regression test for a fixed bug qualifies. Anything
+change could break it. Apply the same criteria to bug reproductions. Anything
 else is checked once by hand and reported, not kept as a test.
 
 Do not write tests that:

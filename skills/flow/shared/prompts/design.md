@@ -2,13 +2,6 @@ Design how the system will produce the agreed requirements and settle it with
 the user: prepare a recommendation, explain significant alternatives and risks,
 then agree the approach.
 
-Before presenting the proposed approach, identify what makes it complicated.
-Which requirement or design choice accounts for that work? Consider dropping
-that part. If the agreed behavior still holds, simplify the proposal. If a
-smaller solution still serves the user's goal but changes agreed behavior,
-explain what the user would lose and which work would disappear before asking
-them to choose.
-
 Prefer the simplest design that meets current requirements. New layers,
 configuration, recovery, compatibility, and migrations need a current requirement
 or evidence from existing code or data, not a hypothetical future use.

@@ -47,7 +47,8 @@ lives in the conversation and Git history.
 Besides the backlog item move, commit only at these points, always with explicit
 paths: the first contract document with the initial state; the remaining
 contract documents and the plan together once planning is finished; each
-developer's completed task; and the outcome with the completion state.
+developer's completed task; agreed contract or plan revisions before dependent
+work continues; and the outcome with the completion state.
 
 ## State
 

@@ -29,8 +29,8 @@ responsibilities and mechanisms your implementation adds are needed for this tas
 
 Derive test expectations from the behavioral document, not from the code under
 test. Never weaken an expectation to make a check pass. Write the automated
-tests your task lists and a regression test for a fixed bug; any other test
-needs a reason in your report. Follow [tests.md](tests.md).
+tests your task lists. Use [tests.md](tests.md) to decide whether to keep an
+additional test, including a bug reproduction. Give the reason in your report.
 
 Changes listed in [approval.md](approval.md) need the user's approval recorded in
 the contract. If approval is missing, explain the decision needed to the

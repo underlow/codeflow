@@ -39,13 +39,13 @@ result and any decision or help needed; you decide what happens next.
 | | `review-plan-full` | reviewer |
 | Medium planning | `plan-medium` | coordinator |
 | Small planning | `plan-small` | coordinator |
-| Medium or small planning | `review-plan-compact` | reviewer |
+| Medium or small planning, when uncertainty, size, or integration risk warrants review | `review-plan-compact` | reviewer |
 | Implementation | `implement` | developer |
 | | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
 | Bug correction | `fix-bug` | developer |
 | Whole-change review | `review-change` with selected `aspects/*`, always including `aspects/test-quality` when tests changed; `small` and `bugfix` may use `review-change-single` | reviewer |
+| After whole-change reviews, before assigning corrections, every profile | `review-simplification` | reviewer |
 | Correct findings | `fix` | fixer |
-| After whole-change reviews and corrections, every profile | `review-simplification` | reviewer |
 
 Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or
 `review-change-single`. Assign reviewers as described in [review.md](review.md).
@@ -70,6 +70,10 @@ These rules apply to every document you agree with the user, including a plan.
   promises more than the user asked for. Prefer the simpler option when it
   meets the agreed behavior. If a stronger guarantee would change the user's
   experience and add work, explain both effects before agreeing on it.
+- Before presenting the first technical approach, identify what accounts for
+  its complexity and consider dropping that part. Simplify the draft if agreed
+  behavior holds. If a smaller version still serves the goal, explain what
+  the user would lose and which work would disappear.
 - Bring each consequential choice with options, their effects, and a
   recommendation. Ask focused questions, one decision per message.
 - Bring each change listed in [approval.md](approval.md) as its own question,

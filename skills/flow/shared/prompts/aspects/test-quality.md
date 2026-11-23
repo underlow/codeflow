@@ -5,11 +5,9 @@ Review tests for necessity as well as missing coverage:
 - Tests must observe behavior at a stated system or component boundary. Trace
   expectations to requirements or established compatibility obligations, not to
   the current implementation or expected values computed by the code under test.
-- Inspect changed and deleted expectations across the reviewed commits. Require
-  a requirement change authorized by the task or human agreement, or evidence
-  that the old expectation contradicted the requirement. A failing test after a
-  code change is not a reason to change it. Where requirements are missing,
-  preserve established behavior unless its change is authorized; flag uncertainty.
+- For changed or deleted expectations, verify the recorded approval under
+  [approval.md](../../references/approval.md) and check the change against the
+  behavioral contract. Flag unclear requirements or compatibility.
 - Follow the actual scenario. A test must not perform the action the tested code
   is responsible for, then claim that action works. Claimed requirement coverage
   must not exceed what the test observes through its chosen boundary.

@@ -11,6 +11,8 @@ Use Codex's native subagent tools for fresh implementation and independent
 review agents. Give each agent the exact checkout, relevant contract, task,
 and file boundaries.
 
-Read [the coordinator instructions](references/coordinator.md),
-[the phase guide](references/phases.md), [the review guide](references/review.md),
-and [workspace and resume rules](references/execution.md) before acting.
+Start with [the coordinator instructions](references/coordinator.md) and
+[the phase guide](references/phases.md). Consult the relevant section of
+[workspace and resume rules](references/execution.md) when resolving a request,
+managing the checkout or state, resuming, or delivering. Read the
+[review guide](references/review.md) before assigning a reviewer.

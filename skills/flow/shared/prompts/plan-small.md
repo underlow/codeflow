@@ -3,13 +3,6 @@ requirements or design document: the plan carries the requirements and the
 technical approach. Inspect affected code, project instructions, and usable
 checks, and decide routine details from existing patterns.
 
-Before presenting the proposed approach, identify what makes it complicated.
-Which requirement or design choice accounts for that work? Consider dropping
-that part. If the agreed behavior still holds, simplify the proposal. If a
-smaller solution still serves the user's goal but changes agreed behavior,
-explain what the user would lose and which work would disappear before asking
-them to choose.
-
 Discuss consequential choices about shared contracts, compatibility, ownership,
 or lifecycle with the user unless delegated: explain the mechanism and
 alternatives, and wait for an answer. Settle consequential behavior here so

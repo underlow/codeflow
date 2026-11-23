@@ -30,6 +30,16 @@ Give each reviewer [reviewer.md](reviewer.md), its detailed prompt from
 
 Do not send the planning conversation.
 
+## Whole-change review order
+
+In every profile, verify the whole-change reviewers' findings, then assign
+`review-simplification` to a separate reviewer before issuing fixes. Give them
+the same complete implementation and the confirmed findings with their evidence.
+Leave the choice of remedies open. Keep this review brief for a small change.
+
+Verify the simplification findings and consider both sets together when choosing
+corrections for `fix`.
+
 ## Findings
 
 Merge duplicates and check each finding's scope and evidence yourself. When a
@@ -50,23 +60,12 @@ regardless of its label. Resolve proposed requirement changes before assigning t
 Give the fixer only the findings selected for
 correction, in the reviewers' original wording.
 
-After a fix, choose fresh review of the corrected behavior and whatever the fix
-affected; a targeted reviewer checks the complete current behavior of its scope.
+After a fix, a fresh reviewer checks the corrections and affected behavior
+using `review-change` with `aspects/behavior` and, when tests changed,
+`aspects/test-quality`. Consider another simplification review only if the
+corrections materially changed the design.
 Broaden review when a fix changes shared behavior. When another broad round has
 uncertain value or the same findings keep returning, ask the user instead of
 looping.
 
 Reuse the reviewers' chosen preset in later rounds unless the user changes it.
-
-## Simplification
-
-After the whole-change reviews and their corrections are resolved, assign a
-separate reviewer `review-simplification` for the complete implementation in
-every profile. This is a review, not permission to edit code. For a small change,
-keep it brief.
-
-Verify its findings and give the justified corrections to a developer using
-`fix`. A fresh reviewer using `review-change` with `aspects/behavior` and, when
-tests changed, `aspects/test-quality` then checks the corrections and affected
-behavior before delivery. No changes are required when there is no justified
-simplification.
