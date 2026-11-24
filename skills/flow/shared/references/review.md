@@ -54,9 +54,14 @@ assign. Keep the review proportionate to the change.
 
 ## Findings
 
-Merge duplicates and check each finding's scope and evidence yourself. When a
-review finds several problems, pause before revising the document or assigning
-fixes. Consider whether one mistake in the requirements,
+Before revising a document or assigning a fix, check the evidence yourself.
+What problem does it establish, and why does it matter for this task? If you
+cannot justify a change, dismiss the finding or identify the missing fact.
+For a confirmed problem, assess the reviewer's proposed remedy separately.
+Could a simpler change achieve the required outcome?
+
+Merge duplicates. When a review finds several problems, pause before revising
+the document or assigning fixes. Consider whether one mistake in the requirements,
 plan, or implementation could explain them. For a plan, ask whether you would still
 propose the revised plan for the original goal. For code, ask whether local
 fixes would leave the cause in place. If the findings share a cause, compare
@@ -69,8 +74,9 @@ demonstrated consequence, show the exact scenario and both assessments, and
 record the decision. Do not reopen an accepted risk without new evidence. An
 unresolved requirement conflict needs correction or explicit acceptance
 regardless of its label. Resolve proposed requirement changes before assigning the affected fix.
-Give the fixer only the findings selected for
-correction, in the reviewers' original wording.
+For each correction you assign, describe the confirmed problem and required
+outcome in your own words. You may attach the original finding for context.
+Prescribe a specific remedy only if you can explain why it is required.
 
 After a fix, a fresh reviewer checks the corrections and affected behavior
 using `review-change` with `aspects/behavior` and, when tests changed,

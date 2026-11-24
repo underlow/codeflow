@@ -81,11 +81,11 @@ These rules apply to every document you agree with the user, including a plan.
 - Show the proposal in the conversation and wait for explicit confirmation of the
   current version before writing the file. Silence or approval of an earlier
   draft is not confirmation.
-- On revision, verify each finding first; a reviewer's priority label is not a
-  reason to change anything. Fix the general rule, not just the reported example,
-  and recheck what the change affects. Discuss changed consequential decisions
-  with the user; local repairs need no new approval. Tell the user which findings
-  you rejected and why.
+- Before revising a document after review, decide which findings warrant a
+  change and why, following [the findings guidance](review.md#findings).
+  Correct the underlying rule and recheck what the change affects. Discuss
+  changed consequential decisions with the user; local repairs need no new
+  approval. Tell the user which findings you rejected and why.
 - Keep only the current agreed text: no finding history, review chronology,
   obsolete alternatives, or separate decision or evidence files.
 - Record the confirmation and explicit delegations in the document, and keep the
