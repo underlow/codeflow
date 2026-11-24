@@ -3,10 +3,16 @@ Review the plan before implementation. The contract is `problem.md` with
 approach inside the plan. Do not ask for
 documents or task files the plan does not need.
 
-Consider both questions independently:
-- Which part of the plan needs the most new logic? Check the existing code for
-  a simpler way to deliver the same behavior. Explain which work would disappear
-  and why the agreed guarantees would still hold.
+Start from the original request, agreed behavior and acceptance examples.
+Work out who needs which results and when. Then examine the proposed design:
+if you remove a responsibility it introduces, which agreed scenario or existing
+constraint would fail? Trace dependencies between proposed mechanisms back to
+that need. Recommend removing work whose only justification is another
+unnecessary mechanism.
+
+For the work that remains, consider both questions independently:
+- Does the existing code offer a simpler way to deliver the same behavior?
+  Explain which work would disappear and why the agreed guarantees still hold.
 - Could relaxing or dropping one requirement eliminate substantial work while
   preserving the main goal? Give the affected user scenario, what the user could
   still do, what they would lose, and which mechanism would disappear.
