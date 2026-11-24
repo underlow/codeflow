@@ -55,8 +55,10 @@ assign. Keep the review proportionate to the change.
 ## Findings
 
 Before revising a document or assigning a fix, check the evidence yourself.
-What problem does it establish, and why does it matter for this task? If you
-cannot justify a change, dismiss the finding or identify the missing fact.
+What would go wrong if you left things as they are? What supports the
+expectation of a different outcome? If the finding depends on a new guarantee,
+name it explicitly. The user decides whether to add it to the requirements.
+If you cannot justify a change, dismiss the finding or identify the missing fact.
 For a confirmed problem, assess the reviewer's proposed remedy separately.
 Could a simpler change achieve the required outcome?
 
