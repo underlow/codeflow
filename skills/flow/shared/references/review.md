@@ -1,13 +1,18 @@
 # Independent review
 
-Before the first code review, the coordinator proposes a concrete review plan to
-the user. For `medium` and `full`, assign at least two independent reviewers:
+Inspect the diff before proposing the review plan to the user. For `medium`
+and `full`, assign independent reviewers for behavior and integration
+(`aspects/behavior`) and for code quality (`aspects/code-quality`). For
+`small` and `bugfix`, one reviewer may cover both when the scope is manageable.
 
-- Behavior and integration, using `aspects/behavior`.
-- Design, code quality, and test quality, using `aspects/code-quality` and
-  `aspects/test-quality`.
+Assign `aspects/test-quality` to the behavior reviewer for a few focused checks.
+Use a separate test reviewer when assessing coverage is substantial, for example
+with complex fixtures, extensive expectation changes, or claims that existing
+tests protect several new paths. Judge the verification effort even when the
+test diff is small. If code quality review spans more than one reviewer can
+inspect in context, divide it by subsystem and give each reviewer the full
+code-quality checklist and the relevant callers across its boundaries.
 
-For `small` and `bugfix`, one combined reviewer may cover these concerns.
 Add specialists for concrete risks such as security and permissions, irreversible
 data changes, concurrency, or performance at the expected scale. Explain which
 risks need separate review and which the main reviewers can cover.
