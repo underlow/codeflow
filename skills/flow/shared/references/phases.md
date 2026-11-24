@@ -13,10 +13,10 @@ one planned assignment for one developer. A *stage* is only a project stage.
 
 | Profile | Analysis and planning | Implementation and review |
 | --- | --- | --- |
-| `full` | After the problem, agree requirements with acceptance examples and design, then an ordered plan. Review requirements, design, and plan independently. | Implement tasks; review a task result when later tasks depend on it; use at least two whole-change reviewers, then simplification review. |
-| `medium` | After the problem, discuss behavior, then design, in one specification; challenge it independently, then plan tasks. | Implement tasks; use at least two whole-change reviewers, then simplification review. |
-| `small` | After the problem, agree a short plan with requirements, acceptance examples, and the technical approach. | Implement and review the change independently, then simplification review. |
-| `bugfix` | The problem holds the reproduction, cause, expected behavior, and correction scope; nothing more is needed. | Fix, verify the original failure and nearby behavior, review independently, then simplification review. |
+| `full` | After the problem, agree requirements with acceptance examples and design, then an ordered plan. Review requirements, design, and plan independently. | Implement tasks; review a task result when later tasks depend on it; use at least two whole-change reviewers with a separate simplification reviewer. |
+| `medium` | After the problem, discuss behavior, then design, in one specification; challenge it independently, then plan tasks. | Implement tasks; use at least two whole-change reviewers with a separate simplification reviewer. |
+| `small` | After the problem, agree a short plan with requirements, acceptance examples, and the technical approach. | Implement and review the change independently with a separate simplification reviewer. |
+| `bugfix` | The problem holds the reproduction, cause, expected behavior, and correction scope; nothing more is needed. | Fix, verify the original failure and nearby behavior, review independently with a separate simplification reviewer. |
 
 ## Detailed prompts
 
@@ -44,7 +44,7 @@ result and any decision or help needed; you decide what happens next.
 | | `review-task` for a full-profile task later tasks depend on, with `aspects/test-quality` when tests changed | reviewer |
 | Bug correction | `fix-bug` | developer |
 | Whole-change review | `review-change` with selected `aspects/*`, always including `aspects/test-quality` when tests changed; `small` and `bugfix` may use `review-change-single` | reviewer |
-| After whole-change reviews, before assigning corrections, every profile | `review-simplification` | reviewer |
+| Whole-change review and follow-up in the same session, every profile | `review-simplification` | reviewer |
 | Correct findings | `fix` | fixer |
 
 Each prompt is `prompts/<name>.md`. An aspect adds a focus to `review-change` or

@@ -32,13 +32,20 @@ Do not send the planning conversation.
 
 ## Whole-change review order
 
-In every profile, verify the whole-change reviewers' findings, then assign
-`review-simplification` to a separate reviewer before issuing fixes. Give them
-the same complete implementation and the confirmed findings with their evidence.
-Leave the choice of remedies open. Keep this review brief for a small change.
+Use the same revision for both passes in every profile:
 
-Verify the simplification findings and consider both sets together when choosing
-corrections for `fix`.
+1. Give a separate reviewer `review-simplification`, the original goal, the
+   contract and the complete change. Keep the current round's other reports
+   and suggested fixes out of this assignment. The reviews may run in parallel.
+2. Once all independent reports are in, send the other findings and evidence
+   to the same simplification reviewer as a follow-up. Keep their session
+   available until they reply. Ask for a brief recommendation: which problems
+   warrant local fixes, which call for reconsidering the approach, and which
+   proposed fixes depend on unverified assumptions about what users see or
+   could lose? Ask what evidence would settle any consequential uncertainty.
+
+Check the recommendation against the evidence and decide which corrections to
+assign. Keep the review proportionate to the change.
 
 ## Findings
 
