@@ -13,6 +13,7 @@ incompatible contracts, ownership gaps, and any narrowing or change of required
 behavior. When a shared mechanism is faulty, check the behaviors that depend on
 it. An unresolved product choice is a question for the user, not a design fix.
 
+Assess the component boundaries and how responsibilities are divided among them.
 Check that the component interaction diagram agrees with the explanation and
 that decisions about affected APIs, storage, compatibility, permissions, and
 dependencies are covered in the document. Report unnecessary layers or mechanisms

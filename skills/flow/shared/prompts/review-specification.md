@@ -12,6 +12,7 @@ claims against the code. Each material requirement needs a plausible mechanism,
 but do not demand private implementation detail. Point out missing user
 agreement instead of approving a product choice on the user's behalf.
 
+Assess the component boundaries and how responsibilities are divided among them.
 Check that the component interaction diagram and explanation show how the
 behavior works, who owns important state, and what changes at component or data
 boundaries. Verify that decisions about affected APIs, storage, compatibility,

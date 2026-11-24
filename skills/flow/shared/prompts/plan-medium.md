@@ -16,8 +16,10 @@ after the implementation they need. Leave private choices to the developer.
 Adapt the task structure where useful: merge or omit unneeded sections, add
 missing ones, and vary order and detail. Do not write filler to satisfy the
 template or omit important context because it has no section. State shared
-context once in the plan. Tasks must carry the agreed design's decisions and
-constraints through the split without predesigning local implementation details.
+context once in the plan. Once the work is split, read the tasks by component.
+Check the responsibilities each component will have after all tasks against the
+agreed approach and its constraints. Leave local implementation details to the
+developer.
 
 Name the automated tests each task adds: the behavior, the boundary it is
 observed at, and the mistake it catches. Other checks are run once and

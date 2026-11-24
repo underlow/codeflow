@@ -25,6 +25,10 @@ share `plan.md`; flag one task that bundles several. A single task is fine for
 one bounded result. Flag a task over two days of work for a developer who knows
 the code, and say how to split it.
 
+Consider the tasks together. What will the system look like once they are
+complete? Will it preserve the component boundaries and responsibilities set
+out in the design? If you find a mismatch, identify the tasks that lead to it
+and explain why it matters.
 Check that required results, dependencies, shared contracts, real entry points,
 important failures, integration, documentation, and whole-feature checks are
 assigned. Check tasks in order for the inputs they need. Named checks need

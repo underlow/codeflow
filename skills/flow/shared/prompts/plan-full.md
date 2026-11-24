@@ -34,8 +34,10 @@ Default task structure, as a section or a file under `tasks/`:
 Adapt this structure to the task: merge or omit unneeded sections, add missing
 ones, and vary order and detail. Do not write filler to satisfy the template or
 omit important context because it has no section. State shared context once in
-the plan. Tasks must carry the agreed design's decisions and constraints through
-the split without predesigning local implementation details.
+the plan. Once the work is split, read the tasks by component.
+Check the responsibilities each component will have after all tasks against the
+agreed approach and its constraints. Leave local implementation details to the
+developer.
 
 A task must make sense to a developer who has only the documents. Refer to
 requirements instead of copying them, and take expected results from the

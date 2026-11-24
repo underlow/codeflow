@@ -23,8 +23,10 @@ Write `plan.md` with:
 Use this as the default structure; merge or omit unneeded sections, add missing
 ones, and vary order and detail to suit the plan and its tasks. Do not write
 filler to satisfy the template or omit important context because it has no
-section. State shared context once. Tasks must preserve the agreed technical
-approach without predesigning local implementation details.
+section. State shared context once. Once the work is split, read the tasks by component.
+Check the responsibilities each component will have after all tasks against the
+agreed approach and its constraints. Leave local implementation details to the
+developer.
 
 Name the automated tests each task adds: the behavior, the boundary it is
 observed at, and the mistake it catches. Other checks are run once and
