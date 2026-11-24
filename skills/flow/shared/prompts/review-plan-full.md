@@ -3,8 +3,15 @@ inventing a product or design decision. Each task will go to a separate
 developer who has only the documents. Flag a task over two days of work for a
 developer who knows the code, and say how to split it.
 
-Consider whether there is a smaller solution worth offering the user before
-implementation, including changes to requirements already in the contract.
+Consider both questions independently:
+- Which part of the plan needs the most new logic? Check the existing code for
+  a simpler way to deliver the same behavior. Explain which work would disappear
+  and why the agreed guarantees would still hold.
+- Could relaxing or dropping one requirement eliminate substantial work while
+  preserving the main goal? Give the affected user scenario, what the user could
+  still do, what they would lose, and which mechanism would disappear.
+
+Report concrete opportunities you find. Either question may yield none.
 
 Check that every required result is assigned, dependencies arrive before they
 are needed, tasks agree on shared data and behavior, and the results join

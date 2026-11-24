@@ -3,8 +3,15 @@ Review the plan before implementation. The contract is `problem.md` with
 approach inside the plan. Do not ask for
 documents or task files the plan does not need.
 
-Consider whether there is a smaller solution worth offering the user before
-implementation, including changes to requirements already in the contract.
+Consider both questions independently:
+- Which part of the plan needs the most new logic? Check the existing code for
+  a simpler way to deliver the same behavior. Explain which work would disappear
+  and why the agreed guarantees would still hold.
+- Could relaxing or dropping one requirement eliminate substantial work while
+  preserving the main goal? Give the affected user scenario, what the user could
+  still do, what they would lose, and which mechanism would disappear.
+
+Report concrete opportunities you find. Either question may yield none.
 
 Each task will go to a separate developer who has only the documents. Separate
 verifiable results with their own dependencies need separate tasks, which may
