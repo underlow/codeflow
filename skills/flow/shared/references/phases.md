@@ -6,8 +6,8 @@ profile only after it. Move forward when a phase's result is usable; go back whe
 invalidates an earlier document. A blocker needs a real missing decision,
 evidence, or capability; say what remains possible.
 
-Terms: the *contract* is the agreed behavioral documents (problem,
-requirements, design, specification, and the requirements in a small plan); a
+Terms: the *contract* is the agreed requirements and technical decisions in
+the profile's documents, including the technical approach in a small plan; a
 *shared contract* is what several components or tasks must agree on. *Acceptance examples* have A IDs. A *task* is
 one planned assignment for one developer. A *stage* is only a project stage.
 
@@ -118,9 +118,8 @@ start of implementation in [coordinator.md](coordinator.md).
 ## Implementation
 
 Give each task to its own developer with the committed contract and plan, the
-exact task, and the checkout. Check the returned commit and result before
-dependent work. For a shared rule, locate where the first task enforces it
-and check the evidence from its working scenario. Give dependent developers
+exact task, and the checkout. For a shared rule, locate where the first task
+enforces it and check the evidence from its working scenario. Give dependent developers
 that code location and the behavior they can rely on. When accepting their
 work, trace each new entry point that relies on the rule to the code that
 enforces it.

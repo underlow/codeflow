@@ -34,10 +34,14 @@ role to Codex (see below): give each developer or fixer
 both the detailed prompt from [phases.md](phases.md#detailed-prompts), the
 checkout, the task, the contract, and the confirmed model and effort. Assign one
 planned task per developer, even when tasks share `plan.md`, and use a new
-developer after a plan revision. Check each agent's claims and commits against
-the repository before dependent work; you decide what happens next. If native
-agents are unavailable, stop before implementation or review and say so instead
-of doing that work yourself.
+developer after a plan revision. If native agents are unavailable, stop before
+implementation or review and say so instead of doing that work yourself.
+
+Before accepting work or acting on a finding, determine from the task, its
+requirements, and its agreed design what would justify that decision. Use the
+agent’s report to locate evidence in the document, code, or checks. Inspect the
+work yourself and verify any conditions the evidence leaves open before
+dependent work proceeds.
 
 Planning is finished when plan reviews are resolved and the contract and plan
 are committed. Then ask whether to continue implementation in this session or

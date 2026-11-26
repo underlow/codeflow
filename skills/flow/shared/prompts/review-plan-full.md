@@ -19,10 +19,10 @@ For the work that remains, consider both questions independently:
 
 Report concrete opportunities you find. Either question may yield none.
 
-Consider the tasks together. What will the system look like once they are
-complete? Will it preserve the component boundaries and responsibilities set
-out in the design? If you find a mismatch, identify the tasks that lead to it
-and explain why it matters.
+Judge behavioral coverage and design conformance independently. Read the tasks
+together and compare the resulting system with the agreed design decisions,
+including component boundaries and responsibilities. Report a departure even
+when the plan delivers every behavior. Identify which tasks cause it.
 Check that every required result is assigned, dependencies arrive before they
 are needed, tasks agree on shared data and behavior, and the results join
 through the application's real entry points, including failures, recovery, and

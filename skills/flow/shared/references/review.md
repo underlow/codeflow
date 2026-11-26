@@ -54,13 +54,15 @@ assign. Keep the review proportionate to the change.
 
 ## Findings
 
-Before revising a document or assigning a fix, check the evidence yourself.
-What would go wrong if you left things as they are? What supports the
-expectation of a different outcome? If the finding depends on a new guarantee,
+Before revising a document or assigning a fix, establish the consequence of
+leaving the finding unresolved. Which requirement or agreed design decision
+supports the finding? If the finding depends on a new guarantee,
 name it explicitly. The user decides whether to add it to the requirements.
 If you cannot justify a change, dismiss the finding or identify the missing fact.
 For a confirmed problem, assess the reviewer's proposed remedy separately.
-Could a simpler change achieve the required outcome?
+Could a simpler change achieve the required outcome within the agreed design?
+If the remedy requires revising that design, resolve the decision before
+incorporating it into a plan or assigning it to a developer.
 
 Merge duplicates. When a review finds several problems, pause before revising
 the document or assigning fixes. Consider whether one mistake in the requirements,

@@ -1,5 +1,6 @@
-Review one task's result before later tasks build on it. Judge the behavior and
-shared contracts the task promised, not work assigned to later tasks.
+Review one task's result before later tasks build on it. Compare the result with the
+task's agreed behavior, design decisions, and shared contracts. Leave later
+tasks to their assigned developers.
 
 Follow each behavior the task changed through its entry point, inputs, state,
 success and failure paths, recovery, and downstream consumers, including other
